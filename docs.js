@@ -44,6 +44,9 @@ var ucp = (() => {
   function is_empty(obj) {
     return Object.keys(obj).length === 0;
   }
+  function null_to_empty(value) {
+    return value == null ? "" : value;
+  }
   var is_hydrating = false;
   function start_hydrating() {
     is_hydrating = true;
@@ -205,13 +208,46 @@ var ucp = (() => {
     }
   }
   var outroing = /* @__PURE__ */ new Set();
+  var outros;
+  function group_outros() {
+    outros = {
+      r: 0,
+      c: [],
+      p: outros
+    };
+  }
+  function check_outros() {
+    if (!outros.r) {
+      run_all(outros.c);
+    }
+    outros = outros.p;
+  }
   function transition_in(block, local) {
     if (block && block.i) {
       outroing.delete(block);
       block.i(local);
     }
   }
+  function transition_out(block, local, detach2, callback) {
+    if (block && block.o) {
+      if (outroing.has(block))
+        return;
+      outroing.add(block);
+      outros.c.push(() => {
+        outroing.delete(block);
+        if (callback) {
+          if (detach2)
+            block.d(1);
+          callback();
+        }
+      });
+      block.o(local);
+    }
+  }
   var globals = typeof window !== "undefined" ? window : typeof globalThis !== "undefined" ? globalThis : global;
+  function create_component(block) {
+    block && block.c();
+  }
   function mount_component(component, target, anchor, customElement) {
     const { fragment, on_mount, on_destroy, after_update } = component.$$;
     fragment && fragment.m(target, anchor);
@@ -245,7 +281,7 @@ var ucp = (() => {
     }
     component.$$.dirty[i / 31 | 0] |= 1 << i % 31;
   }
-  function init(component, options, instance2, create_fragment2, not_equal, props, append_styles, dirty = [-1]) {
+  function init(component, options, instance3, create_fragment3, not_equal, props, append_styles, dirty = [-1]) {
     const parent_component = current_component;
     set_current_component(component);
     const $$ = component.$$ = {
@@ -268,7 +304,7 @@ var ucp = (() => {
     };
     append_styles && append_styles($$.root);
     let ready = false;
-    $$.ctx = instance2 ? instance2(component, options.props || {}, (i, ret, ...rest) => {
+    $$.ctx = instance3 ? instance3(component, options.props || {}, (i, ret, ...rest) => {
       const value = rest.length ? rest[0] : ret;
       if ($$.ctx && not_equal($$.ctx[i], $$.ctx[i] = value)) {
         if (!$$.skip_bound && $$.bound[i])
@@ -281,7 +317,7 @@ var ucp = (() => {
     $$.update();
     ready = true;
     run_all($$.before_update);
-    $$.fragment = create_fragment2 ? create_fragment2($$.ctx) : false;
+    $$.fragment = create_fragment3 ? create_fragment3($$.ctx) : false;
     if (options.target) {
       if (options.hydrate) {
         start_hydrating();
@@ -364,34 +400,268 @@ var ucp = (() => {
     }
   };
 
-  // src/Docs/Docs.svelte
+  // src/Docs/LinkTree.svelte
   function get_each_context(ctx, list, i) {
     const child_ctx = ctx.slice();
-    child_ctx[9] = list[i];
+    child_ctx[4] = list[i];
     return child_ctx;
   }
   function create_if_block_1(ctx) {
+    let span;
+    let t_value = ctx[0].key + "";
+    let t;
+    return {
+      c() {
+        span = element("span");
+        t = text(t_value);
+      },
+      m(target, anchor) {
+        insert(target, span, anchor);
+        append(span, t);
+      },
+      p(ctx2, dirty) {
+        if (dirty & 1 && t_value !== (t_value = ctx2[0].key + ""))
+          set_data(t, t_value);
+      },
+      d(detaching) {
+        if (detaching)
+          detach(span);
+      }
+    };
+  }
+  function create_if_block(ctx) {
+    let a;
+    let t_value = ctx[0].key + "";
+    let t;
+    let a_href_value;
+    return {
+      c() {
+        a = element("a");
+        t = text(t_value);
+        attr(a, "href", a_href_value = `/#/${ctx[0].link}`);
+      },
+      m(target, anchor) {
+        insert(target, a, anchor);
+        append(a, t);
+      },
+      p(ctx2, dirty) {
+        if (dirty & 1 && t_value !== (t_value = ctx2[0].key + ""))
+          set_data(t, t_value);
+        if (dirty & 1 && a_href_value !== (a_href_value = `/#/${ctx2[0].link}`)) {
+          attr(a, "href", a_href_value);
+        }
+      },
+      d(detaching) {
+        if (detaching)
+          detach(a);
+      }
+    };
+  }
+  function create_each_block(ctx) {
+    let div;
+    let linktree;
+    let t;
+    let div_class_value;
+    let current;
+    linktree = new LinkTree_default({
+      props: { links: ctx[4], isChild: true }
+    });
+    return {
+      c() {
+        div = element("div");
+        create_component(linktree.$$.fragment);
+        t = space();
+        attr(div, "class", div_class_value = null_to_empty(ctx[1] ? "child" : "") + " svelte-1673gk7");
+      },
+      m(target, anchor) {
+        insert(target, div, anchor);
+        mount_component(linktree, div, null);
+        append(div, t);
+        current = true;
+      },
+      p(ctx2, dirty) {
+        const linktree_changes = {};
+        if (dirty & 4)
+          linktree_changes.links = ctx2[4];
+        linktree.$set(linktree_changes);
+        if (!current || dirty & 2 && div_class_value !== (div_class_value = null_to_empty(ctx2[1] ? "child" : "") + " svelte-1673gk7")) {
+          attr(div, "class", div_class_value);
+        }
+      },
+      i(local) {
+        if (current)
+          return;
+        transition_in(linktree.$$.fragment, local);
+        current = true;
+      },
+      o(local) {
+        transition_out(linktree.$$.fragment, local);
+        current = false;
+      },
+      d(detaching) {
+        if (detaching)
+          detach(div);
+        destroy_component(linktree);
+      }
+    };
+  }
+  function create_fragment(ctx) {
+    let div;
+    let t;
+    let current;
+    function select_block_type(ctx2, dirty) {
+      if (ctx2[0].link)
+        return create_if_block;
+      if (ctx2[0].key)
+        return create_if_block_1;
+    }
+    let current_block_type = select_block_type(ctx, -1);
+    let if_block = current_block_type && current_block_type(ctx);
+    let each_value = ctx[2];
+    let each_blocks = [];
+    for (let i = 0; i < each_value.length; i += 1) {
+      each_blocks[i] = create_each_block(get_each_context(ctx, each_value, i));
+    }
+    const out = (i) => transition_out(each_blocks[i], 1, 1, () => {
+      each_blocks[i] = null;
+    });
+    return {
+      c() {
+        div = element("div");
+        if (if_block)
+          if_block.c();
+        t = space();
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          each_blocks[i].c();
+        }
+      },
+      m(target, anchor) {
+        insert(target, div, anchor);
+        if (if_block)
+          if_block.m(div, null);
+        append(div, t);
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          each_blocks[i].m(div, null);
+        }
+        current = true;
+      },
+      p(ctx2, [dirty]) {
+        if (current_block_type === (current_block_type = select_block_type(ctx2, dirty)) && if_block) {
+          if_block.p(ctx2, dirty);
+        } else {
+          if (if_block)
+            if_block.d(1);
+          if_block = current_block_type && current_block_type(ctx2);
+          if (if_block) {
+            if_block.c();
+            if_block.m(div, t);
+          }
+        }
+        if (dirty & 6) {
+          each_value = ctx2[2];
+          let i;
+          for (i = 0; i < each_value.length; i += 1) {
+            const child_ctx = get_each_context(ctx2, each_value, i);
+            if (each_blocks[i]) {
+              each_blocks[i].p(child_ctx, dirty);
+              transition_in(each_blocks[i], 1);
+            } else {
+              each_blocks[i] = create_each_block(child_ctx);
+              each_blocks[i].c();
+              transition_in(each_blocks[i], 1);
+              each_blocks[i].m(div, null);
+            }
+          }
+          group_outros();
+          for (i = each_value.length; i < each_blocks.length; i += 1) {
+            out(i);
+          }
+          check_outros();
+        }
+      },
+      i(local) {
+        if (current)
+          return;
+        for (let i = 0; i < each_value.length; i += 1) {
+          transition_in(each_blocks[i]);
+        }
+        current = true;
+      },
+      o(local) {
+        each_blocks = each_blocks.filter(Boolean);
+        for (let i = 0; i < each_blocks.length; i += 1) {
+          transition_out(each_blocks[i]);
+        }
+        current = false;
+      },
+      d(detaching) {
+        if (detaching)
+          detach(div);
+        if (if_block) {
+          if_block.d();
+        }
+        destroy_each(each_blocks, detaching);
+      }
+    };
+  }
+  function instance($$self, $$props, $$invalidate) {
+    let children2;
+    const forbiddenKeys = ["link", "key"];
+    let { links } = $$props;
+    let { isChild } = $$props;
+    $$self.$$set = ($$props2) => {
+      if ("links" in $$props2)
+        $$invalidate(0, links = $$props2.links);
+      if ("isChild" in $$props2)
+        $$invalidate(1, isChild = $$props2.isChild);
+    };
+    $$self.$$.update = () => {
+      if ($$self.$$.dirty & 1) {
+        $:
+          $$invalidate(2, children2 = Object.keys(links).filter((d) => !forbiddenKeys.includes(d)).map((key) => Object.assign(Object.assign({}, links[key]), { key })));
+      }
+    };
+    return [links, isChild, children2];
+  }
+  var LinkTree_1 = class extends SvelteComponent {
+    constructor(options) {
+      super();
+      init(this, options, instance, create_fragment, safe_not_equal, { links: 0, isChild: 1 });
+    }
+  };
+  var LinkTree_default = LinkTree_1;
+
+  // src/Docs/Docs.svelte
+  function get_each_context2(ctx, list, i) {
+    const child_ctx = ctx.slice();
+    child_ctx[11] = list[i];
+    return child_ctx;
+  }
+  function create_if_block_12(ctx) {
     let html_tag;
-    let raw_value = window.atob(ctx[9].wc) + "";
+    let raw_value = window.atob(ctx[11].wc) + "";
     let t0;
-    let t1_value = window.atob(ctx[9][ctx[0]]) + "";
+    let div;
+    let t1_value = window.atob(ctx[11][ctx[0]]) + "";
     let t1;
     return {
       c() {
         html_tag = new HtmlTag();
         t0 = space();
+        div = element("div");
         t1 = text(t1_value);
         html_tag.a = t0;
       },
       m(target, anchor) {
         html_tag.m(raw_value, target, anchor);
         insert(target, t0, anchor);
-        insert(target, t1, anchor);
+        insert(target, div, anchor);
+        append(div, t1);
       },
       p(ctx2, dirty) {
-        if (dirty & 2 && raw_value !== (raw_value = window.atob(ctx2[9].wc) + ""))
+        if (dirty & 4 && raw_value !== (raw_value = window.atob(ctx2[11].wc) + ""))
           html_tag.p(raw_value);
-        if (dirty & 3 && t1_value !== (t1_value = window.atob(ctx2[9][ctx2[0]]) + ""))
+        if (dirty & 5 && t1_value !== (t1_value = window.atob(ctx2[11][ctx2[0]]) + ""))
           set_data(t1, t1_value);
       },
       d(detaching) {
@@ -400,13 +670,13 @@ var ucp = (() => {
         if (detaching)
           detach(t0);
         if (detaching)
-          detach(t1);
+          detach(div);
       }
     };
   }
-  function create_if_block(ctx) {
+  function create_if_block2(ctx) {
     let html_tag;
-    let raw_value = window.atob(ctx[9].md) + "";
+    let raw_value = window.atob(ctx[11].md) + "";
     let html_anchor;
     return {
       c() {
@@ -419,7 +689,7 @@ var ucp = (() => {
         insert(target, html_anchor, anchor);
       },
       p(ctx2, dirty) {
-        if (dirty & 2 && raw_value !== (raw_value = window.atob(ctx2[9].md) + ""))
+        if (dirty & 4 && raw_value !== (raw_value = window.atob(ctx2[11].md) + ""))
           html_tag.p(raw_value);
       },
       d(detaching) {
@@ -430,13 +700,13 @@ var ucp = (() => {
       }
     };
   }
-  function create_each_block(ctx) {
+  function create_each_block2(ctx) {
     let if_block_anchor;
     function select_block_type(ctx2, dirty) {
-      if (ctx2[9].md)
-        return create_if_block;
-      if (ctx2[9].wc)
-        return create_if_block_1;
+      if (ctx2[11].md)
+        return create_if_block2;
+      if (ctx2[11].wc)
+        return create_if_block_12;
     }
     let current_block_type = select_block_type(ctx, -1);
     let if_block = current_block_type && current_block_type(ctx);
@@ -473,7 +743,7 @@ var ucp = (() => {
       }
     };
   }
-  function create_fragment(ctx) {
+  function create_fragment2(ctx) {
     let div;
     let nav;
     let select;
@@ -481,13 +751,19 @@ var ucp = (() => {
     let option1;
     let option2;
     let t3;
+    let a;
+    let t5;
+    let linktree;
+    let t6;
     let main;
+    let current;
     let mounted;
     let dispose;
-    let each_value = ctx[1].content;
+    linktree = new LinkTree_default({ props: { links: ctx[1] } });
+    let each_value = ctx[2].content;
     let each_blocks = [];
     for (let i = 0; i < each_value.length; i += 1) {
-      each_blocks[i] = create_each_block(get_each_context(ctx, each_value, i));
+      each_blocks[i] = create_each_block2(get_each_context2(ctx, each_value, i));
     }
     return {
       c() {
@@ -501,6 +777,11 @@ var ucp = (() => {
         option2 = element("option");
         option2.textContent = "Web Components";
         t3 = space();
+        a = element("a");
+        a.textContent = "Home";
+        t5 = space();
+        create_component(linktree.$$.fragment);
+        t6 = space();
         main = element("main");
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
@@ -512,10 +793,11 @@ var ucp = (() => {
         option2.__value = "wc";
         option2.value = option2.__value;
         if (ctx[0] === void 0)
-          add_render_callback(() => ctx[4].call(select));
-        attr(nav, "class", "svelte-1pivokt");
-        attr(main, "class", "svelte-1pivokt");
-        attr(div, "class", "root svelte-1pivokt");
+          add_render_callback(() => ctx[5].call(select));
+        attr(a, "href", "/#/");
+        attr(nav, "class", "svelte-gdrarx");
+        attr(main, "class", "svelte-gdrarx");
+        attr(div, "class", "root svelte-gdrarx");
       },
       m(target, anchor) {
         insert(target, div, anchor);
@@ -525,16 +807,21 @@ var ucp = (() => {
         append(select, option1);
         append(select, option2);
         select_option(select, ctx[0]);
-        append(div, t3);
+        append(nav, t3);
+        append(nav, a);
+        append(nav, t5);
+        mount_component(linktree, nav, null);
+        append(div, t6);
         append(div, main);
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].m(main, null);
         }
+        current = true;
         if (!mounted) {
           dispose = [
-            listen(select, "change", ctx[4]),
             listen(select, "change", ctx[5]),
-            listen(div, "___docs", ctx[6])
+            listen(select, "change", ctx[6]),
+            listen(div, "___docs", ctx[7])
           ];
           mounted = true;
         }
@@ -543,15 +830,19 @@ var ucp = (() => {
         if (dirty & 1) {
           select_option(select, ctx2[0]);
         }
-        if (dirty & 3) {
-          each_value = ctx2[1].content;
+        const linktree_changes = {};
+        if (dirty & 2)
+          linktree_changes.links = ctx2[1];
+        linktree.$set(linktree_changes);
+        if (dirty & 5) {
+          each_value = ctx2[2].content;
           let i;
           for (i = 0; i < each_value.length; i += 1) {
-            const child_ctx = get_each_context(ctx2, each_value, i);
+            const child_ctx = get_each_context2(ctx2, each_value, i);
             if (each_blocks[i]) {
               each_blocks[i].p(child_ctx, dirty);
             } else {
-              each_blocks[i] = create_each_block(child_ctx);
+              each_blocks[i] = create_each_block2(child_ctx);
               each_blocks[i].c();
               each_blocks[i].m(main, null);
             }
@@ -562,21 +853,31 @@ var ucp = (() => {
           each_blocks.length = each_value.length;
         }
       },
-      i: noop,
-      o: noop,
+      i(local) {
+        if (current)
+          return;
+        transition_in(linktree.$$.fragment, local);
+        current = true;
+      },
+      o(local) {
+        transition_out(linktree.$$.fragment, local);
+        current = false;
+      },
       d(detaching) {
         if (detaching)
           detach(div);
+        destroy_component(linktree);
         destroy_each(each_blocks, detaching);
         mounted = false;
         run_all(dispose);
       }
     };
   }
-  function instance($$self, $$props, $$invalidate) {
+  function instance2($$self, $$props, $$invalidate) {
     let currentPage;
+    let links;
     let route = "";
-    const updateHash = () => $$invalidate(3, route = window.location.hash.substring(1));
+    const updateHash = () => $$invalidate(4, route = window.location.hash.substring(1));
     window.addEventListener("popstate", updateHash);
     window.addEventListener("hashchange", updateHash);
     updateHash();
@@ -586,6 +887,19 @@ var ucp = (() => {
       $$invalidate(0, framework = fw);
       localStorage.setItem("framework", fw);
     };
+    const groupLinks = (pages) => {
+      const sorted = pages.filter((d) => d.length > 0 && !d[0].startsWith("_"));
+      const ret = {};
+      for (const page of sorted) {
+        let pointer = ret;
+        for (const link of page) {
+          pointer[link] = Object.assign({}, pointer[link]);
+          pointer = pointer[link];
+        }
+        pointer.link = page.join("");
+      }
+      return ret;
+    };
     function select_change_handler() {
       framework = select_value(this);
       $$invalidate(0, framework);
@@ -593,13 +907,16 @@ var ucp = (() => {
     const change_handler = (ev) => setFramework(ev.target.value);
     const __docs_handler = (val) => console.log(val);
     $$self.$$.update = () => {
-      if ($$self.$$.dirty & 8) {
+      if ($$self.$$.dirty & 16) {
         $:
-          $$invalidate(1, currentPage = docs.find((doc) => "/" + doc.page.join("") === route));
+          $$invalidate(2, currentPage = docs.find((doc) => "/" + doc.page.join("") === route));
       }
     };
+    $:
+      $$invalidate(1, links = groupLinks(docs.map((d) => d.page)));
     return [
       framework,
+      links,
       currentPage,
       setFramework,
       route,
@@ -611,7 +928,7 @@ var ucp = (() => {
   var Docs = class extends SvelteComponent {
     constructor(options) {
       super();
-      init(this, options, instance, create_fragment, safe_not_equal, {});
+      init(this, options, instance2, create_fragment2, safe_not_equal, {});
     }
   };
   var Docs_default = Docs;

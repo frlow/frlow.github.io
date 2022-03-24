@@ -1,0 +1,17 @@
+/* fakecss:/Users/ahp168/Code/Privat/ucp/packages/example/src/Docs/LinkTree.esbuild-svelte-fake-css */
+.child.svelte-1673gk7 {
+  margin-left: 1rem;
+}
+
+/* fakecss:/Users/ahp168/Code/Privat/ucp/packages/example/src/Docs/Docs.esbuild-svelte-fake-css */
+.root.svelte-gdrarx {
+  display: flex;
+  flex-direction: row;
+}
+nav.svelte-gdrarx {
+  margin-right: 2rem;
+  margin-top: 2rem;
+  margin-left: 0.8rem;
+  display: flex;
+  flex-direction: column;
+}
