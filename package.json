@@ -1,1 +1,10 @@
-{"name":"html-docs","version":"1.0.0","scripts":{"docs":"serve -p 3000"},"devDependencies":{"serve":"^13.0.2"}}
+{
+  "name": "html-docs",
+  "version": "1.0.0",
+  "scripts": {
+    "docs": "serve -p 3000"
+  },
+  "devDependencies": {
+    "serve": "^13.0.2"
+  }
+}
