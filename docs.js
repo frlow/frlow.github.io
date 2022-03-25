@@ -642,21 +642,27 @@ var ucp = (() => {
     let raw_value = window.atob(ctx[11].wc) + "";
     let t0;
     let div;
+    let code;
     let t1_value = window.atob(ctx[11][ctx[0]]) + "";
     let t1;
+    let t2;
     return {
       c() {
         html_tag = new HtmlTag();
         t0 = space();
         div = element("div");
+        code = element("code");
         t1 = text(t1_value);
+        t2 = space();
         html_tag.a = t0;
       },
       m(target, anchor) {
         html_tag.m(raw_value, target, anchor);
         insert(target, t0, anchor);
         insert(target, div, anchor);
-        append(div, t1);
+        append(div, code);
+        append(code, t1);
+        append(div, t2);
       },
       p(ctx2, dirty) {
         if (dirty & 4 && raw_value !== (raw_value = window.atob(ctx2[11].wc) + ""))
@@ -751,10 +757,12 @@ var ucp = (() => {
     let option1;
     let option2;
     let t3;
-    let a;
+    let a0;
     let t5;
+    let a1;
+    let t7;
     let linktree;
-    let t6;
+    let t8;
     let main;
     let current;
     let mounted;
@@ -777,11 +785,14 @@ var ucp = (() => {
         option2 = element("option");
         option2.textContent = "Web Components";
         t3 = space();
-        a = element("a");
-        a.textContent = "Home";
+        a0 = element("a");
+        a0.textContent = "Home";
         t5 = space();
+        a1 = element("a");
+        a1.textContent = "Installation";
+        t7 = space();
         create_component(linktree.$$.fragment);
-        t6 = space();
+        t8 = space();
         main = element("main");
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].c();
@@ -794,7 +805,8 @@ var ucp = (() => {
         option2.value = option2.__value;
         if (ctx[0] === void 0)
           add_render_callback(() => ctx[5].call(select));
-        attr(a, "href", "/#/");
+        attr(a0, "href", "/#/");
+        attr(a1, "href", "/#/_Install");
         attr(nav, "class", "svelte-gdrarx");
         attr(main, "class", "svelte-gdrarx");
         attr(div, "class", "root svelte-gdrarx");
@@ -808,10 +820,12 @@ var ucp = (() => {
         append(select, option2);
         select_option(select, ctx[0]);
         append(nav, t3);
-        append(nav, a);
+        append(nav, a0);
         append(nav, t5);
+        append(nav, a1);
+        append(nav, t7);
         mount_component(linktree, nav, null);
-        append(div, t6);
+        append(div, t8);
         append(div, main);
         for (let i = 0; i < each_blocks.length; i += 1) {
           each_blocks[i].m(main, null);
