@@ -919,7 +919,7 @@ var ucp = (() => {
       $$invalidate(0, framework);
     }
     const change_handler = (ev) => setFramework(ev.target.value);
-    const __docs_handler = (val) => console.log(val);
+    const __docs_handler = (val) => console.log(val.detail);
     $$self.$$.update = () => {
       if ($$self.$$.dirty & 16) {
         $:
