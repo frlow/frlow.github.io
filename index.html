@@ -173,7 +173,8 @@ window.history.pushState = new Proxy(window.history.pushState, {
 <div id='config' 
   x-data='{route:window.location.pathname, framework:localStorage.getItem("framework")||"vue3"}' 
   x-on:route='(r)=>route=r.detail' 
-  x-init='$watch("framework", value => localStorage.setItem("framework", value))'>
+  x-init='$watch("framework", value => localStorage.setItem("framework", value))'
+  style="min-height: 100vh;">
 <script>
   class UcpExampleImplementation extends HTMLElement {
 
@@ -239,7 +240,12 @@ window.history.pushState = new Proxy(window.history.pushState, {
 </script>
 <style>
     :root {
-        --font-color: #a8c2de
+        --font-color: #a8c2de;
+        --bg-color: rgb(26, 26, 30);
+    }
+
+    body {
+        background-color: var(--bg-color);
     }
 
     .docs-root {
@@ -249,21 +255,32 @@ window.history.pushState = new Proxy(window.history.pushState, {
         color: var(--font-color);
         display: flex;
         flex-direction: row;
-        height: 100vh;
-        background-color: rgb(26, 26, 30);
     }
 
     nav {
-        padding: 20px;
+        background-color: var(--bg-color);
+        padding: 1rem;
         border-right: 1px solid rgb(54, 54, 59);
-        width: 250px;
+        min-width: 250px;
+        min-height: 100vh;
+        box-sizing: border-box;
     }
 
     @media (max-width: 900px) {
         nav {
-            visibility: collapse;
-            width: 0;
-            padding: 0;
+            position: absolute;
+            padding-top: 3rem;
+        }
+
+        .show-nav {
+            left: 0;
+            transition: left 0.5s;
+        }
+
+        .hide-nav {
+            left: -100vw;
+            overflow: hidden;
+            transition: left 0.5s;
         }
     }
 
@@ -275,6 +292,7 @@ window.history.pushState = new Proxy(window.history.pushState, {
     @media (max-width: 900px) {
         main {
             margin: 20px;
+            padding-top: 1rem;
         }
     }
 
@@ -286,6 +304,22 @@ window.history.pushState = new Proxy(window.history.pushState, {
 
     .framework-select {
         margin-bottom: 40px;
+    }
+
+    .toggle-nav {
+        position: fixed;
+        left: 1.2rem;
+        top: 1.2rem;
+        border: 1px solid whitesmoke;
+        background-color: var(--bg-color);
+        color: var(--font-color);
+        padding: 0.4rem 0.6rem 0.4rem 0.6rem;
+    }
+
+    @media (min-width: 900px) {
+        .toggle-nav {
+            visibility: hidden;
+        }
     }
 
     select {
@@ -307,29 +341,30 @@ window.history.pushState = new Proxy(window.history.pushState, {
         margin-bottom: 1rem;
     }
 </style>
-<div class="docs-root">
-    <nav>
-        <select class="framework-select" x-on:change="framework=$event.target.value" x-bind:value="framework">
-            <option value="vue3">Vue 3</option>
-            <option value="react">React</option>
-            <option value="web-components">Web Components</option>
-        </select>
-        <div class="docs-logo">LOGO</div>
-        <template x-for="link in links">
-            <div :style="`margin-left: ${link.level}em; margin-top: ${link.level===0?'0.5em':'0'};`">
-                <template x-if="link.link">
-                    <a x-text="link.title" :href="link.link"
-                       @click="$event.preventDefault(); history.pushState({},'',link.link)"></a>
-                </template>
-                <template x-if="!link.link">
-                    <div x-text="link.title"></div>
-                </template>
-
-            </div>
+<div class='docs-root' x-data='{showNav: false}'>
+  <nav x-bind:class='showNav?"show-nav":"hide-nav"'>
+    <select class='framework-select' x-on:change='framework=$event.target.value' x-bind:value='framework'>
+      <option value='vue3'>Vue 3</option>
+      <option value='react'>React</option>
+      <option value='web-components'>Web Components</option>
+    </select>
+    <div class='docs-logo'>LOGO</div>
+    <button class='toggle-nav' @click='showNav=!showNav'>=</button>
+    <template x-for='link in links'>
+      <div :style="`margin-left: ${link.level}em; margin-top: ${link.level===0?'0.5em':'0'};`">
+        <template x-if='link.link'>
+          <a x-text='link.title' :href='link.link'
+             @click="$event.preventDefault(); history.pushState({},'',link.link); showNav=false"></a>
         </template>
-    </nav>
-    <main x-html="(docs.find(d=>route==='/'+d.position.join('/'))||docs[0]).content">
-    </main>
+        <template x-if='!link.link'>
+          <div x-text='link.title'></div>
+        </template>
+
+      </div>
+    </template>
+  </nav>
+  <main x-html="(docs.find(d=>route==='/'+d.position.join('/'))||docs[0]).content">
+  </main>
 </div>
 
 </div>
