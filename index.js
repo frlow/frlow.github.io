@@ -7674,7 +7674,7 @@
     }
   });
 
-  // ../ucp-example/dist/elements/ReactDemo.js
+  // ../ucp-example/dist/elements/react/ReactDemo.js
   var import_react2 = __toESM(require_react());
   var import_react_dom = __toESM(require_react_dom());
   var import_react = __toESM(require_react());
@@ -7723,7 +7723,7 @@
   };
   customElements.define("ex-react-demo", ReactWc);
 
-  // ../ucp-example/dist/elements/ReactEmits.js
+  // ../ucp-example/dist/elements/react/ReactEmits.js
   var import_react22 = __toESM(require_react());
   var import_react_dom2 = __toESM(require_react_dom());
   var import_react3 = __toESM(require_react());
@@ -7774,7 +7774,7 @@
   };
   customElements.define("ex-react-emits", ReactWc2);
 
-  // ../ucp-example/dist/elements/ReactNested.js
+  // ../ucp-example/dist/elements/react/ReactNested.js
   var import_react222 = __toESM(require_react());
   var import_react_dom3 = __toESM(require_react_dom());
   var import_react20 = __toESM(require_react());
@@ -7788,6 +7788,10 @@
   var import_react8 = __toESM(require_react());
   var import_react9 = __toESM(require_react());
   var import_react10 = __toESM(require_react());
+  var VueProps = function(_a2) {
+    var stringprop = _a2.stringprop, numprop = _a2.numprop, complexprop = _a2.complexprop, children2 = _a2.children;
+    return import_react10.default.createElement("ex-vue-props", { stringprop: JSON.stringify(stringprop), numprop: JSON.stringify(numprop), complexprop: JSON.stringify(complexprop) }, children2);
+  };
   var import_react11 = __toESM(require_react());
   var import_react12 = __toESM(require_react());
   var import_react13 = __toESM(require_react());
@@ -7796,13 +7800,13 @@
   var import_react16 = __toESM(require_react());
   var import_react17 = __toESM(require_react());
   var import_react18 = __toESM(require_react());
-  var ReactSimple = function(_a2) {
-    var children2 = _a2.children;
-    return import_react18.default.createElement("ex-react-simple", null, children2);
-  };
   var import_react19 = __toESM(require_react());
   var ReactNested_default = () => {
-    return /* @__PURE__ */ import_react20.default.createElement("div", null, /* @__PURE__ */ import_react20.default.createElement(ReactSimple, null));
+    return /* @__PURE__ */ import_react20.default.createElement("div", null, /* @__PURE__ */ import_react20.default.createElement(VueProps, {
+      numprop: 9,
+      complexprop: { value: "str" },
+      stringprop: "demo"
+    }));
   };
   var ReactWc3 = class extends HTMLElement {
     render() {
@@ -7831,7 +7835,7 @@
   };
   customElements.define("ex-react-nested", ReactWc3);
 
-  // ../ucp-example/dist/elements/ReactProps.js
+  // ../ucp-example/dist/elements/react/ReactProps.js
   var import_react24 = __toESM(require_react());
   var import_react_dom4 = __toESM(require_react_dom());
   var import_react21 = __toESM(require_react());
@@ -7900,14 +7904,14 @@
   };
   customElements.define("ex-react-props", ReactWc4);
 
-  // ../ucp-example/dist/elements/ReactSimple.js
+  // ../ucp-example/dist/elements/react/ReactSimple.js
   var import_react25 = __toESM(require_react());
   var import_react_dom5 = __toESM(require_react_dom());
   var import_react26 = __toESM(require_react());
   var ReactSimple_default = () => {
     return /* @__PURE__ */ import_react26.default.createElement("div", {
       className: "dummy"
-    }, "Dummy");
+    }, "React");
   };
   var ReactWc5 = class extends HTMLElement {
     render() {
@@ -7919,7 +7923,7 @@
       this.shadowRoot.innerHTML = "";
       this.shadowRoot.appendChild(rootEl);
       const styleElement = document.createElement("style");
-      styleElement.innerHTML = `.dummy{font-family:Avenir,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-align:center;color:#2c3e50;margin-top:60px}
+      styleElement.innerHTML = `.dummy{font-family:Avenir,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-align:center;color:#2c3e50}
 `;
       this.shadowRoot.appendChild(styleElement);
     }
@@ -7937,7 +7941,7 @@
   };
   customElements.define("ex-react-simple", ReactWc5);
 
-  // ../ucp-example/dist/elements/ReactSlots.js
+  // ../ucp-example/dist/elements/react/ReactSlots.js
   var import_react27 = __toESM(require_react());
   var import_react_dom6 = __toESM(require_react_dom());
   var import_react28 = __toESM(require_react());
@@ -8281,7 +8285,7 @@
     };
   }
 
-  // ../ucp-example/dist/elements/SvelteDemo.js
+  // ../ucp-example/dist/elements/svelte/SvelteDemo.js
   function create_fragment(ctx) {
     let button;
     let t;
@@ -8380,7 +8384,7 @@
   };
   customElements.define("ex-svelte-demo", SvelteDemo);
 
-  // ../ucp-example/dist/elements/SvelteEmits.js
+  // ../ucp-example/dist/elements/svelte/SvelteEmits.js
   function create_fragment2(ctx) {
     let button;
     let mounted;
@@ -8447,7 +8451,7 @@
   };
   customElements.define("ex-svelte-emits", SvelteEmits);
 
-  // ../ucp-example/dist/elements/SvelteProps.js
+  // ../ucp-example/dist/elements/svelte/SvelteProps.js
   function create_fragment3(ctx) {
     let div3;
     let div0;
@@ -8598,13 +8602,13 @@
   };
   customElements.define("ex-svelte-props", SvelteProps);
 
-  // ../ucp-example/dist/elements/SvelteSimple.js
+  // ../ucp-example/dist/elements/svelte/SvelteSimple.js
   function create_fragment4(ctx) {
     let div;
     return {
       c() {
         div = element("div");
-        div.textContent = "Dummy";
+        div.textContent = "Svelte";
         this.c = noop;
         attr(div, "class", "dummy");
       },
@@ -8623,7 +8627,7 @@
   var SvelteSimple = class extends SvelteElement {
     constructor(options) {
       super();
-      this.shadowRoot.innerHTML = `<style>.dummy{font-family:Avenir, Helvetica, Arial, sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-align:center;color:#2c3e50;margin-top:60px}</style>`;
+      this.shadowRoot.innerHTML = `<style>.dummy{font-family:Avenir, Helvetica, Arial, sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-align:center;color:#2c3e50}</style>`;
       init(this, {
         target: this.shadowRoot,
         props: attribute_to_object(this.attributes),
@@ -8638,7 +8642,7 @@
   };
   customElements.define("ex-svelte-simple", SvelteSimple);
 
-  // ../ucp-example/dist/elements/SvelteSlots.js
+  // ../ucp-example/dist/elements/svelte/SvelteSlots.js
   function create_fragment5(ctx) {
     let div1;
     return {
@@ -8679,7 +8683,7 @@
   };
   customElements.define("ex-svelte-slots", SvelteSlots);
 
-  // ../ucp-example/dist/elements/SvelteTheme.js
+  // ../ucp-example/dist/elements/svelte/SvelteTheme.js
   function create_fragment6(ctx) {
     let div;
     let slot;
@@ -14460,7 +14464,7 @@ Component that was made reactive: `, type);
     initDev();
   }
 
-  // ../ucp-example/dist/elements/VueDemo.js
+  // ../ucp-example/dist/elements/vue/VueDemo.js
   var VueDemo_default = /* @__PURE__ */ defineComponent({
     props: {
       text: { type: String, required: true }
@@ -14468,9 +14472,7 @@ Component that was made reactive: `, type);
     emits: ["myclick"],
     setup(__props, { expose, emit }) {
       expose();
-      const {
-        text: text2
-      } = __props;
+      const { text: text2 } = __props;
       const __returned__ = { emit };
       Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
       return __returned__;
@@ -14481,8 +14483,8 @@ Component that was made reactive: `, type);
       onClick: _cache[0] || (_cache[0] = () => $setup.emit("myclick", "Vue click"))
     }, toDisplayString($props.text), 1);
   }
-  var defineCe = (script5, style) => {
-    var Element = defineCustomElement(script5);
+  var defineCe = (script4, style) => {
+    var Element = defineCustomElement(script4);
     class StyledElement extends Element {
       constructor(args) {
         super(args);
@@ -14500,11 +14502,11 @@ Component that was made reactive: `, type);
     return render2(_ctx, _cache, $props, { ...$setup, emit: emitPrefixer }, $data, $options);
   };
   VueDemo_default.render = renderFix;
-  VueDemo_default.__file = "../ucp-example/src/components/VueDemo.vue";
+  VueDemo_default.__file = "../ucp-example/src/components/vue/VueDemo.vue";
   var styles = [];
   defineCe(VueDemo_default, styles.join("\n"));
 
-  // ../ucp-example/dist/elements/VueEmits.js
+  // ../ucp-example/dist/elements/vue/VueEmits.js
   var VueEmits_default = /* @__PURE__ */ defineComponent({
     emits: ["stringevent", "numevent", "objevent", "voidevent"],
     setup(__props, { expose, emit }) {
@@ -14523,10 +14525,10 @@ Component that was made reactive: `, type);
         $setup.emit("objevent", { value: "val" });
         $setup.emit("voidevent");
       })
-    }, "Send event ");
+    }, " Send event ");
   }
-  var defineCe2 = (script5, style) => {
-    var Element = defineCustomElement(script5);
+  var defineCe2 = (script4, style) => {
+    var Element = defineCustomElement(script4);
     class StyledElement extends Element {
       constructor(args) {
         super(args);
@@ -14544,43 +14546,63 @@ Component that was made reactive: `, type);
     return render3(_ctx, _cache, $props, { ...$setup, emit: emitPrefixer }, $data, $options);
   };
   VueEmits_default.render = renderFix2;
-  VueEmits_default.__file = "../ucp-example/src/components/VueEmits.vue";
+  VueEmits_default.__file = "../ucp-example/src/components/vue/VueEmits.vue";
   var styles2 = [];
   defineCe2(VueEmits_default, styles2.join("\n"));
 
-  // ../ucp-example/dist/elements/VueNested.js
-  function render4(_ctx, _cache) {
-    const _component_ex_vue_simple = resolveComponent("ex-vue-simple");
-    return openBlock(), createBlock(_component_ex_vue_simple, null, {
+  // ../ucp-example/dist/elements/vue/VueNested.js
+  var ReactProps_default2 = /* @__PURE__ */ defineComponent({
+    props: {
+      stringprop: { type: String, required: true },
+      numprop: { type: Number, required: true },
+      complexprop: { type: Object, required: true }
+    },
+    setup(__props, { expose }) {
+      expose();
+      const __returned__ = {};
+      Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
+      return __returned__;
+    }
+  });
+  function render4(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_ex_react_props = resolveComponent("ex-react-props");
+    return openBlock(), createBlock(_component_ex_react_props, {
+      stringprop: JSON.stringify($props.stringprop),
+      numprop: JSON.stringify($props.numprop),
+      complexprop: JSON.stringify($props.complexprop)
+    }, {
       default: withCtx(() => [
         renderSlot(_ctx.$slots, "default")
       ]),
       _: 3
-    });
+    }, 8, ["stringprop", "numprop", "complexprop"]);
   }
-  var script = {};
   var renderFix3 = (_ctx, _cache, $props, $setup, $data, $options) => {
     const emitPrefixer = (key, detail) => $setup.emit("ex-" + key, detail);
     return render4(_ctx, _cache, $props, { ...$setup, emit: emitPrefixer }, $data, $options);
   };
-  script.render = renderFix3;
-  script.__file = "../ucp-example/dist/wrapper/vue/VueSimple.vue";
-  var VueSimple_default = script;
+  ReactProps_default2.render = renderFix3;
+  ReactProps_default2.__file = "../ucp-example/dist/wrapper/vue/ReactProps.vue";
+  var ReactProps_default22 = ReactProps_default2;
   var VueNested_default = /* @__PURE__ */ defineComponent({
     setup(__props, { expose }) {
       expose();
-      const __returned__ = { VueSimple: VueSimple_default };
+      const __returned__ = { ReactProps: ReactProps_default22 };
       Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
       return __returned__;
     }
   });
   function render22(_ctx, _cache, $props, $setup, $data, $options) {
     return openBlock(), createElementBlock("div", null, [
-      createVNode($setup["VueSimple"])
+      createVNode($setup["ReactProps"], {
+        stringprop: "str",
+        numprop: 9,
+        complexprop: { value: "val" }
+      })
     ]);
   }
-  var defineCe3 = (script22, style) => {
-    var Element = defineCustomElement(script22);
+  var defineCe3 = (script4, style) => {
+    var Element = defineCustomElement(script4);
     class StyledElement extends Element {
       constructor(args) {
         super(args);
@@ -14598,11 +14620,11 @@ Component that was made reactive: `, type);
     return render22(_ctx, _cache, $props, { ...$setup, emit: emitPrefixer }, $data, $options);
   };
   VueNested_default.render = renderFix22;
-  VueNested_default.__file = "../ucp-example/src/components/VueNested.vue";
+  VueNested_default.__file = "../ucp-example/src/components/vue/VueNested.vue";
   var styles3 = [];
   defineCe3(VueNested_default, styles3.join("\n"));
 
-  // ../ucp-example/dist/elements/VueProps.js
+  // ../ucp-example/dist/elements/vue/VueProps.js
   var VueProps_default = /* @__PURE__ */ defineComponent({
     props: {
       stringprop: { type: String, required: true },
@@ -14631,8 +14653,8 @@ Component that was made reactive: `, type);
       createBaseVNode("div", _hoisted_3, toDisplayString($props.complexprop?.value), 1)
     ]);
   }
-  var defineCe4 = (script5, style) => {
-    var Element = defineCustomElement(script5);
+  var defineCe4 = (script4, style) => {
+    var Element = defineCustomElement(script4);
     class StyledElement extends Element {
       constructor(args) {
         super(args);
@@ -14650,22 +14672,21 @@ Component that was made reactive: `, type);
     return render5(_ctx, _cache, $props, { ...$setup, emit: emitPrefixer }, $data, $options);
   };
   VueProps_default.render = renderFix4;
-  VueProps_default.__file = "../ucp-example/src/components/VueProps.vue";
+  VueProps_default.__file = "../ucp-example/src/components/vue/VueProps.vue";
   var styles4 = [];
   defineCe4(VueProps_default, styles4.join("\n"));
 
-  // ../ucp-example/dist/elements/VueSimple.js
+  // ../ucp-example/dist/elements/vue/VueSimple.js
   var _hoisted_12 = { class: "dummy" };
   function render6(_ctx, _cache) {
-    return openBlock(), createElementBlock("div", _hoisted_12, "Dummy");
+    return openBlock(), createElementBlock("div", _hoisted_12, "Vue");
   }
-  var VueSimple_default2 = `.dummy {
+  var VueSimple_default = `.dummy {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }`;
   var defineCe5 = (script22, style) => {
     var Element = defineCustomElement(script22);
@@ -14681,17 +14702,17 @@ Component that was made reactive: `, type);
     }
     customElements.define("ex-vue-simple", StyledElement);
   };
-  var script2 = {};
+  var script = {};
   var renderFix5 = (_ctx, _cache, $props, $setup, $data, $options) => {
     const emitPrefixer = (key, detail) => $setup.emit("ex-" + key, detail);
     return render6(_ctx, _cache, $props, { ...$setup, emit: emitPrefixer }, $data, $options);
   };
-  script2.render = renderFix5;
-  script2.__file = "../ucp-example/src/components/VueSimple.vue";
-  var styles5 = [VueSimple_default2];
-  defineCe5(script2, styles5.join("\n"));
+  script.render = renderFix5;
+  script.__file = "../ucp-example/src/components/vue/VueSimple.vue";
+  var styles5 = [VueSimple_default];
+  defineCe5(script, styles5.join("\n"));
 
-  // ../ucp-example/dist/elements/VueSlots.js
+  // ../ucp-example/dist/elements/vue/VueSlots.js
   var _hoisted_13 = { class: "slot" };
   function render7(_ctx, _cache) {
     return openBlock(), createElementBlock("div", null, [
@@ -14721,23 +14742,23 @@ Component that was made reactive: `, type);
     }
     customElements.define("ex-vue-slots", StyledElement);
   };
-  var script3 = {};
+  var script2 = {};
   var renderFix6 = (_ctx, _cache, $props, $setup, $data, $options) => {
     const emitPrefixer = (key, detail) => $setup.emit("ex-" + key, detail);
     return render7(_ctx, _cache, $props, { ...$setup, emit: emitPrefixer }, $data, $options);
   };
-  script3.render = renderFix6;
-  script3.__file = "../ucp-example/src/components/VueSlots.vue";
+  script2.render = renderFix6;
+  script2.__file = "../ucp-example/src/components/vue/VueSlots.vue";
   var styles6 = [VueSlots_default];
-  defineCe6(script3, styles6.join("\n"));
+  defineCe6(script2, styles6.join("\n"));
 
-  // ../ucp-example/dist/elements/VueThemed.js
+  // ../ucp-example/dist/elements/vue/VueThemed.js
   var _hoisted_14 = { class: "themed" };
   function render8(_ctx, _cache) {
     return openBlock(), createElementBlock("button", _hoisted_14, "Themed");
   }
   var VueThemed_default = `
-.themed[data-v-6903cf83] {
+.themed[data-v-f877025e] {
   background-color: var(--bg-color);
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 4px;
@@ -14765,16 +14786,16 @@ Component that was made reactive: `, type);
     }
     customElements.define("ex-vue-themed", StyledElement);
   };
-  var script4 = {};
+  var script3 = {};
   var renderFix7 = (_ctx, _cache, $props, $setup, $data, $options) => {
     const emitPrefixer = (key, detail) => $setup.emit("ex-" + key, detail);
     return render8(_ctx, _cache, $props, { ...$setup, emit: emitPrefixer }, $data, $options);
   };
-  script4.render = renderFix7;
-  script4.__file = "../ucp-example/src/components/VueThemed.vue";
-  script4.__scopeId = "data-v-6903cf83";
+  script3.render = renderFix7;
+  script3.__file = "../ucp-example/src/components/vue/VueThemed.vue";
+  script3.__scopeId = "data-v-f877025e";
   var styles7 = [VueThemed_default];
-  defineCe7(script4, styles7.join("\n"));
+  defineCe7(script3, styles7.join("\n"));
 })();
 /**
  * @license React
