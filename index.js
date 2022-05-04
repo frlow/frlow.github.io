@@ -19,9 +19,9 @@
   };
   var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
 
-  // ../ucp-example/dist/elements/chunks/chunk-PIPGNH2F.js
+  // ../ucp-example/dist/elements/chunks/chunk-Q53OEBM4.js
   var require_react_production_min = __commonJS({
-    "../../node_modules/react/cjs/react.production.min.js"(exports) {
+    "../ucp-example/node_modules/react/cjs/react.production.min.js"(exports) {
       "use strict";
       var l = Symbol.for("react.element");
       var n = Symbol.for("react.portal");
@@ -316,7 +316,7 @@
     }
   });
   var require_react = __commonJS({
-    "../../node_modules/react/index.js"(exports, module) {
+    "../ucp-example/node_modules/react/index.js"(exports, module) {
       "use strict";
       if (true) {
         module.exports = require_react_production_min();
@@ -326,7 +326,7 @@
     }
   });
   var require_scheduler_production_min = __commonJS({
-    "../../node_modules/scheduler/cjs/scheduler.production.min.js"(exports) {
+    "../ucp-example/node_modules/scheduler/cjs/scheduler.production.min.js"(exports) {
       "use strict";
       function f(a, b) {
         var c = a.length;
@@ -595,7 +595,7 @@
     }
   });
   var require_scheduler = __commonJS({
-    "../../node_modules/scheduler/index.js"(exports, module) {
+    "../ucp-example/node_modules/scheduler/index.js"(exports, module) {
       "use strict";
       if (true) {
         module.exports = require_scheduler_production_min();
@@ -605,7 +605,7 @@
     }
   });
   var require_react_dom_production_min = __commonJS({
-    "../../node_modules/react-dom/cjs/react-dom.production.min.js"(exports) {
+    "../ucp-example/node_modules/react-dom/cjs/react-dom.production.min.js"(exports) {
       "use strict";
       var aa = require_react();
       var ba = require_scheduler();
@@ -7650,7 +7650,7 @@
     }
   });
   var require_react_dom = __commonJS({
-    "../../node_modules/react-dom/index.js"(exports, module) {
+    "../ucp-example/node_modules/react-dom/index.js"(exports, module) {
       "use strict";
       function checkDCE() {
         if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ === "undefined" || typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.checkDCE !== "function") {
@@ -7984,7 +7984,7 @@
   };
   customElements.define("ex-react-slots", ReactWc6);
 
-  // ../ucp-example/dist/elements/chunks/chunk-GEEXG3SV.js
+  // ../ucp-example/dist/elements/chunks/chunk-UJNXRBXX.js
   function noop() {
   }
   function run(fn) {
@@ -8762,7 +8762,7 @@
   };
   customElements.define("ex-svelte-theme", SvelteTheme);
 
-  // ../ucp-example/dist/elements/chunks/chunk-WJPKTIMD.js
+  // ../ucp-example/dist/elements/chunks/chunk-RMS7CLFV.js
   function makeMap(str, expectsLowerCase) {
     const map = /* @__PURE__ */ Object.create(null);
     const list = str.split(",");
