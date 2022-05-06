@@ -160,6 +160,7 @@ document.addEventListener('alpine:init', ()=>{
 const updateRoute = ()=>{
     document.getElementById("config").dispatchEvent(new CustomEvent("route",{detail: window.location.pathname}))
 }
+window.ucp = {import: name=>console.log('Importing: '+name)}
 window.addEventListener("popstate", ()=>updateRoute())
 window.history.pushState = new Proxy(window.history.pushState, {
   apply: (target, thisArg, argArray) => {
