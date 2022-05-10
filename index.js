@@ -7787,6 +7787,14 @@
   var import_react7 = __toESM(require_react());
   var import_react8 = __toESM(require_react());
   var import_react9 = __toESM(require_react());
+  var VueNested = function(_a2) {
+    var children2 = _a2.children;
+    (0, import_react9.useEffect)(function() {
+      var _a22;
+      (_a22 = window.ucp) === null || _a22 === void 0 ? void 0 : _a22.import("VueNested");
+    }, []);
+    return import_react9.default.createElement("ex-vue-nested", null, children2);
+  };
   var import_react10 = __toESM(require_react());
   var VueProps = function(_a2) {
     var stringprop = _a2.stringprop, numprop = _a2.numprop, complexprop = _a2.complexprop, children2 = _a2.children;
@@ -7810,7 +7818,7 @@
       numprop: 9,
       complexprop: { value: "str" },
       stringprop: "demo"
-    }));
+    }), /* @__PURE__ */ import_react20.default.createElement(VueNested, null));
   };
   var ReactWc3 = class extends HTMLElement {
     render() {
@@ -14594,7 +14602,8 @@ Component that was made reactive: `, type);
   var VueNested_default = /* @__PURE__ */ defineComponent({
     setup(__props, { expose }) {
       expose();
-      const __returned__ = { ReactProps: ReactProps_default22 };
+      let demo = 0;
+      const __returned__ = { demo, ReactProps: ReactProps_default22 };
       Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
       return __returned__;
     }
