@@ -7795,10 +7795,10 @@
     const emitsRef = useWcEvents({
       "ex-stringevent": (ev) => setCount(count + 1)
     });
-    return /* @__PURE__ */ import_react23.default.createElement("div", null, count, /* @__PURE__ */ import_react23.default.createElement("ex-react-emits", {
+    return /* @__PURE__ */ import_react23.default.createElement("div", null, /* @__PURE__ */ import_react23.default.createElement("ex-react-emits", {
       ref: emitsRef
     }), /* @__PURE__ */ import_react23.default.createElement("ex-react-props", {
-      numprop: 4,
+      numprop: count,
       stringprop: "str",
       complexprop: "{ value: 'val' }"
     }));
