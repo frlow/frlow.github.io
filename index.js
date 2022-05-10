@@ -7815,8 +7815,8 @@
   var import_react19 = __toESM(require_react());
   var ReactNested_default = () => {
     return /* @__PURE__ */ import_react20.default.createElement("div", null, /* @__PURE__ */ import_react20.default.createElement(VueProps, {
-      numprop: 9,
-      complexprop: { value: "str" },
+      numprop: 3,
+      complexprop: { value: "something" },
       stringprop: "demo"
     }), /* @__PURE__ */ import_react20.default.createElement(VueNested, null));
   };
@@ -14602,8 +14602,7 @@ Component that was made reactive: `, type);
   var VueNested_default = /* @__PURE__ */ defineComponent({
     setup(__props, { expose }) {
       expose();
-      let demo = 0;
-      const __returned__ = { demo, ReactProps: ReactProps_default22 };
+      const __returned__ = { ReactProps: ReactProps_default22 };
       Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
       return __returned__;
     }
