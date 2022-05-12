@@ -7674,19 +7674,82 @@
     }
   });
 
-  // ../ucp-example/dist/elements/react/ReactDemo.js
-  var import_react2 = __toESM(require_react());
-  var import_react_dom = __toESM(require_react_dom());
+  // ../ucp-example/dist/elements/chunks/chunk-AMTYERUC.js
   var import_react = __toESM(require_react());
-  var ReactDemo_default = ({
-    text: text2,
-    onMyclick
-  }) => {
+  var ReactAppComponentStyled_default = ({ onClick, text: text2 }) => {
     return /* @__PURE__ */ import_react.default.createElement("button", {
-      onClick: () => onMyclick("React click")
+      className: "dummy",
+      onClick: () => onClick()
     }, text2);
   };
+
+  // ../ucp-example/dist/elements/chunks/chunk-RX5X5YW4.js
+  var import_react2 = __toESM(require_react());
+  var ReactAppComponent_default = ({ onClick, text: text2 }) => {
+    return /* @__PURE__ */ import_react2.default.createElement(ReactAppComponentStyled_default, {
+      text: text2,
+      onClick
+    });
+  };
+
+  // ../ucp-example/dist/elements/app/react/ReactApp.style.js
+  var ReactApp_style_default = `/* ../ucp-example/src/components/app/react/ReactAppComponentStyled.scss */
+.dummy {
+  background-color: #377bb2;
+}
+/*# =ReactApp.css.map */
+`;
+
+  // ../ucp-example/dist/elements/app/react/ReactApp.js
+  var import_react22 = __toESM(require_react());
+  var import_react_dom = __toESM(require_react_dom());
+  var import_react3 = __toESM(require_react());
+  var ReactApp_default = () => {
+    const [count, setCount] = (0, import_react3.useState)(0);
+    return /* @__PURE__ */ import_react3.default.createElement(ReactAppComponent_default, {
+      onClick: () => setCount(count + 1),
+      text: `Clicked: ${count}`
+    });
+  };
   var ReactWc = class extends HTMLElement {
+    render() {
+      const rootEl = document.createElement("div");
+      const args = {};
+      (0, import_react_dom.createRoot)(rootEl).render(/* @__PURE__ */ import_react22.default.createElement(ReactApp_default, {
+        ...args
+      }));
+      this.shadowRoot.innerHTML = "";
+      this.shadowRoot.appendChild(rootEl);
+      const styleElement = document.createElement("style");
+      styleElement.innerHTML = ReactApp_style_default;
+      this.shadowRoot.appendChild(styleElement);
+    }
+    static get observedAttributes() {
+      return [];
+    }
+    attributeChangedCallback() {
+      this.render();
+    }
+    constructor() {
+      super();
+      this.attachShadow({ mode: "open" });
+      this.render();
+    }
+  };
+  customElements.define("ex-react-app", ReactWc);
+
+  // ../ucp-example/dist/elements/app/react/ReactAppComponent.style.js
+  var ReactAppComponent_style_default = `/* ../ucp-example/src/components/app/react/ReactAppComponentStyled.scss */
+.dummy {
+  background-color: #377bb2;
+}
+/*# =ReactAppComponent.css.map */
+`;
+
+  // ../ucp-example/dist/elements/app/react/ReactAppComponent.js
+  var import_react4 = __toESM(require_react());
+  var import_react_dom2 = __toESM(require_react_dom());
+  var ReactWc2 = class extends HTMLElement {
     render() {
       const rootEl = document.createElement("div");
       const args = {
@@ -7698,15 +7761,15 @@
             return value;
           }
         })(),
-        onMyclick: (args2) => this.dispatchEvent(new CustomEvent("ex-myclick", { bubbles: true, detail: [args2] }))
+        onClick: (args2) => this.dispatchEvent(new CustomEvent("ex-click", { bubbles: true, detail: [args2] }))
       };
-      (0, import_react_dom.createRoot)(rootEl).render(/* @__PURE__ */ import_react2.default.createElement(ReactDemo_default, {
+      (0, import_react_dom2.createRoot)(rootEl).render(/* @__PURE__ */ import_react4.default.createElement(ReactAppComponent_default, {
         ...args
       }));
       this.shadowRoot.innerHTML = "";
       this.shadowRoot.appendChild(rootEl);
       const styleElement = document.createElement("style");
-      styleElement.innerHTML = ``;
+      styleElement.innerHTML = ReactAppComponent_style_default;
       this.shadowRoot.appendChild(styleElement);
     }
     static get observedAttributes() {
@@ -7721,172 +7784,44 @@
       this.render();
     }
   };
-  customElements.define("ex-react-demo", ReactWc);
+  customElements.define("ex-react-app-component", ReactWc2);
 
-  // ../ucp-example/dist/elements/react/ReactEmits.js
-  var import_react22 = __toESM(require_react());
-  var import_react_dom2 = __toESM(require_react_dom());
-  var import_react3 = __toESM(require_react());
-  var ReactEmits_default = ({
-    onStringevent,
-    onVoidevent,
-    onObjevent,
-    onNumevent
-  }) => {
-    return /* @__PURE__ */ import_react3.default.createElement("button", {
-      onClick: () => {
-        onStringevent("demo");
-        onNumevent(5);
-        onObjevent({ value: "val" });
-        onVoidevent();
-      }
-    }, "Send event");
-  };
-  var ReactWc2 = class extends HTMLElement {
-    render() {
-      const rootEl = document.createElement("div");
-      const args = {
-        onStringevent: (args2) => this.dispatchEvent(new CustomEvent("ex-stringevent", { bubbles: true, detail: [args2] })),
-        onNumevent: (args2) => this.dispatchEvent(new CustomEvent("ex-numevent", { bubbles: true, detail: [args2] })),
-        onObjevent: (args2) => this.dispatchEvent(new CustomEvent("ex-objevent", { bubbles: true, detail: [args2] })),
-        onVoidevent: (args2) => this.dispatchEvent(new CustomEvent("ex-voidevent", { bubbles: true, detail: [args2] }))
-      };
-      (0, import_react_dom2.createRoot)(rootEl).render(/* @__PURE__ */ import_react22.default.createElement(ReactEmits_default, {
-        ...args
-      }));
-      this.shadowRoot.innerHTML = "";
-      this.shadowRoot.appendChild(rootEl);
-      const styleElement = document.createElement("style");
-      styleElement.innerHTML = ``;
-      this.shadowRoot.appendChild(styleElement);
-    }
-    static get observedAttributes() {
-      return [];
-    }
-    attributeChangedCallback() {
-      this.render();
-    }
-    constructor() {
-      super();
-      this.attachShadow({ mode: "open" });
-      this.render();
-    }
-  };
-  customElements.define("ex-react-emits", ReactWc2);
+  // ../ucp-example/dist/elements/app/react/ReactAppComponentStyled.style.js
+  var ReactAppComponentStyled_style_default = `/* ../ucp-example/src/components/app/react/ReactAppComponentStyled.scss */
+.dummy {
+  background-color: #377bb2;
+}
+/*# =ReactAppComponentStyled.css.map */
+`;
 
-  // ../ucp-example/dist/elements/react/ReactNested.js
-  var import_react32 = __toESM(require_react());
+  // ../ucp-example/dist/elements/app/react/ReactAppComponentStyled.js
+  var import_react5 = __toESM(require_react());
   var import_react_dom3 = __toESM(require_react_dom());
-  var import_react23 = __toESM(require_react());
-  var import_react4 = __toESM(require_react());
-  var useWcEvents = (events) => {
-    const ref2 = (0, import_react4.useRef)();
-    (0, import_react4.useEffect)(() => {
-      const callback = (ev) => events[ev.type](ev.detail);
-      Object.keys(events).forEach((key) => ref2.current.addEventListener(key, callback));
-      return () => {
-        Object.keys(events).forEach((key) => ref2.current.removeEventListener(key, callback));
-      };
-    });
-    return ref2;
-  };
-  var ReactNested_default = () => {
-    const [count, setCount] = (0, import_react23.useState)(0);
-    const emitsRef = useWcEvents({
-      "ex-stringevent": (ev) => setCount(count + 1)
-    });
-    return /* @__PURE__ */ import_react23.default.createElement("div", null, /* @__PURE__ */ import_react23.default.createElement("ex-react-emits", {
-      ref: emitsRef
-    }), /* @__PURE__ */ import_react23.default.createElement("ex-react-props", {
-      numprop: count,
-      stringprop: "str",
-      complexprop: "{ value: 'val' }"
-    }));
-  };
   var ReactWc3 = class extends HTMLElement {
     render() {
       const rootEl = document.createElement("div");
-      const args = {};
-      (0, import_react_dom3.createRoot)(rootEl).render(/* @__PURE__ */ import_react32.default.createElement(ReactNested_default, {
-        ...args
-      }));
-      this.shadowRoot.innerHTML = "";
-      this.shadowRoot.appendChild(rootEl);
-      const styleElement = document.createElement("style");
-      styleElement.innerHTML = ``;
-      this.shadowRoot.appendChild(styleElement);
-    }
-    static get observedAttributes() {
-      return [];
-    }
-    attributeChangedCallback() {
-      this.render();
-    }
-    constructor() {
-      super();
-      this.attachShadow({ mode: "open" });
-      this.render();
-    }
-  };
-  customElements.define("ex-react-nested", ReactWc3);
-
-  // ../ucp-example/dist/elements/react/ReactProps.js
-  var import_react24 = __toESM(require_react());
-  var import_react_dom4 = __toESM(require_react_dom());
-  var import_react5 = __toESM(require_react());
-  var ReactProps_default = ({
-    stringprop,
-    numprop,
-    complexprop
-  }) => {
-    return /* @__PURE__ */ import_react5.default.createElement("div", null, /* @__PURE__ */ import_react5.default.createElement("div", {
-      className: "stringprop"
-    }, stringprop), /* @__PURE__ */ import_react5.default.createElement("div", {
-      className: "numprop"
-    }, numprop + 1), /* @__PURE__ */ import_react5.default.createElement("div", {
-      className: "complexprop"
-    }, complexprop?.value));
-  };
-  var ReactWc4 = class extends HTMLElement {
-    render() {
-      const rootEl = document.createElement("div");
       const args = {
-        stringprop: (() => {
-          const value = this.attributes.getNamedItem("stringprop")?.value;
+        text: (() => {
+          const value = this.attributes.getNamedItem("text")?.value;
           try {
             return JSON.parse(value);
           } catch {
             return value;
           }
         })(),
-        numprop: (() => {
-          const value = this.attributes.getNamedItem("numprop")?.value;
-          try {
-            return JSON.parse(value);
-          } catch {
-            return value;
-          }
-        })(),
-        complexprop: (() => {
-          const value = this.attributes.getNamedItem("complexprop")?.value;
-          try {
-            return JSON.parse(value);
-          } catch {
-            return value;
-          }
-        })()
+        onClick: (args2) => this.dispatchEvent(new CustomEvent("ex-click", { bubbles: true, detail: [args2] }))
       };
-      (0, import_react_dom4.createRoot)(rootEl).render(/* @__PURE__ */ import_react24.default.createElement(ReactProps_default, {
+      (0, import_react_dom3.createRoot)(rootEl).render(/* @__PURE__ */ import_react5.default.createElement(ReactAppComponentStyled_default, {
         ...args
       }));
       this.shadowRoot.innerHTML = "";
       this.shadowRoot.appendChild(rootEl);
       const styleElement = document.createElement("style");
-      styleElement.innerHTML = ``;
+      styleElement.innerHTML = ReactAppComponentStyled_style_default;
       this.shadowRoot.appendChild(styleElement);
     }
     static get observedAttributes() {
-      return ["stringprop", "numprop", "complexprop"];
+      return ["text"];
     }
     attributeChangedCallback() {
       this.render();
@@ -7897,127 +7832,15 @@
       this.render();
     }
   };
-  customElements.define("ex-react-props", ReactWc4);
+  customElements.define("ex-react-app-component-styled", ReactWc3);
 
-  // ../ucp-example/dist/elements/react/ReactSimple.js
-  var import_react25 = __toESM(require_react());
-  var import_react_dom5 = __toESM(require_react_dom());
-  var import_react6 = __toESM(require_react());
-  var ReactSimple_default = () => {
-    return /* @__PURE__ */ import_react6.default.createElement("div", {
-      className: "dummy"
-    }, "React");
-  };
-  var ReactWc5 = class extends HTMLElement {
-    render() {
-      const rootEl = document.createElement("div");
-      const args = {};
-      (0, import_react_dom5.createRoot)(rootEl).render(/* @__PURE__ */ import_react25.default.createElement(ReactSimple_default, {
-        ...args
-      }));
-      this.shadowRoot.innerHTML = "";
-      this.shadowRoot.appendChild(rootEl);
-      const styleElement = document.createElement("style");
-      styleElement.innerHTML = `.dummy{font-family:Avenir,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-align:center;color:#2c3e50}
-`;
-      this.shadowRoot.appendChild(styleElement);
-    }
-    static get observedAttributes() {
-      return [];
-    }
-    attributeChangedCallback() {
-      this.render();
-    }
-    constructor() {
-      super();
-      this.attachShadow({ mode: "open" });
-      this.render();
-    }
-  };
-  customElements.define("ex-react-simple", ReactWc5);
-
-  // ../ucp-example/dist/elements/react/ReactSlots.js
-  var import_react26 = __toESM(require_react());
-  var import_react_dom6 = __toESM(require_react_dom());
-  var import_react7 = __toESM(require_react());
-  var ReactSlots_default = () => {
-    const style = {
-      border: "2px solid red"
-    };
-    return /* @__PURE__ */ import_react7.default.createElement("div", null, /* @__PURE__ */ import_react7.default.createElement("slot", null), /* @__PURE__ */ import_react7.default.createElement("div", {
-      style
-    }, /* @__PURE__ */ import_react7.default.createElement("slot", {
-      name: "box"
-    })), /* @__PURE__ */ import_react7.default.createElement("slot", {
-      name: "after"
-    }));
-  };
-  var ReactWc6 = class extends HTMLElement {
-    render() {
-      const rootEl = document.createElement("div");
-      const args = {};
-      (0, import_react_dom6.createRoot)(rootEl).render(/* @__PURE__ */ import_react26.default.createElement(ReactSlots_default, {
-        ...args
-      }));
-      this.shadowRoot.innerHTML = "";
-      this.shadowRoot.appendChild(rootEl);
-      const styleElement = document.createElement("style");
-      styleElement.innerHTML = ``;
-      this.shadowRoot.appendChild(styleElement);
-    }
-    static get observedAttributes() {
-      return [];
-    }
-    attributeChangedCallback() {
-      this.render();
-    }
-    constructor() {
-      super();
-      this.attachShadow({ mode: "open" });
-      this.render();
-    }
-  };
-  customElements.define("ex-react-slots", ReactWc6);
-
-  // ../ucp-example/dist/elements/react/ReactState.js
-  var import_react27 = __toESM(require_react());
-  var import_react_dom7 = __toESM(require_react_dom());
-  var import_react8 = __toESM(require_react());
-  var ReactState_default = () => {
-    const [count, setCount] = (0, import_react8.useState)(0);
-    return /* @__PURE__ */ import_react8.default.createElement("div", null, /* @__PURE__ */ import_react8.default.createElement("button", {
-      onClick: () => setCount(count + 1)
-    }, count), /* @__PURE__ */ import_react8.default.createElement("ex-react-emits", null));
-  };
-  var ReactWc7 = class extends HTMLElement {
-    render() {
-      const rootEl = document.createElement("div");
-      const args = {};
-      (0, import_react_dom7.createRoot)(rootEl).render(/* @__PURE__ */ import_react27.default.createElement(ReactState_default, {
-        ...args
-      }));
-      this.shadowRoot.innerHTML = "";
-      this.shadowRoot.appendChild(rootEl);
-      const styleElement = document.createElement("style");
-      styleElement.innerHTML = ``;
-      this.shadowRoot.appendChild(styleElement);
-    }
-    static get observedAttributes() {
-      return [];
-    }
-    attributeChangedCallback() {
-      this.render();
-    }
-    constructor() {
-      super();
-      this.attachShadow({ mode: "open" });
-      this.render();
-    }
-  };
-  customElements.define("ex-react-state", ReactWc7);
-
-  // ../ucp-example/dist/elements/chunks/chunk-GEEXG3SV.js
+  // ../ucp-example/dist/elements/chunks/chunk-MGNSNS55.js
   function noop() {
+  }
+  function assign(tar, src) {
+    for (const k in src)
+      tar[k] = src[k];
+    return tar;
   }
   function run(fn) {
     return fn();
@@ -8037,6 +7860,50 @@
   function is_empty(obj) {
     return Object.keys(obj).length === 0;
   }
+  function create_slot(definition, ctx, $$scope, fn) {
+    if (definition) {
+      const slot_ctx = get_slot_context(definition, ctx, $$scope, fn);
+      return definition[0](slot_ctx);
+    }
+  }
+  function get_slot_context(definition, ctx, $$scope, fn) {
+    return definition[1] && fn ? assign($$scope.ctx.slice(), definition[1](fn(ctx))) : $$scope.ctx;
+  }
+  function get_slot_changes(definition, $$scope, dirty, fn) {
+    if (definition[2] && fn) {
+      const lets = definition[2](fn(dirty));
+      if ($$scope.dirty === void 0) {
+        return lets;
+      }
+      if (typeof lets === "object") {
+        const merged = [];
+        const len = Math.max($$scope.dirty.length, lets.length);
+        for (let i = 0; i < len; i += 1) {
+          merged[i] = $$scope.dirty[i] | lets[i];
+        }
+        return merged;
+      }
+      return $$scope.dirty | lets;
+    }
+    return $$scope.dirty;
+  }
+  function update_slot_base(slot, slot_definition, ctx, $$scope, slot_changes, get_slot_context_fn) {
+    if (slot_changes) {
+      const slot_context = get_slot_context(slot_definition, ctx, $$scope, get_slot_context_fn);
+      slot.p(slot_context, slot_changes);
+    }
+  }
+  function get_all_dirty_from_scope($$scope) {
+    if ($$scope.ctx.length > 32) {
+      const dirty = [];
+      const length = $$scope.ctx.length / 32;
+      for (let i = 0; i < length; i++) {
+        dirty[i] = -1;
+      }
+      return dirty;
+    }
+    return -1;
+  }
   var is_hydrating = false;
   function start_hydrating() {
     is_hydrating = true;
@@ -8046,6 +7913,27 @@
   }
   function append(target, node) {
     target.appendChild(node);
+  }
+  function append_styles(target, style_sheet_id, styles) {
+    const append_styles_to = get_root_for_style(target);
+    if (!append_styles_to.getElementById(style_sheet_id)) {
+      const style = element("style");
+      style.id = style_sheet_id;
+      style.textContent = styles;
+      append_stylesheet(append_styles_to, style);
+    }
+  }
+  function get_root_for_style(node) {
+    if (!node)
+      return document;
+    const root = node.getRootNode ? node.getRootNode() : node.ownerDocument;
+    if (root && root.host) {
+      return root;
+    }
+    return node.ownerDocument;
+  }
+  function append_stylesheet(node, style) {
+    append(node.head || node, style);
   }
   function insert(target, node, anchor) {
     target.insertBefore(node, anchor || null);
@@ -8180,13 +8068,33 @@
     }
   }
   var outroing = /* @__PURE__ */ new Set();
+  var outros;
   function transition_in(block, local) {
     if (block && block.i) {
       outroing.delete(block);
       block.i(local);
     }
   }
+  function transition_out(block, local, detach2, callback) {
+    if (block && block.o) {
+      if (outroing.has(block))
+        return;
+      outroing.add(block);
+      outros.c.push(() => {
+        outroing.delete(block);
+        if (callback) {
+          if (detach2)
+            block.d(1);
+          callback();
+        }
+      });
+      block.o(local);
+    }
+  }
   var globals = typeof window !== "undefined" ? window : typeof globalThis !== "undefined" ? globalThis : global;
+  function create_component(block) {
+    block && block.c();
+  }
   function mount_component(component, target, anchor, customElement) {
     const { fragment, on_mount, on_destroy, after_update } = component.$$;
     fragment && fragment.m(target, anchor);
@@ -8220,7 +8128,7 @@
     }
     component.$$.dirty[i / 31 | 0] |= 1 << i % 31;
   }
-  function init(component, options, instance7, create_fragment9, not_equal, props, append_styles, dirty = [-1]) {
+  function init(component, options, instance11, create_fragment11, not_equal, props, append_styles2, dirty = [-1]) {
     const parent_component = current_component;
     set_current_component(component);
     const $$ = component.$$ = {
@@ -8241,9 +8149,9 @@
       skip_bound: false,
       root: options.target || parent_component.$$.root
     };
-    append_styles && append_styles($$.root);
+    append_styles2 && append_styles2($$.root);
     let ready = false;
-    $$.ctx = instance7 ? instance7(component, options.props || {}, (i, ret, ...rest) => {
+    $$.ctx = instance11 ? instance11(component, options.props || {}, (i, ret, ...rest) => {
       const value = rest.length ? rest[0] : ret;
       if ($$.ctx && not_equal($$.ctx[i], $$.ctx[i] = value)) {
         if (!$$.skip_bound && $$.bound[i])
@@ -8256,7 +8164,7 @@
     $$.update();
     ready = true;
     run_all($$.before_update);
-    $$.fragment = create_fragment9 ? create_fragment9($$.ctx) : false;
+    $$.fragment = create_fragment11 ? create_fragment11($$.ctx) : false;
     if (options.target) {
       if (options.hydrate) {
         start_hydrating();
@@ -8316,8 +8224,33 @@
       }
     };
   }
+  var SvelteComponent = class {
+    $destroy() {
+      destroy_component(this, 1);
+      this.$destroy = noop;
+    }
+    $on(type, callback) {
+      const callbacks = this.$$.callbacks[type] || (this.$$.callbacks[type] = []);
+      callbacks.push(callback);
+      return () => {
+        const index = callbacks.indexOf(callback);
+        if (index !== -1)
+          callbacks.splice(index, 1);
+      };
+    }
+    $set($$props) {
+      if (this.$$set && !is_empty($$props)) {
+        this.$$.skip_bound = true;
+        this.$$set($$props);
+        this.$$.skip_bound = false;
+      }
+    }
+  };
 
-  // ../ucp-example/dist/elements/svelte/SvelteDemo.js
+  // ../ucp-example/dist/elements/chunks/chunk-ZKZN5XW3.js
+  function add_css(target) {
+    append_styles(target, "svelte-1i5xse5", ".dummy.svelte-1i5xse5{background-color:#b84141}");
+  }
   function create_fragment(ctx) {
     let button;
     let t;
@@ -8327,7 +8260,7 @@
       c() {
         button = element("button");
         t = text(ctx[0]);
-        this.c = noop;
+        attr(button, "class", "dummy svelte-1i5xse5");
       },
       m(target, anchor) {
         insert(target, button, anchor);
@@ -8352,47 +8285,192 @@
     };
   }
   function instance($$self, $$props, $$invalidate) {
-    const currentComponent = get_current_component();
-    const originalDispatch = createEventDispatcher();
-    const createUcpDispatcher = () => (name, detail) => {
-      originalDispatch("ex-" + name, [detail]);
-      currentComponent?.dispatchEvent(new CustomEvent("ex-" + name, {
-        detail: [detail],
-        bubbles: true,
-        cancelable: true
-      }));
-    };
-    const dispatch = createUcpDispatcher();
     let { text: text2 } = $$props;
+    const dispatch = createEventDispatcher();
     const click_handler = () => {
-      dispatch("myclick", "Svelte click");
+      dispatch("myclick");
     };
     $$self.$$set = ($$props2) => {
       if ("text" in $$props2)
         $$invalidate(0, text2 = $$props2.text);
     };
-    $$self.$$.update = () => {
-      if ($$self.$$.dirty & 1) {
-        $:
-          $$invalidate(0, text2 = text2 !== void 0 ? (() => {
-            try {
-              return JSON.parse(text2);
-            } catch {
-              return text2;
-            }
-          })() : void 0);
-      }
-    };
     return [text2, dispatch, click_handler];
   }
-  var SvelteDemo = class extends SvelteElement {
+  var SvelteAppComponent = class extends SvelteComponent {
+    constructor(options) {
+      super();
+      init(this, options, instance, create_fragment, safe_not_equal, { text: 0 }, add_css);
+    }
+  };
+  var SvelteAppComponent_default = SvelteAppComponent;
+
+  // ../ucp-example/dist/elements/app/svelte/SvelteApp.js
+  function create_fragment2(ctx) {
+    let svelteappcomponent;
+    let current;
+    svelteappcomponent = new SvelteAppComponent_default({
+      props: { text: `Clicked: ${ctx[0]}` }
+    });
+    svelteappcomponent.$on("myclick", ctx[1]);
+    return {
+      c() {
+        create_component(svelteappcomponent.$$.fragment);
+      },
+      m(target, anchor) {
+        mount_component(svelteappcomponent, target, anchor);
+        current = true;
+      },
+      p(ctx2, [dirty]) {
+        const svelteappcomponent_changes = {};
+        if (dirty & 1)
+          svelteappcomponent_changes.text = `Clicked: ${ctx2[0]}`;
+        svelteappcomponent.$set(svelteappcomponent_changes);
+      },
+      i(local) {
+        if (current)
+          return;
+        transition_in(svelteappcomponent.$$.fragment, local);
+        current = true;
+      },
+      o(local) {
+        transition_out(svelteappcomponent.$$.fragment, local);
+        current = false;
+      },
+      d(detaching) {
+        destroy_component(svelteappcomponent, detaching);
+      }
+    };
+  }
+  function instance2($$self, $$props, $$invalidate) {
+    let count = 0;
+    const myclick_handler = () => {
+      $$invalidate(0, count++, count);
+    };
+    return [count, myclick_handler];
+  }
+  var SvelteApp = class extends SvelteComponent {
+    constructor(options) {
+      super();
+      init(this, options, instance2, create_fragment2, safe_not_equal, {});
+    }
+  };
+  var SvelteApp_default = SvelteApp;
+  function create_fragment22(ctx) {
+    let component_1;
+    let current;
+    component_1 = new SvelteApp_default({});
+    return {
+      c() {
+        create_component(component_1.$$.fragment);
+        this.c = noop;
+      },
+      m(target, anchor) {
+        mount_component(component_1, target, anchor);
+        current = true;
+      },
+      p: noop,
+      i(local) {
+        if (current)
+          return;
+        transition_in(component_1.$$.fragment, local);
+        current = true;
+      },
+      o(local) {
+        transition_out(component_1.$$.fragment, local);
+        current = false;
+      },
+      d(detaching) {
+        destroy_component(component_1, detaching);
+      }
+    };
+  }
+  function instance22($$self) {
+    const component = get_current_component();
+    const svelteDispatch = createEventDispatcher();
+    const dispatch = (name, detail) => {
+      svelteDispatch(name, detail);
+      component.dispatchEvent && component.dispatchEvent(new CustomEvent(name, { detail, bubbles: true }));
+    };
+    const handleEvent = (ev) => dispatch("ex-" + ev.type, [ev.detail]);
+    return [];
+  }
+  var SvelteApp2 = class extends SvelteElement {
     constructor(options) {
       super();
       init(this, {
         target: this.shadowRoot,
         props: attribute_to_object(this.attributes),
         customElement: true
-      }, instance, create_fragment, safe_not_equal, { text: 0 }, null);
+      }, instance22, create_fragment22, safe_not_equal, {}, null);
+      if (options) {
+        if (options.target) {
+          insert(options.target, this, options.anchor);
+        }
+      }
+    }
+  };
+  customElements.define("ex-svelte-app", SvelteApp2);
+
+  // ../ucp-example/dist/elements/app/svelte/SvelteAppComponent.js
+  function create_fragment3(ctx) {
+    let component_1;
+    let current;
+    component_1 = new SvelteAppComponent_default({ props: { text: ctx[0] } });
+    component_1.$on("myclick", ctx[2]);
+    return {
+      c() {
+        create_component(component_1.$$.fragment);
+        this.c = noop;
+      },
+      m(target, anchor) {
+        mount_component(component_1, target, anchor);
+        current = true;
+      },
+      p(ctx2, [dirty]) {
+        const component_1_changes = {};
+        if (dirty & 1)
+          component_1_changes.text = ctx2[0];
+        component_1.$set(component_1_changes);
+      },
+      i(local) {
+        if (current)
+          return;
+        transition_in(component_1.$$.fragment, local);
+        current = true;
+      },
+      o(local) {
+        transition_out(component_1.$$.fragment, local);
+        current = false;
+      },
+      d(detaching) {
+        destroy_component(component_1, detaching);
+      }
+    };
+  }
+  function instance3($$self, $$props, $$invalidate) {
+    const component = get_current_component();
+    const svelteDispatch = createEventDispatcher();
+    const dispatch = (name, detail) => {
+      svelteDispatch(name, detail);
+      component.dispatchEvent && component.dispatchEvent(new CustomEvent(name, { detail, bubbles: true }));
+    };
+    let { text: text2 } = $$props;
+    const handleEvent = (ev) => dispatch("ex-" + ev.type, [ev.detail]);
+    const myclick_handler = (ev) => handleEvent(ev);
+    $$self.$$set = ($$props2) => {
+      if ("text" in $$props2)
+        $$invalidate(0, text2 = $$props2.text);
+    };
+    return [text2, handleEvent, myclick_handler];
+  }
+  var SvelteAppComponent2 = class extends SvelteElement {
+    constructor(options) {
+      super();
+      init(this, {
+        target: this.shadowRoot,
+        props: attribute_to_object(this.attributes),
+        customElement: true
+      }, instance3, create_fragment3, safe_not_equal, { text: 0 }, null);
       if (options) {
         if (options.target) {
           insert(options.target, this, options.anchor);
@@ -8414,490 +8492,7 @@
       flush();
     }
   };
-  customElements.define("ex-svelte-demo", SvelteDemo);
-
-  // ../ucp-example/dist/elements/svelte/SvelteEmits.js
-  function create_fragment2(ctx) {
-    let button;
-    let mounted;
-    let dispose;
-    return {
-      c() {
-        button = element("button");
-        button.textContent = "Send event";
-        this.c = noop;
-        attr(button, "class", "event-button");
-      },
-      m(target, anchor) {
-        insert(target, button, anchor);
-        if (!mounted) {
-          dispose = listen(button, "click", ctx[1]);
-          mounted = true;
-        }
-      },
-      p: noop,
-      i: noop,
-      o: noop,
-      d(detaching) {
-        if (detaching)
-          detach(button);
-        mounted = false;
-        dispose();
-      }
-    };
-  }
-  function instance2($$self) {
-    const currentComponent = get_current_component();
-    const originalDispatch = createEventDispatcher();
-    const createUcpDispatcher = () => (name, detail) => {
-      originalDispatch("ex-" + name, [detail]);
-      currentComponent?.dispatchEvent(new CustomEvent("ex-" + name, {
-        detail: [detail],
-        bubbles: true,
-        cancelable: true
-      }));
-    };
-    const dispatch = createUcpDispatcher();
-    const click_handler = () => {
-      dispatch("stringevent", "demo");
-      dispatch("numevent", 5);
-      dispatch("objevent", { value: "val" });
-      dispatch("voidevent");
-    };
-    return [dispatch, click_handler];
-  }
-  var SvelteEmits = class extends SvelteElement {
-    constructor(options) {
-      super();
-      init(this, {
-        target: this.shadowRoot,
-        props: attribute_to_object(this.attributes),
-        customElement: true
-      }, instance2, create_fragment2, safe_not_equal, {}, null);
-      if (options) {
-        if (options.target) {
-          insert(options.target, this, options.anchor);
-        }
-      }
-    }
-  };
-  customElements.define("ex-svelte-emits", SvelteEmits);
-
-  // ../ucp-example/dist/elements/svelte/SvelteNested.js
-  function create_fragment3(ctx) {
-    let ex_vue_emits;
-    let mounted;
-    let dispose;
-    return {
-      c() {
-        ex_vue_emits = element("ex-vue-emits");
-        this.c = noop;
-      },
-      m(target, anchor) {
-        insert(target, ex_vue_emits, anchor);
-        if (!mounted) {
-          dispose = listen(ex_vue_emits, "ex-stringevent", ctx[0]);
-          mounted = true;
-        }
-      },
-      p: noop,
-      i: noop,
-      o: noop,
-      d(detaching) {
-        if (detaching)
-          detach(ex_vue_emits);
-        mounted = false;
-        dispose();
-      }
-    };
-  }
-  function instance3($$self) {
-    const ex_stringevent_handler = (val) => console.log(val.detail);
-    return [ex_stringevent_handler];
-  }
-  var SvelteNested = class extends SvelteElement {
-    constructor(options) {
-      super();
-      init(this, {
-        target: this.shadowRoot,
-        props: attribute_to_object(this.attributes),
-        customElement: true
-      }, instance3, create_fragment3, safe_not_equal, {}, null);
-      if (options) {
-        if (options.target) {
-          insert(options.target, this, options.anchor);
-        }
-      }
-    }
-  };
-  customElements.define("ex-svelte-nested", SvelteNested);
-
-  // ../ucp-example/dist/elements/svelte/SvelteProps.js
-  function create_fragment4(ctx) {
-    let div3;
-    let div0;
-    let t0;
-    let t1;
-    let div1;
-    let t2_value = ctx[1] + 1 + "";
-    let t2;
-    let t3;
-    let div2;
-    let t4_value = ctx[2]?.value + "";
-    let t4;
-    return {
-      c() {
-        div3 = element("div");
-        div0 = element("div");
-        t0 = text(ctx[0]);
-        t1 = space();
-        div1 = element("div");
-        t2 = text(t2_value);
-        t3 = space();
-        div2 = element("div");
-        t4 = text(t4_value);
-        this.c = noop;
-        attr(div0, "class", "stringprop");
-        attr(div1, "class", "numprop");
-        attr(div2, "class", "complexprop");
-      },
-      m(target, anchor) {
-        insert(target, div3, anchor);
-        append(div3, div0);
-        append(div0, t0);
-        append(div3, t1);
-        append(div3, div1);
-        append(div1, t2);
-        append(div3, t3);
-        append(div3, div2);
-        append(div2, t4);
-      },
-      p(ctx2, [dirty]) {
-        if (dirty & 1)
-          set_data(t0, ctx2[0]);
-        if (dirty & 2 && t2_value !== (t2_value = ctx2[1] + 1 + ""))
-          set_data(t2, t2_value);
-        if (dirty & 4 && t4_value !== (t4_value = ctx2[2]?.value + ""))
-          set_data(t4, t4_value);
-      },
-      i: noop,
-      o: noop,
-      d(detaching) {
-        if (detaching)
-          detach(div3);
-      }
-    };
-  }
-  function instance4($$self, $$props, $$invalidate) {
-    let { stringprop } = $$props;
-    let { numprop } = $$props;
-    let { complexprop } = $$props;
-    $$self.$$set = ($$props2) => {
-      if ("stringprop" in $$props2)
-        $$invalidate(0, stringprop = $$props2.stringprop);
-      if ("numprop" in $$props2)
-        $$invalidate(1, numprop = $$props2.numprop);
-      if ("complexprop" in $$props2)
-        $$invalidate(2, complexprop = $$props2.complexprop);
-    };
-    $$self.$$.update = () => {
-      if ($$self.$$.dirty & 1) {
-        $:
-          $$invalidate(0, stringprop = stringprop !== void 0 ? (() => {
-            try {
-              return JSON.parse(stringprop);
-            } catch {
-              return stringprop;
-            }
-          })() : void 0);
-      }
-      if ($$self.$$.dirty & 2) {
-        $:
-          $$invalidate(1, numprop = numprop !== void 0 ? (() => {
-            try {
-              return JSON.parse(numprop);
-            } catch {
-              return numprop;
-            }
-          })() : void 0);
-      }
-      if ($$self.$$.dirty & 4) {
-        $:
-          $$invalidate(2, complexprop = complexprop !== void 0 ? (() => {
-            try {
-              return JSON.parse(complexprop);
-            } catch {
-              return complexprop;
-            }
-          })() : void 0);
-      }
-    };
-    return [stringprop, numprop, complexprop];
-  }
-  var SvelteProps = class extends SvelteElement {
-    constructor(options) {
-      super();
-      init(this, {
-        target: this.shadowRoot,
-        props: attribute_to_object(this.attributes),
-        customElement: true
-      }, instance4, create_fragment4, safe_not_equal, {
-        stringprop: 0,
-        numprop: 1,
-        complexprop: 2
-      }, null);
-      if (options) {
-        if (options.target) {
-          insert(options.target, this, options.anchor);
-        }
-        if (options.props) {
-          this.$set(options.props);
-          flush();
-        }
-      }
-    }
-    static get observedAttributes() {
-      return ["stringprop", "numprop", "complexprop"];
-    }
-    get stringprop() {
-      return this.$$.ctx[0];
-    }
-    set stringprop(stringprop) {
-      this.$$set({ stringprop });
-      flush();
-    }
-    get numprop() {
-      return this.$$.ctx[1];
-    }
-    set numprop(numprop) {
-      this.$$set({ numprop });
-      flush();
-    }
-    get complexprop() {
-      return this.$$.ctx[2];
-    }
-    set complexprop(complexprop) {
-      this.$$set({ complexprop });
-      flush();
-    }
-  };
-  customElements.define("ex-svelte-props", SvelteProps);
-
-  // ../ucp-example/dist/elements/svelte/SvelteSimple.js
-  function create_fragment5(ctx) {
-    let div;
-    return {
-      c() {
-        div = element("div");
-        div.textContent = "Svelte";
-        this.c = noop;
-        attr(div, "class", "dummy");
-      },
-      m(target, anchor) {
-        insert(target, div, anchor);
-      },
-      p: noop,
-      i: noop,
-      o: noop,
-      d(detaching) {
-        if (detaching)
-          detach(div);
-      }
-    };
-  }
-  var SvelteSimple = class extends SvelteElement {
-    constructor(options) {
-      super();
-      this.shadowRoot.innerHTML = `<style>.dummy{font-family:Avenir, Helvetica, Arial, sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-align:center;color:#2c3e50}</style>`;
-      init(this, {
-        target: this.shadowRoot,
-        props: attribute_to_object(this.attributes),
-        customElement: true
-      }, null, create_fragment5, safe_not_equal, {}, null);
-      if (options) {
-        if (options.target) {
-          insert(options.target, this, options.anchor);
-        }
-      }
-    }
-  };
-  customElements.define("ex-svelte-simple", SvelteSimple);
-
-  // ../ucp-example/dist/elements/svelte/SvelteSlots.js
-  function create_fragment6(ctx) {
-    let div1;
-    return {
-      c() {
-        div1 = element("div");
-        div1.innerHTML = `<slot></slot> 
-    <div class="slot"><slot name="box"></slot></div> 
-    <slot name="after"></slot>`;
-        this.c = noop;
-      },
-      m(target, anchor) {
-        insert(target, div1, anchor);
-      },
-      p: noop,
-      i: noop,
-      o: noop,
-      d(detaching) {
-        if (detaching)
-          detach(div1);
-      }
-    };
-  }
-  var SvelteSlots = class extends SvelteElement {
-    constructor(options) {
-      super();
-      this.shadowRoot.innerHTML = `<style>.slot{border:2px solid red}</style>`;
-      init(this, {
-        target: this.shadowRoot,
-        props: attribute_to_object(this.attributes),
-        customElement: true
-      }, null, create_fragment6, safe_not_equal, {}, null);
-      if (options) {
-        if (options.target) {
-          insert(options.target, this, options.anchor);
-        }
-      }
-    }
-  };
-  customElements.define("ex-svelte-slots", SvelteSlots);
-
-  // ../ucp-example/dist/elements/svelte/SvelteState.js
-  function create_fragment7(ctx) {
-    let button;
-    let t;
-    let mounted;
-    let dispose;
-    return {
-      c() {
-        button = element("button");
-        t = text(ctx[0]);
-        this.c = noop;
-      },
-      m(target, anchor) {
-        insert(target, button, anchor);
-        append(button, t);
-        if (!mounted) {
-          dispose = listen(button, "click", ctx[1]);
-          mounted = true;
-        }
-      },
-      p(ctx2, [dirty]) {
-        if (dirty & 1)
-          set_data(t, ctx2[0]);
-      },
-      i: noop,
-      o: noop,
-      d(detaching) {
-        if (detaching)
-          detach(button);
-        mounted = false;
-        dispose();
-      }
-    };
-  }
-  function instance5($$self, $$props, $$invalidate) {
-    let count = 0;
-    const click_handler = () => $$invalidate(0, count++, count);
-    return [count, click_handler];
-  }
-  var SvelteState = class extends SvelteElement {
-    constructor(options) {
-      super();
-      init(this, {
-        target: this.shadowRoot,
-        props: attribute_to_object(this.attributes),
-        customElement: true
-      }, instance5, create_fragment7, safe_not_equal, {}, null);
-      if (options) {
-        if (options.target) {
-          insert(options.target, this, options.anchor);
-        }
-      }
-    }
-  };
-  customElements.define("ex-svelte-state", SvelteState);
-
-  // ../ucp-example/dist/elements/svelte/SvelteTheme.js
-  function create_fragment8(ctx) {
-    let div;
-    let slot;
-    return {
-      c() {
-        div = element("div");
-        slot = element("slot");
-        this.c = noop;
-        set_style(div, "--bg-color", ctx[0]);
-      },
-      m(target, anchor) {
-        insert(target, div, anchor);
-        append(div, slot);
-      },
-      p(ctx2, [dirty]) {
-        if (dirty & 1) {
-          set_style(div, "--bg-color", ctx2[0]);
-        }
-      },
-      i: noop,
-      o: noop,
-      d(detaching) {
-        if (detaching)
-          detach(div);
-      }
-    };
-  }
-  function instance6($$self, $$props, $$invalidate) {
-    let { color } = $$props;
-    $$self.$$set = ($$props2) => {
-      if ("color" in $$props2)
-        $$invalidate(0, color = $$props2.color);
-    };
-    $$self.$$.update = () => {
-      if ($$self.$$.dirty & 1) {
-        $:
-          $$invalidate(0, color = color !== void 0 ? (() => {
-            try {
-              return JSON.parse(color);
-            } catch {
-              return color;
-            }
-          })() : void 0);
-      }
-    };
-    return [color];
-  }
-  var SvelteTheme = class extends SvelteElement {
-    constructor(options) {
-      super();
-      init(this, {
-        target: this.shadowRoot,
-        props: attribute_to_object(this.attributes),
-        customElement: true
-      }, instance6, create_fragment8, safe_not_equal, { color: 0 }, null);
-      if (options) {
-        if (options.target) {
-          insert(options.target, this, options.anchor);
-        }
-        if (options.props) {
-          this.$set(options.props);
-          flush();
-        }
-      }
-    }
-    static get observedAttributes() {
-      return ["color"];
-    }
-    get color() {
-      return this.$$.ctx[0];
-    }
-    set color(color) {
-      this.$$set({ color });
-      flush();
-    }
-  };
-  customElements.define("ex-svelte-theme", SvelteTheme);
+  customElements.define("ex-svelte-app-component", SvelteAppComponent2);
 
   // ../ucp-example/dist/elements/chunks/chunk-VPXRDLZN.js
   function makeMap(str, expectsLowerCase) {
@@ -9939,14 +9534,14 @@
   var stack = [];
   function warn(msg, ...args) {
     pauseTracking();
-    const instance7 = stack.length ? stack[stack.length - 1].component : null;
-    const appWarnHandler = instance7 && instance7.appContext.config.warnHandler;
+    const instance11 = stack.length ? stack[stack.length - 1].component : null;
+    const appWarnHandler = instance11 && instance11.appContext.config.warnHandler;
     const trace = getComponentTrace();
     if (appWarnHandler) {
-      callWithErrorHandling(appWarnHandler, instance7, 11, [
+      callWithErrorHandling(appWarnHandler, instance11, 11, [
         msg + args.join(""),
-        instance7 && instance7.proxy,
-        trace.map(({ vnode }) => `at <${formatComponentName(instance7, vnode.type)}>`).join("\n"),
+        instance11 && instance11.proxy,
+        trace.map(({ vnode }) => `at <${formatComponentName(instance11, vnode.type)}>`).join("\n"),
         trace
       ]);
     } else {
@@ -10022,36 +9617,36 @@
       return raw ? value : [`${key}=`, value];
     }
   }
-  function callWithErrorHandling(fn, instance7, type, args) {
+  function callWithErrorHandling(fn, instance11, type, args) {
     let res;
     try {
       res = args ? fn(...args) : fn();
     } catch (err) {
-      handleError(err, instance7, type);
+      handleError(err, instance11, type);
     }
     return res;
   }
-  function callWithAsyncErrorHandling(fn, instance7, type, args) {
+  function callWithAsyncErrorHandling(fn, instance11, type, args) {
     if (isFunction(fn)) {
-      const res = callWithErrorHandling(fn, instance7, type, args);
+      const res = callWithErrorHandling(fn, instance11, type, args);
       if (res && isPromise(res)) {
         res.catch((err) => {
-          handleError(err, instance7, type);
+          handleError(err, instance11, type);
         });
       }
       return res;
     }
     const values = [];
     for (let i = 0; i < fn.length; i++) {
-      values.push(callWithAsyncErrorHandling(fn[i], instance7, type, args));
+      values.push(callWithAsyncErrorHandling(fn[i], instance11, type, args));
     }
     return values;
   }
-  function handleError(err, instance7, type, throwInDev = true) {
-    const contextVNode = instance7 ? instance7.vnode : null;
-    if (instance7) {
-      let cur = instance7.parent;
-      const exposedInstance = instance7.proxy;
+  function handleError(err, instance11, type, throwInDev = true) {
+    const contextVNode = instance11 ? instance11.vnode : null;
+    if (instance11) {
+      let cur = instance11.parent;
+      const exposedInstance = instance11.proxy;
       const errorInfo = false ? ErrorTypeStrings[type] : type;
       while (cur) {
         const errorCapturedHooks = cur.ec;
@@ -10064,7 +9659,7 @@
         }
         cur = cur.parent;
       }
-      const appErrorHandler = instance7.appContext.config.errorHandler;
+      const appErrorHandler = instance11.appContext.config.errorHandler;
       if (appErrorHandler) {
         callWithErrorHandling(appErrorHandler, null, 10, [err, exposedInstance, errorInfo]);
         return;
@@ -10237,12 +9832,12 @@
       reload: tryWrap(reload)
     };
   }
-  function emit$1(instance7, event, ...rawArgs) {
-    if (instance7.isUnmounted)
+  function emit$1(instance11, event, ...rawArgs) {
+    if (instance11.isUnmounted)
       return;
-    const props = instance7.vnode.props || EMPTY_OBJ;
+    const props = instance11.vnode.props || EMPTY_OBJ;
     if (false) {
-      const { emitsOptions, propsOptions: [propsOptions] } = instance7;
+      const { emitsOptions, propsOptions: [propsOptions] } = instance11;
       if (emitsOptions) {
         if (!(event in emitsOptions) && true) {
           if (!propsOptions || !(toHandlerKey(event) in propsOptions)) {
@@ -10272,12 +9867,12 @@
       }
     }
     if (false) {
-      devtoolsComponentEmit(instance7, event, args);
+      devtoolsComponentEmit(instance11, event, args);
     }
     if (false) {
       const lowerCaseEvent = event.toLowerCase();
       if (lowerCaseEvent !== event && props[toHandlerKey(lowerCaseEvent)]) {
-        warn(`Event "${lowerCaseEvent}" is emitted in component ${formatComponentName(instance7, instance7.type)} but the handler is registered for "${event}". Note that HTML attributes are case-insensitive and you cannot use v-on to listen to camelCase events when using in-DOM templates. You should probably use "${hyphenate(event)}" instead of "${event}".`);
+        warn(`Event "${lowerCaseEvent}" is emitted in component ${formatComponentName(instance11, instance11.type)} but the handler is registered for "${event}". Note that HTML attributes are case-insensitive and you cannot use v-on to listen to camelCase events when using in-DOM templates. You should probably use "${hyphenate(event)}" instead of "${event}".`);
       }
     }
     let handlerName;
@@ -10286,17 +9881,17 @@
       handler = props[handlerName = toHandlerKey(hyphenate(event))];
     }
     if (handler) {
-      callWithAsyncErrorHandling(handler, instance7, 6, args);
+      callWithAsyncErrorHandling(handler, instance11, 6, args);
     }
     const onceHandler = props[handlerName + `Once`];
     if (onceHandler) {
-      if (!instance7.emitted) {
-        instance7.emitted = {};
-      } else if (instance7.emitted[handlerName]) {
+      if (!instance11.emitted) {
+        instance11.emitted = {};
+      } else if (instance11.emitted[handlerName]) {
         return;
       }
-      instance7.emitted[handlerName] = true;
-      callWithAsyncErrorHandling(onceHandler, instance7, 6, args);
+      instance11.emitted[handlerName] = true;
+      callWithAsyncErrorHandling(onceHandler, instance11, 6, args);
     }
   }
   function normalizeEmitsOptions(comp, appContext, asMixin = false) {
@@ -10347,10 +9942,10 @@
   }
   var currentRenderingInstance = null;
   var currentScopeId = null;
-  function setCurrentRenderingInstance(instance7) {
+  function setCurrentRenderingInstance(instance11) {
     const prev = currentRenderingInstance;
-    currentRenderingInstance = instance7;
-    currentScopeId = instance7 && instance7.type.__scopeId || null;
+    currentRenderingInstance = instance11;
+    currentScopeId = instance11 && instance11.type.__scopeId || null;
     return prev;
   }
   function withCtx(fn, ctx = currentRenderingInstance, isNonScopedSlot) {
@@ -10379,11 +9974,11 @@
     renderFnWithContext._d = true;
     return renderFnWithContext;
   }
-  function renderComponentRoot(instance7) {
-    const { type: Component, vnode, proxy, withProxy, props, propsOptions: [propsOptions], slots, attrs, emit, render: render22, renderCache, data, setupState, ctx, inheritAttrs } = instance7;
+  function renderComponentRoot(instance11) {
+    const { type: Component, vnode, proxy, withProxy, props, propsOptions: [propsOptions], slots, attrs, emit, render: render22, renderCache, data, setupState, ctx, inheritAttrs } = instance11;
     let result;
     let fallthroughAttrs;
-    const prev = setCurrentRenderingInstance(instance7);
+    const prev = setCurrentRenderingInstance(instance11);
     if (false) {
       accessedAttrs = false;
     }
@@ -10409,7 +10004,7 @@
       }
     } catch (err) {
       blockStack.length = 0;
-      handleError(err, instance7, 1);
+      handleError(err, instance11, 1);
       result = createVNode(Comment);
     }
     let root = result;
@@ -10580,13 +10175,13 @@
     }
   }
   function inject(key, defaultValue, treatDefaultAsFactory = false) {
-    const instance7 = currentInstance || currentRenderingInstance;
-    if (instance7) {
-      const provides = instance7.parent == null ? instance7.vnode.appContext && instance7.vnode.appContext.provides : instance7.parent.provides;
+    const instance11 = currentInstance || currentRenderingInstance;
+    if (instance11) {
+      const provides = instance11.parent == null ? instance11.vnode.appContext && instance11.vnode.appContext.provides : instance11.parent.provides;
       if (provides && key in provides) {
         return provides[key];
       } else if (arguments.length > 1) {
-        return treatDefaultAsFactory && isFunction(defaultValue) ? defaultValue.call(instance7.proxy) : defaultValue;
+        return treatDefaultAsFactory && isFunction(defaultValue) ? defaultValue.call(instance11.proxy) : defaultValue;
       } else if (false) {
         warn(`injection "${String(key)}" not found.`);
       }
@@ -10613,7 +10208,7 @@
     const warnInvalidSource = (s) => {
       warn(`Invalid watch source: `, s, `A watch source can only be a getter/effect function, a ref, a reactive object, or an array of these types.`);
     };
-    const instance7 = currentInstance;
+    const instance11 = currentInstance;
     let getter;
     let forceTrigger = false;
     let isMultiSource = false;
@@ -10632,22 +10227,22 @@
         } else if (isReactive(s)) {
           return traverse(s);
         } else if (isFunction(s)) {
-          return callWithErrorHandling(s, instance7, 2);
+          return callWithErrorHandling(s, instance11, 2);
         } else {
         }
       });
     } else if (isFunction(source)) {
       if (cb) {
-        getter = () => callWithErrorHandling(source, instance7, 2);
+        getter = () => callWithErrorHandling(source, instance11, 2);
       } else {
         getter = () => {
-          if (instance7 && instance7.isUnmounted) {
+          if (instance11 && instance11.isUnmounted) {
             return;
           }
           if (cleanup) {
             cleanup();
           }
-          return callWithAsyncErrorHandling(source, instance7, 3, [onCleanup]);
+          return callWithAsyncErrorHandling(source, instance11, 3, [onCleanup]);
         };
       }
     } else {
@@ -10660,7 +10255,7 @@
     let cleanup;
     let onCleanup = (fn) => {
       cleanup = effect2.onStop = () => {
-        callWithErrorHandling(fn, instance7, 4);
+        callWithErrorHandling(fn, instance11, 4);
       };
     };
     if (isInSSRComponentSetup) {
@@ -10668,7 +10263,7 @@
       if (!cb) {
         getter();
       } else if (immediate) {
-        callWithAsyncErrorHandling(cb, instance7, 3, [
+        callWithAsyncErrorHandling(cb, instance11, 3, [
           getter(),
           isMultiSource ? [] : void 0,
           onCleanup
@@ -10687,7 +10282,7 @@
           if (cleanup) {
             cleanup();
           }
-          callWithAsyncErrorHandling(cb, instance7, 3, [
+          callWithAsyncErrorHandling(cb, instance11, 3, [
             newValue,
             oldValue === INITIAL_WATCHER_VALUE ? void 0 : oldValue,
             onCleanup
@@ -10703,10 +10298,10 @@
     if (flush2 === "sync") {
       scheduler = job;
     } else if (flush2 === "post") {
-      scheduler = () => queuePostRenderEffect(job, instance7 && instance7.suspense);
+      scheduler = () => queuePostRenderEffect(job, instance11 && instance11.suspense);
     } else {
       scheduler = () => {
-        if (!instance7 || instance7.isMounted) {
+        if (!instance11 || instance11.isMounted) {
           queuePreFlushCb(job);
         } else {
           job();
@@ -10725,14 +10320,14 @@
         oldValue = effect2.run();
       }
     } else if (flush2 === "post") {
-      queuePostRenderEffect(effect2.run.bind(effect2), instance7 && instance7.suspense);
+      queuePostRenderEffect(effect2.run.bind(effect2), instance11 && instance11.suspense);
     } else {
       effect2.run();
     }
     return () => {
       effect2.stop();
-      if (instance7 && instance7.scope) {
-        remove(instance7.scope.effects, effect2);
+      if (instance11 && instance11.scope) {
+        remove(instance11.scope.effects, effect2);
       }
     };
   }
@@ -10828,7 +10423,7 @@
       onAppearCancelled: TransitionHookValidator
     },
     setup(props, { slots }) {
-      const instance7 = getCurrentInstance();
+      const instance11 = getCurrentInstance();
       const state = useTransitionState();
       let prevTransitionKey;
       return () => {
@@ -10864,9 +10459,9 @@
         if (!innerChild) {
           return emptyPlaceholder(child);
         }
-        const enterHooks = resolveTransitionHooks(innerChild, rawProps, state, instance7);
+        const enterHooks = resolveTransitionHooks(innerChild, rawProps, state, instance11);
         setTransitionHooks(innerChild, enterHooks);
-        const oldChild = instance7.subTree;
+        const oldChild = instance11.subTree;
         const oldInnerChild = oldChild && getKeepAliveChild(oldChild);
         let transitionKeyChanged = false;
         const { getTransitionKey } = innerChild.type;
@@ -10880,13 +10475,13 @@
           }
         }
         if (oldInnerChild && oldInnerChild.type !== Comment && (!isSameVNodeType(innerChild, oldInnerChild) || transitionKeyChanged)) {
-          const leavingHooks = resolveTransitionHooks(oldInnerChild, rawProps, state, instance7);
+          const leavingHooks = resolveTransitionHooks(oldInnerChild, rawProps, state, instance11);
           setTransitionHooks(oldInnerChild, leavingHooks);
           if (mode === "out-in") {
             state.isLeaving = true;
             leavingHooks.afterLeave = () => {
               state.isLeaving = false;
-              instance7.update();
+              instance11.update();
             };
             return emptyPlaceholder(child);
           } else if (mode === "in-out" && innerChild.type !== Comment) {
@@ -10916,12 +10511,12 @@
     }
     return leavingVNodesCache;
   }
-  function resolveTransitionHooks(vnode, props, state, instance7) {
+  function resolveTransitionHooks(vnode, props, state, instance11) {
     const { appear, mode, persisted = false, onBeforeEnter, onEnter, onAfterEnter, onEnterCancelled, onBeforeLeave, onLeave, onAfterLeave, onLeaveCancelled, onBeforeAppear, onAppear, onAfterAppear, onAppearCancelled } = props;
     const key = String(vnode.key);
     const leavingVNodesCache = getLeavingNodesForType(state, vnode);
     const callHook3 = (hook, args) => {
-      hook && callWithAsyncErrorHandling(hook, instance7, 9, args);
+      hook && callWithAsyncErrorHandling(hook, instance11, 9, args);
     };
     const hooks = {
       mode,
@@ -11017,7 +10612,7 @@
         }
       },
       clone(vnode2) {
-        return resolveTransitionHooks(vnode2, props, state, instance7);
+        return resolveTransitionHooks(vnode2, props, state, instance11);
       }
     };
     return hooks;
@@ -11141,13 +10736,13 @@
     injectHook("ec", hook, target);
   }
   var shouldCacheAccess = true;
-  function applyOptions(instance7) {
-    const options = resolveMergedOptions(instance7);
-    const publicThis = instance7.proxy;
-    const ctx = instance7.ctx;
+  function applyOptions(instance11) {
+    const options = resolveMergedOptions(instance11);
+    const publicThis = instance11.proxy;
+    const ctx = instance11.ctx;
     shouldCacheAccess = false;
     if (options.beforeCreate) {
-      callHook(options.beforeCreate, instance7, "bc");
+      callHook(options.beforeCreate, instance11, "bc");
     }
     const {
       data: dataOptions,
@@ -11180,7 +10775,7 @@
     } = options;
     const checkDuplicateProperties = false ? createDuplicateChecker() : null;
     if (false) {
-      const [propsOptions] = instance7.propsOptions;
+      const [propsOptions] = instance11.propsOptions;
       if (propsOptions) {
         for (const key in propsOptions) {
           checkDuplicateProperties("Props", key);
@@ -11188,7 +10783,7 @@
       }
     }
     if (injectOptions) {
-      resolveInjections(injectOptions, ctx, checkDuplicateProperties, instance7.appContext.config.unwrapInjectedRef);
+      resolveInjections(injectOptions, ctx, checkDuplicateProperties, instance11.appContext.config.unwrapInjectedRef);
     }
     if (methods) {
       for (const key in methods) {
@@ -11222,7 +10817,7 @@
       }
       if (!isObject(data)) {
       } else {
-        instance7.data = reactive(data);
+        instance11.data = reactive(data);
         if (false) {
           for (const key in data) {
             checkDuplicateProperties("Data", key);
@@ -11276,7 +10871,7 @@
       });
     }
     if (created) {
-      callHook(created, instance7, "c");
+      callHook(created, instance11, "c");
     }
     function registerLifecycleHook(register, hook) {
       if (isArray(hook)) {
@@ -11299,27 +10894,27 @@
     registerLifecycleHook(onServerPrefetch, serverPrefetch);
     if (isArray(expose)) {
       if (expose.length) {
-        const exposed = instance7.exposed || (instance7.exposed = {});
+        const exposed = instance11.exposed || (instance11.exposed = {});
         expose.forEach((key) => {
           Object.defineProperty(exposed, key, {
             get: () => publicThis[key],
             set: (val) => publicThis[key] = val
           });
         });
-      } else if (!instance7.exposed) {
-        instance7.exposed = {};
+      } else if (!instance11.exposed) {
+        instance11.exposed = {};
       }
     }
-    if (render22 && instance7.render === NOOP) {
-      instance7.render = render22;
+    if (render22 && instance11.render === NOOP) {
+      instance11.render = render22;
     }
     if (inheritAttrs != null) {
-      instance7.inheritAttrs = inheritAttrs;
+      instance11.inheritAttrs = inheritAttrs;
     }
     if (components)
-      instance7.components = components;
+      instance11.components = components;
     if (directives)
-      instance7.directives = directives;
+      instance11.directives = directives;
   }
   function resolveInjections(injectOptions, ctx, checkDuplicateProperties = NOOP, unwrapRef = false) {
     if (isArray(injectOptions)) {
@@ -11359,8 +10954,8 @@
       }
     }
   }
-  function callHook(hook, instance7, type) {
-    callWithAsyncErrorHandling(isArray(hook) ? hook.map((h2) => h2.bind(instance7.proxy)) : hook.bind(instance7.proxy), instance7, type);
+  function callHook(hook, instance11, type) {
+    callWithAsyncErrorHandling(isArray(hook) ? hook.map((h2) => h2.bind(instance11.proxy)) : hook.bind(instance11.proxy), instance11, type);
   }
   function createWatcher(raw, ctx, publicThis, key) {
     const getter = key.includes(".") ? createPathGetter(publicThis, key) : () => publicThis[key];
@@ -11388,10 +10983,10 @@
       warn(`Invalid watch option: "${key}"`, raw);
     }
   }
-  function resolveMergedOptions(instance7) {
-    const base = instance7.type;
+  function resolveMergedOptions(instance11) {
+    const base = instance11.type;
     const { mixins, extends: extendsOptions } = base;
-    const { mixins: globalMixins, optionsCache: cache, config: { optionMergeStrategies } } = instance7.appContext;
+    const { mixins: globalMixins, optionsCache: cache, config: { optionMergeStrategies } } = instance11.appContext;
     const cached = cache.get(base);
     let resolved;
     if (cached) {
@@ -11494,42 +11089,42 @@
     }
     return merged;
   }
-  function initProps(instance7, rawProps, isStateful, isSSR = false) {
+  function initProps(instance11, rawProps, isStateful, isSSR = false) {
     const props = {};
     const attrs = {};
     def(attrs, InternalObjectKey, 1);
-    instance7.propsDefaults = /* @__PURE__ */ Object.create(null);
-    setFullProps(instance7, rawProps, props, attrs);
-    for (const key in instance7.propsOptions[0]) {
+    instance11.propsDefaults = /* @__PURE__ */ Object.create(null);
+    setFullProps(instance11, rawProps, props, attrs);
+    for (const key in instance11.propsOptions[0]) {
       if (!(key in props)) {
         props[key] = void 0;
       }
     }
     if (false) {
-      validateProps(rawProps || {}, props, instance7);
+      validateProps(rawProps || {}, props, instance11);
     }
     if (isStateful) {
-      instance7.props = isSSR ? props : shallowReactive(props);
+      instance11.props = isSSR ? props : shallowReactive(props);
     } else {
-      if (!instance7.type.props) {
-        instance7.props = attrs;
+      if (!instance11.type.props) {
+        instance11.props = attrs;
       } else {
-        instance7.props = props;
+        instance11.props = props;
       }
     }
-    instance7.attrs = attrs;
+    instance11.attrs = attrs;
   }
-  function updateProps(instance7, rawProps, rawPrevProps, optimized) {
-    const { props, attrs, vnode: { patchFlag } } = instance7;
+  function updateProps(instance11, rawProps, rawPrevProps, optimized) {
+    const { props, attrs, vnode: { patchFlag } } = instance11;
     const rawCurrentProps = toRaw(props);
-    const [options] = instance7.propsOptions;
+    const [options] = instance11.propsOptions;
     let hasAttrsChanged = false;
     if ((optimized || patchFlag > 0) && !(patchFlag & 16)) {
       if (patchFlag & 8) {
-        const propsToUpdate = instance7.vnode.dynamicProps;
+        const propsToUpdate = instance11.vnode.dynamicProps;
         for (let i = 0; i < propsToUpdate.length; i++) {
           let key = propsToUpdate[i];
-          if (isEmitListener(instance7.emitsOptions, key)) {
+          if (isEmitListener(instance11.emitsOptions, key)) {
             continue;
           }
           const value = rawProps[key];
@@ -11541,7 +11136,7 @@
               }
             } else {
               const camelizedKey = camelize(key);
-              props[camelizedKey] = resolvePropValue(options, rawCurrentProps, camelizedKey, value, instance7, false);
+              props[camelizedKey] = resolvePropValue(options, rawCurrentProps, camelizedKey, value, instance11, false);
             }
           } else {
             if (value !== attrs[key]) {
@@ -11552,7 +11147,7 @@
         }
       }
     } else {
-      if (setFullProps(instance7, rawProps, props, attrs)) {
+      if (setFullProps(instance11, rawProps, props, attrs)) {
         hasAttrsChanged = true;
       }
       let kebabKey;
@@ -11560,7 +11155,7 @@
         if (!rawProps || !hasOwn(rawProps, key) && ((kebabKey = hyphenate(key)) === key || !hasOwn(rawProps, kebabKey))) {
           if (options) {
             if (rawPrevProps && (rawPrevProps[key] !== void 0 || rawPrevProps[kebabKey] !== void 0)) {
-              props[key] = resolvePropValue(options, rawCurrentProps, key, void 0, instance7, true);
+              props[key] = resolvePropValue(options, rawCurrentProps, key, void 0, instance11, true);
             }
           } else {
             delete props[key];
@@ -11577,14 +11172,14 @@
       }
     }
     if (hasAttrsChanged) {
-      trigger(instance7, "set", "$attrs");
+      trigger(instance11, "set", "$attrs");
     }
     if (false) {
-      validateProps(rawProps || {}, props, instance7);
+      validateProps(rawProps || {}, props, instance11);
     }
   }
-  function setFullProps(instance7, rawProps, props, attrs) {
-    const [options, needCastKeys] = instance7.propsOptions;
+  function setFullProps(instance11, rawProps, props, attrs) {
+    const [options, needCastKeys] = instance11.propsOptions;
     let hasAttrsChanged = false;
     let rawCastValues;
     if (rawProps) {
@@ -11600,7 +11195,7 @@
           } else {
             (rawCastValues || (rawCastValues = {}))[camelKey] = value;
           }
-        } else if (!isEmitListener(instance7.emitsOptions, key)) {
+        } else if (!isEmitListener(instance11.emitsOptions, key)) {
           if (!(key in attrs) || value !== attrs[key]) {
             attrs[key] = value;
             hasAttrsChanged = true;
@@ -11613,23 +11208,23 @@
       const castValues = rawCastValues || EMPTY_OBJ;
       for (let i = 0; i < needCastKeys.length; i++) {
         const key = needCastKeys[i];
-        props[key] = resolvePropValue(options, rawCurrentProps, key, castValues[key], instance7, !hasOwn(castValues, key));
+        props[key] = resolvePropValue(options, rawCurrentProps, key, castValues[key], instance11, !hasOwn(castValues, key));
       }
     }
     return hasAttrsChanged;
   }
-  function resolvePropValue(options, props, key, value, instance7, isAbsent) {
+  function resolvePropValue(options, props, key, value, instance11, isAbsent) {
     const opt = options[key];
     if (opt != null) {
       const hasDefault = hasOwn(opt, "default");
       if (hasDefault && value === void 0) {
         const defaultValue = opt.default;
         if (opt.type !== Function && isFunction(defaultValue)) {
-          const { propsDefaults } = instance7;
+          const { propsDefaults } = instance11;
           if (key in propsDefaults) {
             value = propsDefaults[key];
           } else {
-            setCurrentInstance(instance7);
+            setCurrentInstance(instance11);
             value = propsDefaults[key] = defaultValue.call(null, props);
             unsetCurrentInstance();
           }
@@ -11749,7 +11344,7 @@
     normalized._c = false;
     return normalized;
   };
-  var normalizeObjectSlots = (rawSlots, slots, instance7) => {
+  var normalizeObjectSlots = (rawSlots, slots, instance11) => {
     const ctx = rawSlots._ctx;
     for (const key in rawSlots) {
       if (isInternalKey(key))
@@ -11766,32 +11361,32 @@
       }
     }
   };
-  var normalizeVNodeSlots = (instance7, children2) => {
+  var normalizeVNodeSlots = (instance11, children2) => {
     if (false) {
       warn(`Non-function value encountered for default slot. Prefer function slots for better performance.`);
     }
     const normalized = normalizeSlotValue(children2);
-    instance7.slots.default = () => normalized;
+    instance11.slots.default = () => normalized;
   };
-  var initSlots = (instance7, children2) => {
-    if (instance7.vnode.shapeFlag & 32) {
+  var initSlots = (instance11, children2) => {
+    if (instance11.vnode.shapeFlag & 32) {
       const type = children2._;
       if (type) {
-        instance7.slots = toRaw(children2);
+        instance11.slots = toRaw(children2);
         def(children2, "_", type);
       } else {
-        normalizeObjectSlots(children2, instance7.slots = {});
+        normalizeObjectSlots(children2, instance11.slots = {});
       }
     } else {
-      instance7.slots = {};
+      instance11.slots = {};
       if (children2) {
-        normalizeVNodeSlots(instance7, children2);
+        normalizeVNodeSlots(instance11, children2);
       }
     }
-    def(instance7.slots, InternalObjectKey, 1);
+    def(instance11.slots, InternalObjectKey, 1);
   };
-  var updateSlots = (instance7, children2, optimized) => {
-    const { vnode, slots } = instance7;
+  var updateSlots = (instance11, children2, optimized) => {
+    const { vnode, slots } = instance11;
     let needDeletionCheck = true;
     let deletionComparisonTarget = EMPTY_OBJ;
     if (vnode.shapeFlag & 32) {
@@ -11813,7 +11408,7 @@
       }
       deletionComparisonTarget = children2;
     } else if (children2) {
-      normalizeVNodeSlots(instance7, children2);
+      normalizeVNodeSlots(instance11, children2);
       deletionComparisonTarget = { default: 1 };
     }
     if (needDeletionCheck) {
@@ -11824,7 +11419,7 @@
       }
     }
   };
-  function invokeDirectiveHook(vnode, prevVNode, instance7, name) {
+  function invokeDirectiveHook(vnode, prevVNode, instance11, name) {
     const bindings = vnode.dirs;
     const oldBindings = prevVNode && prevVNode.dirs;
     for (let i = 0; i < bindings.length; i++) {
@@ -11835,7 +11430,7 @@
       let hook = binding.dir[name];
       if (hook) {
         pauseTracking();
-        callWithAsyncErrorHandling(hook, instance7, 8, [
+        callWithAsyncErrorHandling(hook, instance11, 8, [
           vnode.el,
           binding,
           vnode,
@@ -12431,114 +12026,114 @@ For more details, see https://link.vuejs.org/feature-flags.`);
       }
     };
     const mountComponent = (initialVNode, container, anchor, parentComponent, parentSuspense, isSVG, optimized) => {
-      const instance7 = initialVNode.component = createComponentInstance(initialVNode, parentComponent, parentSuspense);
+      const instance11 = initialVNode.component = createComponentInstance(initialVNode, parentComponent, parentSuspense);
       if (false) {
-        registerHMR(instance7);
+        registerHMR(instance11);
       }
       if (false) {
         pushWarningContext(initialVNode);
-        startMeasure(instance7, `mount`);
+        startMeasure(instance11, `mount`);
       }
       if (isKeepAlive(initialVNode)) {
-        instance7.ctx.renderer = internals;
+        instance11.ctx.renderer = internals;
       }
       {
         if (false) {
-          startMeasure(instance7, `init`);
+          startMeasure(instance11, `init`);
         }
-        setupComponent(instance7);
+        setupComponent(instance11);
         if (false) {
-          endMeasure(instance7, `init`);
+          endMeasure(instance11, `init`);
         }
       }
-      if (instance7.asyncDep) {
-        parentSuspense && parentSuspense.registerDep(instance7, setupRenderEffect);
+      if (instance11.asyncDep) {
+        parentSuspense && parentSuspense.registerDep(instance11, setupRenderEffect);
         if (!initialVNode.el) {
-          const placeholder = instance7.subTree = createVNode(Comment);
+          const placeholder = instance11.subTree = createVNode(Comment);
           processCommentNode(null, placeholder, container, anchor);
         }
         return;
       }
-      setupRenderEffect(instance7, initialVNode, container, anchor, parentSuspense, isSVG, optimized);
+      setupRenderEffect(instance11, initialVNode, container, anchor, parentSuspense, isSVG, optimized);
       if (false) {
         popWarningContext();
-        endMeasure(instance7, `mount`);
+        endMeasure(instance11, `mount`);
       }
     };
     const updateComponent = (n1, n2, optimized) => {
-      const instance7 = n2.component = n1.component;
+      const instance11 = n2.component = n1.component;
       if (shouldUpdateComponent(n1, n2, optimized)) {
-        if (instance7.asyncDep && !instance7.asyncResolved) {
+        if (instance11.asyncDep && !instance11.asyncResolved) {
           if (false) {
             pushWarningContext(n2);
           }
-          updateComponentPreRender(instance7, n2, optimized);
+          updateComponentPreRender(instance11, n2, optimized);
           if (false) {
             popWarningContext();
           }
           return;
         } else {
-          instance7.next = n2;
-          invalidateJob(instance7.update);
-          instance7.update();
+          instance11.next = n2;
+          invalidateJob(instance11.update);
+          instance11.update();
         }
       } else {
         n2.component = n1.component;
         n2.el = n1.el;
-        instance7.vnode = n2;
+        instance11.vnode = n2;
       }
     };
-    const setupRenderEffect = (instance7, initialVNode, container, anchor, parentSuspense, isSVG, optimized) => {
+    const setupRenderEffect = (instance11, initialVNode, container, anchor, parentSuspense, isSVG, optimized) => {
       const componentUpdateFn = () => {
-        if (!instance7.isMounted) {
+        if (!instance11.isMounted) {
           let vnodeHook;
           const { el, props } = initialVNode;
-          const { bm, m, parent } = instance7;
+          const { bm, m, parent } = instance11;
           const isAsyncWrapperVNode = isAsyncWrapper(initialVNode);
-          toggleRecurse(instance7, false);
+          toggleRecurse(instance11, false);
           if (bm) {
             invokeArrayFns(bm);
           }
           if (!isAsyncWrapperVNode && (vnodeHook = props && props.onVnodeBeforeMount)) {
             invokeVNodeHook(vnodeHook, parent, initialVNode);
           }
-          toggleRecurse(instance7, true);
+          toggleRecurse(instance11, true);
           if (el && hydrateNode) {
             const hydrateSubTree = () => {
               if (false) {
-                startMeasure(instance7, `render`);
+                startMeasure(instance11, `render`);
               }
-              instance7.subTree = renderComponentRoot(instance7);
+              instance11.subTree = renderComponentRoot(instance11);
               if (false) {
-                endMeasure(instance7, `render`);
+                endMeasure(instance11, `render`);
               }
               if (false) {
-                startMeasure(instance7, `hydrate`);
+                startMeasure(instance11, `hydrate`);
               }
-              hydrateNode(el, instance7.subTree, instance7, parentSuspense, null);
+              hydrateNode(el, instance11.subTree, instance11, parentSuspense, null);
               if (false) {
-                endMeasure(instance7, `hydrate`);
+                endMeasure(instance11, `hydrate`);
               }
             };
             if (isAsyncWrapperVNode) {
-              initialVNode.type.__asyncLoader().then(() => !instance7.isUnmounted && hydrateSubTree());
+              initialVNode.type.__asyncLoader().then(() => !instance11.isUnmounted && hydrateSubTree());
             } else {
               hydrateSubTree();
             }
           } else {
             if (false) {
-              startMeasure(instance7, `render`);
+              startMeasure(instance11, `render`);
             }
-            const subTree = instance7.subTree = renderComponentRoot(instance7);
+            const subTree = instance11.subTree = renderComponentRoot(instance11);
             if (false) {
-              endMeasure(instance7, `render`);
+              endMeasure(instance11, `render`);
             }
             if (false) {
-              startMeasure(instance7, `patch`);
+              startMeasure(instance11, `patch`);
             }
-            patch(null, subTree, container, anchor, instance7, parentSuspense, isSVG);
+            patch(null, subTree, container, anchor, instance11, parentSuspense, isSVG);
             if (false) {
-              endMeasure(instance7, `patch`);
+              endMeasure(instance11, `patch`);
             }
             initialVNode.el = subTree.el;
           }
@@ -12550,24 +12145,24 @@ For more details, see https://link.vuejs.org/feature-flags.`);
             queuePostRenderEffect(() => invokeVNodeHook(vnodeHook, parent, scopedInitialVNode), parentSuspense);
           }
           if (initialVNode.shapeFlag & 256) {
-            instance7.a && queuePostRenderEffect(instance7.a, parentSuspense);
+            instance11.a && queuePostRenderEffect(instance11.a, parentSuspense);
           }
-          instance7.isMounted = true;
+          instance11.isMounted = true;
           if (false) {
-            devtoolsComponentAdded(instance7);
+            devtoolsComponentAdded(instance11);
           }
           initialVNode = container = anchor = null;
         } else {
-          let { next, bu, u, parent, vnode } = instance7;
+          let { next, bu, u, parent, vnode } = instance11;
           let originNext = next;
           let vnodeHook;
           if (false) {
-            pushWarningContext(next || instance7.vnode);
+            pushWarningContext(next || instance11.vnode);
           }
-          toggleRecurse(instance7, false);
+          toggleRecurse(instance11, false);
           if (next) {
             next.el = vnode.el;
-            updateComponentPreRender(instance7, next, optimized);
+            updateComponentPreRender(instance11, next, optimized);
           } else {
             next = vnode;
           }
@@ -12577,26 +12172,26 @@ For more details, see https://link.vuejs.org/feature-flags.`);
           if (vnodeHook = next.props && next.props.onVnodeBeforeUpdate) {
             invokeVNodeHook(vnodeHook, parent, next, vnode);
           }
-          toggleRecurse(instance7, true);
+          toggleRecurse(instance11, true);
           if (false) {
-            startMeasure(instance7, `render`);
+            startMeasure(instance11, `render`);
           }
-          const nextTree = renderComponentRoot(instance7);
+          const nextTree = renderComponentRoot(instance11);
           if (false) {
-            endMeasure(instance7, `render`);
+            endMeasure(instance11, `render`);
           }
-          const prevTree = instance7.subTree;
-          instance7.subTree = nextTree;
+          const prevTree = instance11.subTree;
+          instance11.subTree = nextTree;
           if (false) {
-            startMeasure(instance7, `patch`);
+            startMeasure(instance11, `patch`);
           }
-          patch(prevTree, nextTree, hostParentNode(prevTree.el), getNextHostNode(prevTree), instance7, parentSuspense, isSVG);
+          patch(prevTree, nextTree, hostParentNode(prevTree.el), getNextHostNode(prevTree), instance11, parentSuspense, isSVG);
           if (false) {
-            endMeasure(instance7, `patch`);
+            endMeasure(instance11, `patch`);
           }
           next.el = nextTree.el;
           if (originNext === null) {
-            updateHOCHostEl(instance7, nextTree.el);
+            updateHOCHostEl(instance11, nextTree.el);
           }
           if (u) {
             queuePostRenderEffect(u, parentSuspense);
@@ -12605,33 +12200,33 @@ For more details, see https://link.vuejs.org/feature-flags.`);
             queuePostRenderEffect(() => invokeVNodeHook(vnodeHook, parent, next, vnode), parentSuspense);
           }
           if (false) {
-            devtoolsComponentUpdated(instance7);
+            devtoolsComponentUpdated(instance11);
           }
           if (false) {
             popWarningContext();
           }
         }
       };
-      const effect2 = instance7.effect = new ReactiveEffect(componentUpdateFn, () => queueJob(instance7.update), instance7.scope);
-      const update2 = instance7.update = effect2.run.bind(effect2);
-      update2.id = instance7.uid;
-      toggleRecurse(instance7, true);
+      const effect2 = instance11.effect = new ReactiveEffect(componentUpdateFn, () => queueJob(instance11.update), instance11.scope);
+      const update2 = instance11.update = effect2.run.bind(effect2);
+      update2.id = instance11.uid;
+      toggleRecurse(instance11, true);
       if (false) {
-        effect2.onTrack = instance7.rtc ? (e) => invokeArrayFns(instance7.rtc, e) : void 0;
-        effect2.onTrigger = instance7.rtg ? (e) => invokeArrayFns(instance7.rtg, e) : void 0;
-        update2.ownerInstance = instance7;
+        effect2.onTrack = instance11.rtc ? (e) => invokeArrayFns(instance11.rtc, e) : void 0;
+        effect2.onTrigger = instance11.rtg ? (e) => invokeArrayFns(instance11.rtg, e) : void 0;
+        update2.ownerInstance = instance11;
       }
       update2();
     };
-    const updateComponentPreRender = (instance7, nextVNode, optimized) => {
-      nextVNode.component = instance7;
-      const prevProps = instance7.vnode.props;
-      instance7.vnode = nextVNode;
-      instance7.next = null;
-      updateProps(instance7, nextVNode.props, prevProps, optimized);
-      updateSlots(instance7, nextVNode.children, optimized);
+    const updateComponentPreRender = (instance11, nextVNode, optimized) => {
+      nextVNode.component = instance11;
+      const prevProps = instance11.vnode.props;
+      instance11.vnode = nextVNode;
+      instance11.next = null;
+      updateProps(instance11, nextVNode.props, prevProps, optimized);
+      updateSlots(instance11, nextVNode.children, optimized);
       pauseTracking();
-      flushPreFlushCbs(void 0, instance7.update);
+      flushPreFlushCbs(void 0, instance11.update);
       resetTracking();
     };
     const patchChildren = (n1, n2, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized = false) => {
@@ -12939,33 +12534,33 @@ For more details, see https://link.vuejs.org/feature-flags.`);
       }
       hostRemove(end);
     };
-    const unmountComponent = (instance7, parentSuspense, doRemove) => {
+    const unmountComponent = (instance11, parentSuspense, doRemove) => {
       if (false) {
-        unregisterHMR(instance7);
+        unregisterHMR(instance11);
       }
-      const { bum, scope, update: update2, subTree, um } = instance7;
+      const { bum, scope, update: update2, subTree, um } = instance11;
       if (bum) {
         invokeArrayFns(bum);
       }
       scope.stop();
       if (update2) {
         update2.active = false;
-        unmount(subTree, instance7, parentSuspense, doRemove);
+        unmount(subTree, instance11, parentSuspense, doRemove);
       }
       if (um) {
         queuePostRenderEffect(um, parentSuspense);
       }
       queuePostRenderEffect(() => {
-        instance7.isUnmounted = true;
+        instance11.isUnmounted = true;
       }, parentSuspense);
-      if (parentSuspense && parentSuspense.pendingBranch && !parentSuspense.isUnmounted && instance7.asyncDep && !instance7.asyncResolved && instance7.suspenseId === parentSuspense.pendingId) {
+      if (parentSuspense && parentSuspense.pendingBranch && !parentSuspense.isUnmounted && instance11.asyncDep && !instance11.asyncResolved && instance11.suspenseId === parentSuspense.pendingId) {
         parentSuspense.deps--;
         if (parentSuspense.deps === 0) {
           parentSuspense.resolve();
         }
       }
       if (false) {
-        devtoolsComponentRemoved(instance7);
+        devtoolsComponentRemoved(instance11);
       }
     };
     const unmountChildren = (children2, parentComponent, parentSuspense, doRemove = false, optimized = false, start = 0) => {
@@ -13087,16 +12682,16 @@ For more details, see https://link.vuejs.org/feature-flags.`);
   }
   var NULL_DYNAMIC_COMPONENT = Symbol();
   function resolveAsset(type, name, warnMissing = true, maybeSelfReference = false) {
-    const instance7 = currentRenderingInstance || currentInstance;
-    if (instance7) {
-      const Component = instance7.type;
+    const instance11 = currentRenderingInstance || currentInstance;
+    if (instance11) {
+      const Component = instance11.type;
       if (type === COMPONENTS) {
         const selfName = getComponentName(Component);
         if (selfName && (selfName === name || selfName === camelize(name) || selfName === capitalize(camelize(name)))) {
           return Component;
         }
       }
-      const res = resolve(instance7[type] || Component[type], name) || resolve(instance7.appContext[type], name);
+      const res = resolve(instance11[type] || Component[type], name) || resolve(instance11.appContext[type], name);
       if (!res && maybeSelfReference) {
         return Component;
       }
@@ -13364,8 +12959,8 @@ Component that was made reactive: `, type);
     }
     return ret;
   }
-  function invokeVNodeHook(hook, instance7, vnode, prevVNode = null) {
-    callWithAsyncErrorHandling(hook, instance7, 7, [
+  function invokeVNodeHook(hook, instance11, vnode, prevVNode = null) {
+    callWithAsyncErrorHandling(hook, instance11, 7, [
       vnode,
       prevVNode
     ]);
@@ -13428,8 +13023,8 @@ Component that was made reactive: `, type);
     $watch: (i) => true ? instanceWatch.bind(i) : NOOP
   });
   var PublicInstanceProxyHandlers = {
-    get({ _: instance7 }, key) {
-      const { ctx, setupState, data, props, accessCache, type, appContext } = instance7;
+    get({ _: instance11 }, key) {
+      const { ctx, setupState, data, props, accessCache, type, appContext } = instance11;
       if (false) {
         return true;
       }
@@ -13456,7 +13051,7 @@ Component that was made reactive: `, type);
         } else if (data !== EMPTY_OBJ && hasOwn(data, key)) {
           accessCache[key] = 2;
           return data[key];
-        } else if ((normalizedProps = instance7.propsOptions[0]) && hasOwn(normalizedProps, key)) {
+        } else if ((normalizedProps = instance11.propsOptions[0]) && hasOwn(normalizedProps, key)) {
           accessCache[key] = 3;
           return props[key];
         } else if (ctx !== EMPTY_OBJ && hasOwn(ctx, key)) {
@@ -13470,9 +13065,9 @@ Component that was made reactive: `, type);
       let cssModule, globalProperties;
       if (publicGetter) {
         if (key === "$attrs") {
-          track(instance7, "get", key);
+          track(instance11, "get", key);
         }
-        return publicGetter(instance7);
+        return publicGetter(instance11);
       } else if ((cssModule = type.__cssModules) && (cssModule = cssModule[key])) {
         return cssModule;
       } else if (ctx !== EMPTY_OBJ && hasOwn(ctx, key)) {
@@ -13485,23 +13080,23 @@ Component that was made reactive: `, type);
       } else if (false) {
         if (data !== EMPTY_OBJ && (key[0] === "$" || key[0] === "_") && hasOwn(data, key)) {
           warn(`Property ${JSON.stringify(key)} must be accessed via $data because it starts with a reserved character ("$" or "_") and is not proxied on the render context.`);
-        } else if (instance7 === currentRenderingInstance) {
+        } else if (instance11 === currentRenderingInstance) {
           warn(`Property ${JSON.stringify(key)} was accessed during render but is not defined on instance.`);
         }
       }
     },
-    set({ _: instance7 }, key, value) {
-      const { data, setupState, ctx } = instance7;
+    set({ _: instance11 }, key, value) {
+      const { data, setupState, ctx } = instance11;
       if (setupState !== EMPTY_OBJ && hasOwn(setupState, key)) {
         setupState[key] = value;
         return true;
       } else if (data !== EMPTY_OBJ && hasOwn(data, key)) {
         data[key] = value;
         return true;
-      } else if (hasOwn(instance7.props, key)) {
+      } else if (hasOwn(instance11.props, key)) {
         return false;
       }
-      if (key[0] === "$" && key.slice(1) in instance7) {
+      if (key[0] === "$" && key.slice(1) in instance11) {
         return false;
       } else {
         if (false) {
@@ -13540,7 +13135,7 @@ Component that was made reactive: `, type);
   function createComponentInstance(vnode, parent, suspense) {
     const type = vnode.type;
     const appContext = (parent ? parent.appContext : vnode.appContext) || emptyAppContext;
-    const instance7 = {
+    const instance11 = {
       uid: uid$1++,
       vnode,
       type,
@@ -13599,52 +13194,52 @@ Component that was made reactive: `, type);
       sp: null
     };
     if (false) {
-      instance7.ctx = createDevRenderContext(instance7);
+      instance11.ctx = createDevRenderContext(instance11);
     } else {
-      instance7.ctx = { _: instance7 };
+      instance11.ctx = { _: instance11 };
     }
-    instance7.root = parent ? parent.root : instance7;
-    instance7.emit = emit$1.bind(null, instance7);
+    instance11.root = parent ? parent.root : instance11;
+    instance11.emit = emit$1.bind(null, instance11);
     if (vnode.ce) {
-      vnode.ce(instance7);
+      vnode.ce(instance11);
     }
-    return instance7;
+    return instance11;
   }
   var currentInstance = null;
   var getCurrentInstance = () => currentInstance || currentRenderingInstance;
-  var setCurrentInstance = (instance7) => {
-    currentInstance = instance7;
-    instance7.scope.on();
+  var setCurrentInstance = (instance11) => {
+    currentInstance = instance11;
+    instance11.scope.on();
   };
   var unsetCurrentInstance = () => {
     currentInstance && currentInstance.scope.off();
     currentInstance = null;
   };
-  function isStatefulComponent(instance7) {
-    return instance7.vnode.shapeFlag & 4;
+  function isStatefulComponent(instance11) {
+    return instance11.vnode.shapeFlag & 4;
   }
   var isInSSRComponentSetup = false;
-  function setupComponent(instance7, isSSR = false) {
+  function setupComponent(instance11, isSSR = false) {
     isInSSRComponentSetup = isSSR;
-    const { props, children: children2 } = instance7.vnode;
-    const isStateful = isStatefulComponent(instance7);
-    initProps(instance7, props, isStateful, isSSR);
-    initSlots(instance7, children2);
-    const setupResult = isStateful ? setupStatefulComponent(instance7, isSSR) : void 0;
+    const { props, children: children2 } = instance11.vnode;
+    const isStateful = isStatefulComponent(instance11);
+    initProps(instance11, props, isStateful, isSSR);
+    initSlots(instance11, children2);
+    const setupResult = isStateful ? setupStatefulComponent(instance11, isSSR) : void 0;
     isInSSRComponentSetup = false;
     return setupResult;
   }
-  function setupStatefulComponent(instance7, isSSR) {
+  function setupStatefulComponent(instance11, isSSR) {
     var _a2;
-    const Component = instance7.type;
+    const Component = instance11.type;
     if (false) {
       if (Component.name) {
-        validateComponentName(Component.name, instance7.appContext.config);
+        validateComponentName(Component.name, instance11.appContext.config);
       }
       if (Component.components) {
         const names = Object.keys(Component.components);
         for (let i = 0; i < names.length; i++) {
-          validateComponentName(names[i], instance7.appContext.config);
+          validateComponentName(names[i], instance11.appContext.config);
         }
       }
       if (Component.directives) {
@@ -13657,76 +13252,76 @@ Component that was made reactive: `, type);
         warn(`"compilerOptions" is only supported when using a build of Vue that includes the runtime compiler. Since you are using a runtime-only build, the options should be passed via your build tool config instead.`);
       }
     }
-    instance7.accessCache = /* @__PURE__ */ Object.create(null);
-    instance7.proxy = markRaw(new Proxy(instance7.ctx, PublicInstanceProxyHandlers));
+    instance11.accessCache = /* @__PURE__ */ Object.create(null);
+    instance11.proxy = markRaw(new Proxy(instance11.ctx, PublicInstanceProxyHandlers));
     if (false) {
-      exposePropsOnRenderContext(instance7);
+      exposePropsOnRenderContext(instance11);
     }
     const { setup } = Component;
     if (setup) {
-      const setupContext = instance7.setupContext = setup.length > 1 ? createSetupContext(instance7) : null;
-      setCurrentInstance(instance7);
+      const setupContext = instance11.setupContext = setup.length > 1 ? createSetupContext(instance11) : null;
+      setCurrentInstance(instance11);
       pauseTracking();
-      const setupResult = callWithErrorHandling(setup, instance7, 0, [false ? shallowReadonly(instance7.props) : instance7.props, setupContext]);
+      const setupResult = callWithErrorHandling(setup, instance11, 0, [false ? shallowReadonly(instance11.props) : instance11.props, setupContext]);
       resetTracking();
       unsetCurrentInstance();
       if (isPromise(setupResult)) {
         setupResult.then(unsetCurrentInstance, unsetCurrentInstance);
         if (isSSR) {
           return setupResult.then((resolvedResult) => {
-            handleSetupResult(instance7, resolvedResult, isSSR);
+            handleSetupResult(instance11, resolvedResult, isSSR);
           }).catch((e) => {
-            handleError(e, instance7, 0);
+            handleError(e, instance11, 0);
           });
         } else {
-          instance7.asyncDep = setupResult;
+          instance11.asyncDep = setupResult;
           if (false) {
             const name = (_a2 = Component.name) !== null && _a2 !== void 0 ? _a2 : "Anonymous";
             warn(`Component <${name}>: setup function returned a promise, but no <Suspense> boundary was found in the parent component tree. A component with async setup() must be nested in a <Suspense> in order to be rendered.`);
           }
         }
       } else {
-        handleSetupResult(instance7, setupResult, isSSR);
+        handleSetupResult(instance11, setupResult, isSSR);
       }
     } else {
-      finishComponentSetup(instance7, isSSR);
+      finishComponentSetup(instance11, isSSR);
     }
   }
-  function handleSetupResult(instance7, setupResult, isSSR) {
+  function handleSetupResult(instance11, setupResult, isSSR) {
     if (isFunction(setupResult)) {
-      if (instance7.type.__ssrInlineRender) {
-        instance7.ssrRender = setupResult;
+      if (instance11.type.__ssrInlineRender) {
+        instance11.ssrRender = setupResult;
       } else {
-        instance7.render = setupResult;
+        instance11.render = setupResult;
       }
     } else if (isObject(setupResult)) {
       if (false) {
         warn(`setup() should not return VNodes directly - return a render function instead.`);
       }
       if (false) {
-        instance7.devtoolsRawSetupState = setupResult;
+        instance11.devtoolsRawSetupState = setupResult;
       }
-      instance7.setupState = proxyRefs(setupResult);
+      instance11.setupState = proxyRefs(setupResult);
       if (false) {
-        exposeSetupStateOnRenderContext(instance7);
+        exposeSetupStateOnRenderContext(instance11);
       }
     } else if (false) {
       warn(`setup() should return an object. Received: ${setupResult === null ? "null" : typeof setupResult}`);
     }
-    finishComponentSetup(instance7, isSSR);
+    finishComponentSetup(instance11, isSSR);
   }
   var compile;
   var installWithProxy;
-  function finishComponentSetup(instance7, isSSR, skipOptions) {
-    const Component = instance7.type;
-    if (!instance7.render) {
+  function finishComponentSetup(instance11, isSSR, skipOptions) {
+    const Component = instance11.type;
+    if (!instance11.render) {
       if (!isSSR && compile && !Component.render) {
         const template = Component.template;
         if (template) {
           if (false) {
-            startMeasure(instance7, `compile`);
+            startMeasure(instance11, `compile`);
           }
-          const { isCustomElement, compilerOptions } = instance7.appContext.config;
+          const { isCustomElement, compilerOptions } = instance11.appContext.config;
           const { delimiters, compilerOptions: componentCompilerOptions } = Component;
           const finalCompilerOptions = extend(extend({
             isCustomElement,
@@ -13734,19 +13329,19 @@ Component that was made reactive: `, type);
           }, compilerOptions), componentCompilerOptions);
           Component.render = compile(template, finalCompilerOptions);
           if (false) {
-            endMeasure(instance7, `compile`);
+            endMeasure(instance11, `compile`);
           }
         }
       }
-      instance7.render = Component.render || NOOP;
+      instance11.render = Component.render || NOOP;
       if (installWithProxy) {
-        installWithProxy(instance7);
+        installWithProxy(instance11);
       }
     }
     if (true) {
-      setCurrentInstance(instance7);
+      setCurrentInstance(instance11);
       pauseTracking();
-      applyOptions(instance7);
+      applyOptions(instance11);
       resetTracking();
       unsetCurrentInstance();
     }
@@ -13758,11 +13353,11 @@ Component that was made reactive: `, type);
       }
     }
   }
-  function createAttrsProxy(instance7) {
-    return new Proxy(instance7.attrs, false ? {
+  function createAttrsProxy(instance11) {
+    return new Proxy(instance11.attrs, false ? {
       get(target, key) {
         markAttrsAccessed();
-        track(instance7, "get", "$attrs");
+        track(instance11, "get", "$attrs");
         return target[key];
       },
       set() {
@@ -13775,51 +13370,51 @@ Component that was made reactive: `, type);
       }
     } : {
       get(target, key) {
-        track(instance7, "get", "$attrs");
+        track(instance11, "get", "$attrs");
         return target[key];
       }
     });
   }
-  function createSetupContext(instance7) {
+  function createSetupContext(instance11) {
     const expose = (exposed) => {
       if (false) {
         warn(`expose() should be called only once per setup().`);
       }
-      instance7.exposed = exposed || {};
+      instance11.exposed = exposed || {};
     };
     let attrs;
     if (false) {
       return Object.freeze({
         get attrs() {
-          return attrs || (attrs = createAttrsProxy(instance7));
+          return attrs || (attrs = createAttrsProxy(instance11));
         },
         get slots() {
-          return shallowReadonly(instance7.slots);
+          return shallowReadonly(instance11.slots);
         },
         get emit() {
-          return (event, ...args) => instance7.emit(event, ...args);
+          return (event, ...args) => instance11.emit(event, ...args);
         },
         expose
       });
     } else {
       return {
         get attrs() {
-          return attrs || (attrs = createAttrsProxy(instance7));
+          return attrs || (attrs = createAttrsProxy(instance11));
         },
-        slots: instance7.slots,
-        emit: instance7.emit,
+        slots: instance11.slots,
+        emit: instance11.emit,
         expose
       };
     }
   }
-  function getExposeProxy(instance7) {
-    if (instance7.exposed) {
-      return instance7.exposeProxy || (instance7.exposeProxy = new Proxy(proxyRefs(markRaw(instance7.exposed)), {
+  function getExposeProxy(instance11) {
+    if (instance11.exposed) {
+      return instance11.exposeProxy || (instance11.exposeProxy = new Proxy(proxyRefs(markRaw(instance11.exposed)), {
         get(target, key) {
           if (key in target) {
             return target[key];
           } else if (key in publicPropertiesMap) {
-            return publicPropertiesMap[key](instance7);
+            return publicPropertiesMap[key](instance11);
           }
         }
       }));
@@ -13830,7 +13425,7 @@ Component that was made reactive: `, type);
   function getComponentName(Component) {
     return isFunction(Component) ? Component.displayName || Component.name : Component.name;
   }
-  function formatComponentName(instance7, Component, isRoot = false) {
+  function formatComponentName(instance11, Component, isRoot = false) {
     let name = getComponentName(Component);
     if (!name && Component.__file) {
       const match = Component.__file.match(/([^/\\]+)\.\w+$/);
@@ -13838,7 +13433,7 @@ Component that was made reactive: `, type);
         name = match[1];
       }
     }
-    if (!name && instance7 && instance7.parent) {
+    if (!name && instance11 && instance11.parent) {
       const inferFromRegistry = (registry) => {
         for (const key in registry) {
           if (registry[key] === Component) {
@@ -13846,7 +13441,7 @@ Component that was made reactive: `, type);
           }
         }
       };
-      name = inferFromRegistry(instance7.components || instance7.parent.type.components) || inferFromRegistry(instance7.appContext.components);
+      name = inferFromRegistry(instance11.components || instance11.parent.type.components) || inferFromRegistry(instance11.appContext.components);
     }
     return name ? classify(name) : isRoot ? `App` : `Anonymous`;
   }
@@ -14026,7 +13621,7 @@ Component that was made reactive: `, type);
     return rawName;
   }
   var xlinkNS = "http://www.w3.org/1999/xlink";
-  function patchAttr(el, key, value, isSVG, instance7) {
+  function patchAttr(el, key, value, isSVG, instance11) {
     if (isSVG && key.startsWith("xlink:")) {
       if (value == null) {
         el.removeAttributeNS(xlinkNS, key.slice(6, key.length));
@@ -14107,7 +13702,7 @@ Component that was made reactive: `, type);
   function removeEventListener(el, event, handler, options) {
     el.removeEventListener(event, handler, options);
   }
-  function patchEvent(el, rawName, prevValue, nextValue, instance7 = null) {
+  function patchEvent(el, rawName, prevValue, nextValue, instance11 = null) {
     const invokers = el._vei || (el._vei = {});
     const existingInvoker = invokers[rawName];
     if (nextValue && existingInvoker) {
@@ -14115,7 +13710,7 @@ Component that was made reactive: `, type);
     } else {
       const [name, options] = parseName(rawName);
       if (nextValue) {
-        const invoker = invokers[rawName] = createInvoker(nextValue, instance7);
+        const invoker = invokers[rawName] = createInvoker(nextValue, instance11);
         addEventListener(el, name, invoker, options);
       } else if (existingInvoker) {
         removeEventListener(el, name, existingInvoker, options);
@@ -14136,11 +13731,11 @@ Component that was made reactive: `, type);
     }
     return [hyphenate(name.slice(2)), options];
   }
-  function createInvoker(initialValue, instance7) {
+  function createInvoker(initialValue, instance11) {
     const invoker = (e) => {
       const timeStamp = e.timeStamp || _getNow();
       if (skipTimestampCheck || timeStamp >= invoker.attached - 1) {
-        callWithAsyncErrorHandling(patchStopImmediatePropagation(e, invoker.value), instance7, 5, [e]);
+        callWithAsyncErrorHandling(patchStopImmediatePropagation(e, invoker.value), instance11, 5, [e]);
       }
     };
     invoker.value = initialValue;
@@ -14266,7 +13861,7 @@ Component that was made reactive: `, type);
         }
       }).observe(this, { attributes: true });
       const resolve2 = (def2) => {
-        const { props, styles: styles9 } = def2;
+        const { props, styles } = def2;
         const hasOptions = !isArray(props);
         const rawKeys = props ? hasOptions ? Object.keys(props) : props : [];
         let numberProps;
@@ -14295,7 +13890,7 @@ Component that was made reactive: `, type);
             }
           });
         }
-        this._applyStyles(styles9);
+        this._applyStyles(styles);
         this._update();
       };
       const asyncDef = this._def.__asyncLoader;
@@ -14338,11 +13933,11 @@ Component that was made reactive: `, type);
     _createVNode() {
       const vnode = createVNode(this._def, extend({}, this._props));
       if (!this._instance) {
-        vnode.ce = (instance7) => {
-          this._instance = instance7;
-          instance7.isCE = true;
+        vnode.ce = (instance11) => {
+          this._instance = instance11;
+          instance11.isCE = true;
           if (false) {
-            instance7.ceReload = (newStyles) => {
+            instance11.ceReload = (newStyles) => {
               if (this._styles) {
                 this._styles.forEach((s) => this.shadowRoot.removeChild(s));
                 this._styles.length = 0;
@@ -14354,7 +13949,7 @@ Component that was made reactive: `, type);
               }
             };
           }
-          instance7.emit = (event, ...args) => {
+          instance11.emit = (event, ...args) => {
             this.dispatchEvent(new CustomEvent(event, {
               detail: args
             }));
@@ -14362,7 +13957,7 @@ Component that was made reactive: `, type);
           let parent = this;
           while (parent = parent && (parent.parentNode || parent.host)) {
             if (parent instanceof VueElement) {
-              instance7.parent = parent._instance;
+              instance11.parent = parent._instance;
               break;
             }
           }
@@ -14370,9 +13965,9 @@ Component that was made reactive: `, type);
       }
       return vnode;
     }
-    _applyStyles(styles9) {
-      if (styles9) {
-        styles9.forEach((css) => {
+    _applyStyles(styles) {
+      if (styles) {
+        styles.forEach((css) => {
           const s = document.createElement("style");
           s.textContent = css;
           this.shadowRoot.appendChild(s);
@@ -14565,8 +14160,8 @@ Component that was made reactive: `, type);
     el.addEventListener(endEvent, onEnd);
   }
   function getTransitionInfo(el, expectedType) {
-    const styles9 = window.getComputedStyle(el);
-    const getStyleProperties = (key) => (styles9[key] || "").split(", ");
+    const styles = window.getComputedStyle(el);
+    const getStyleProperties = (key) => (styles[key] || "").split(", ");
     const transitionDelays = getStyleProperties(TRANSITION + "Delay");
     const transitionDurations = getStyleProperties(TRANSITION + "Duration");
     const transitionTimeout = getTimeout(transitionDelays, transitionDurations);
@@ -14593,7 +14188,7 @@ Component that was made reactive: `, type);
       type = timeout > 0 ? transitionTimeout > animationTimeout ? TRANSITION : ANIMATION : null;
       propCount = type ? type === TRANSITION ? transitionDurations.length : animationDurations.length : 0;
     }
-    const hasTransform = type === TRANSITION && /\b(transform|all)(,|$)/.test(styles9[TRANSITION + "Property"]);
+    const hasTransform = type === TRANSITION && /\b(transform|all)(,|$)/.test(styles[TRANSITION + "Property"]);
     return {
       type,
       timeout,
@@ -14631,6 +14226,1451 @@ Component that was made reactive: `, type);
     initDev();
   }
 
+  // ../ucp-example/dist/elements/chunks/chunk-G5XIWOEF.js
+  var VueAppComponent_default = /* @__PURE__ */ defineComponent({
+    props: {
+      text: { type: String, required: true }
+    },
+    emits: ["click"],
+    setup(__props, { expose, emit }) {
+      expose();
+      const __returned__ = { emit };
+      Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
+      return __returned__;
+    }
+  });
+  function render2(_ctx, _cache, $props, $setup, $data, $options) {
+    return openBlock(), createElementBlock("button", {
+      class: "dummy",
+      onClick: _cache[0] || (_cache[0] = () => {
+        $setup.emit("click");
+      })
+    }, toDisplayString($props.text), 1);
+  }
+  VueAppComponent_default.render = render2;
+  VueAppComponent_default.__file = "../ucp-example/src/components/app/vue/VueAppComponent.vue";
+  VueAppComponent_default.__scopeId = "data-v-91d10334";
+  var VueAppComponent_default2 = VueAppComponent_default;
+
+  // ../ucp-example/dist/elements/app/vue/VueApp.style.js
+  var VueApp_style_default = `/* sfc-style:/Users/ahp168/Code/Privat/ucp/modules/ucp-example/src/components/app/vue/VueAppComponent.vue?type=style&index=0 */
+.dummy[data-v-91d10334] {
+  background-color: #32ac77;
+}
+/*# =VueApp.css.map */
+`;
+
+  // ../ucp-example/dist/elements/app/vue/VueApp.js
+  var VueApp_default = /* @__PURE__ */ defineComponent({
+    setup(__props, { expose }) {
+      expose();
+      const increment = () => {
+        count.value++;
+      };
+      const count = ref(0);
+      const __returned__ = { increment, count, VueAppComponent: VueAppComponent_default2 };
+      Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
+      return __returned__;
+    }
+  });
+  function render3(_ctx, _cache, $props, $setup, $data, $options) {
+    return openBlock(), createBlock($setup["VueAppComponent"], {
+      text: `Clicked: ${$setup.count}`,
+      onClick: $setup.increment
+    }, null, 8, ["text"]);
+  }
+  VueApp_default.render = render3;
+  VueApp_default.__file = "../ucp-example/src/components/app/vue/VueApp.vue";
+  var VueApp_default2 = VueApp_default;
+  var Element = defineCustomElement(VueApp_default2);
+  var StyledElement = class extends Element {
+    constructor(args) {
+      super(args);
+      const styleElement = document.createElement("style");
+      styleElement.innerHTML = VueApp_style_default;
+      this.shadowRoot.appendChild(styleElement);
+    }
+  };
+  customElements.define("ex-vue-app", StyledElement);
+
+  // ../ucp-example/dist/elements/app/vue/VueAppComponent.style.js
+  var VueAppComponent_style_default = `/* sfc-style:/Users/ahp168/Code/Privat/ucp/modules/ucp-example/src/components/app/vue/VueAppComponent.vue?type=style&index=0 */
+.dummy[data-v-91d10334] {
+  background-color: #32ac77;
+}
+/*# =VueAppComponent.css.map */
+`;
+
+  // ../ucp-example/dist/elements/app/vue/VueAppComponent.js
+  var Element2 = defineCustomElement(VueAppComponent_default2);
+  var StyledElement2 = class extends Element2 {
+    constructor(args) {
+      super(args);
+      const styleElement = document.createElement("style");
+      styleElement.innerHTML = VueAppComponent_style_default;
+      this.shadowRoot.appendChild(styleElement);
+      this.addEventListener("click", (ev) => {
+        ev.stopPropagation();
+        this.dispatchEvent(new CustomEvent("ex-click", { detail: ev.detail }));
+      });
+    }
+  };
+  customElements.define("ex-vue-app-component", StyledElement2);
+
+  // ../ucp-example/dist/elements/react/ReactDemo.style.js
+  var ReactDemo_style_default = ``;
+
+  // ../ucp-example/dist/elements/react/ReactDemo.js
+  var import_react23 = __toESM(require_react());
+  var import_react_dom4 = __toESM(require_react_dom());
+  var import_react7 = __toESM(require_react());
+  var ReactDemo_default = ({
+    text: text2,
+    onMyclick
+  }) => {
+    return /* @__PURE__ */ import_react7.default.createElement("button", {
+      onClick: () => onMyclick("React click")
+    }, text2);
+  };
+  var ReactWc4 = class extends HTMLElement {
+    render() {
+      const rootEl = document.createElement("div");
+      const args = {
+        text: (() => {
+          const value = this.attributes.getNamedItem("text")?.value;
+          try {
+            return JSON.parse(value);
+          } catch {
+            return value;
+          }
+        })(),
+        onMyclick: (args2) => this.dispatchEvent(new CustomEvent("ex-myclick", { bubbles: true, detail: [args2] }))
+      };
+      (0, import_react_dom4.createRoot)(rootEl).render(/* @__PURE__ */ import_react23.default.createElement(ReactDemo_default, {
+        ...args
+      }));
+      this.shadowRoot.innerHTML = "";
+      this.shadowRoot.appendChild(rootEl);
+      const styleElement = document.createElement("style");
+      styleElement.innerHTML = ReactDemo_style_default;
+      this.shadowRoot.appendChild(styleElement);
+    }
+    static get observedAttributes() {
+      return ["text"];
+    }
+    attributeChangedCallback() {
+      this.render();
+    }
+    constructor() {
+      super();
+      this.attachShadow({ mode: "open" });
+      this.render();
+    }
+  };
+  customElements.define("ex-react-demo", ReactWc4);
+
+  // ../ucp-example/dist/elements/react/ReactEmits.style.js
+  var ReactEmits_style_default = ``;
+
+  // ../ucp-example/dist/elements/react/ReactEmits.js
+  var import_react24 = __toESM(require_react());
+  var import_react_dom5 = __toESM(require_react_dom());
+  var import_react8 = __toESM(require_react());
+  var ReactEmits_default = ({
+    onStringevent,
+    onVoidevent,
+    onObjevent,
+    onNumevent
+  }) => {
+    return /* @__PURE__ */ import_react8.default.createElement("button", {
+      onClick: () => {
+        onStringevent("demo");
+        onNumevent(5);
+        onObjevent({ value: "val" });
+        onVoidevent();
+      }
+    }, "React Send event");
+  };
+  var ReactWc5 = class extends HTMLElement {
+    render() {
+      const rootEl = document.createElement("div");
+      const args = {
+        onStringevent: (args2) => this.dispatchEvent(new CustomEvent("ex-stringevent", { bubbles: true, detail: [args2] })),
+        onNumevent: (args2) => this.dispatchEvent(new CustomEvent("ex-numevent", { bubbles: true, detail: [args2] })),
+        onObjevent: (args2) => this.dispatchEvent(new CustomEvent("ex-objevent", { bubbles: true, detail: [args2] })),
+        onVoidevent: (args2) => this.dispatchEvent(new CustomEvent("ex-voidevent", { bubbles: true, detail: [args2] }))
+      };
+      (0, import_react_dom5.createRoot)(rootEl).render(/* @__PURE__ */ import_react24.default.createElement(ReactEmits_default, {
+        ...args
+      }));
+      this.shadowRoot.innerHTML = "";
+      this.shadowRoot.appendChild(rootEl);
+      const styleElement = document.createElement("style");
+      styleElement.innerHTML = ReactEmits_style_default;
+      this.shadowRoot.appendChild(styleElement);
+    }
+    static get observedAttributes() {
+      return [];
+    }
+    attributeChangedCallback() {
+      this.render();
+    }
+    constructor() {
+      super();
+      this.attachShadow({ mode: "open" });
+      this.render();
+    }
+  };
+  customElements.define("ex-react-emits", ReactWc5);
+
+  // ../ucp-example/dist/elements/react/ReactProps.style.js
+  var ReactProps_style_default = ``;
+
+  // ../ucp-example/dist/elements/react/ReactProps.js
+  var import_react25 = __toESM(require_react());
+  var import_react_dom6 = __toESM(require_react_dom());
+  var import_react9 = __toESM(require_react());
+  var ReactProps_default = ({
+    stringprop,
+    numprop,
+    complexprop
+  }) => {
+    return /* @__PURE__ */ import_react9.default.createElement("div", null, /* @__PURE__ */ import_react9.default.createElement("div", {
+      className: "stringprop"
+    }, stringprop), /* @__PURE__ */ import_react9.default.createElement("div", {
+      className: "numprop"
+    }, numprop + 1), /* @__PURE__ */ import_react9.default.createElement("div", {
+      className: "complexprop"
+    }, complexprop?.value));
+  };
+  var ReactWc6 = class extends HTMLElement {
+    render() {
+      const rootEl = document.createElement("div");
+      const args = {
+        stringprop: (() => {
+          const value = this.attributes.getNamedItem("stringprop")?.value;
+          try {
+            return JSON.parse(value);
+          } catch {
+            return value;
+          }
+        })(),
+        numprop: (() => {
+          const value = this.attributes.getNamedItem("numprop")?.value;
+          try {
+            return JSON.parse(value);
+          } catch {
+            return value;
+          }
+        })(),
+        complexprop: (() => {
+          const value = this.attributes.getNamedItem("complexprop")?.value;
+          try {
+            return JSON.parse(value);
+          } catch {
+            return value;
+          }
+        })()
+      };
+      (0, import_react_dom6.createRoot)(rootEl).render(/* @__PURE__ */ import_react25.default.createElement(ReactProps_default, {
+        ...args
+      }));
+      this.shadowRoot.innerHTML = "";
+      this.shadowRoot.appendChild(rootEl);
+      const styleElement = document.createElement("style");
+      styleElement.innerHTML = ReactProps_style_default;
+      this.shadowRoot.appendChild(styleElement);
+    }
+    static get observedAttributes() {
+      return ["stringprop", "numprop", "complexprop"];
+    }
+    attributeChangedCallback() {
+      this.render();
+    }
+    constructor() {
+      super();
+      this.attachShadow({ mode: "open" });
+      this.render();
+    }
+  };
+  customElements.define("ex-react-props", ReactWc6);
+
+  // ../ucp-example/dist/elements/react/ReactSimple.style.js
+  var ReactSimple_style_default = `/* ../ucp-example/src/components/dummy.scss */
+.dummy {
+  font-family:
+    Avenir,
+    Helvetica,
+    Arial,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+/*# =ReactSimple.css.map */
+`;
+
+  // ../ucp-example/dist/elements/react/ReactSimple.js
+  var import_react26 = __toESM(require_react());
+  var import_react_dom7 = __toESM(require_react_dom());
+  var import_react10 = __toESM(require_react());
+  var ReactSimple_default = () => {
+    return /* @__PURE__ */ import_react10.default.createElement("div", {
+      className: "dummy"
+    }, "React");
+  };
+  var ReactWc7 = class extends HTMLElement {
+    render() {
+      const rootEl = document.createElement("div");
+      const args = {};
+      (0, import_react_dom7.createRoot)(rootEl).render(/* @__PURE__ */ import_react26.default.createElement(ReactSimple_default, {
+        ...args
+      }));
+      this.shadowRoot.innerHTML = "";
+      this.shadowRoot.appendChild(rootEl);
+      const styleElement = document.createElement("style");
+      styleElement.innerHTML = ReactSimple_style_default;
+      this.shadowRoot.appendChild(styleElement);
+    }
+    static get observedAttributes() {
+      return [];
+    }
+    attributeChangedCallback() {
+      this.render();
+    }
+    constructor() {
+      super();
+      this.attachShadow({ mode: "open" });
+      this.render();
+    }
+  };
+  customElements.define("ex-react-simple", ReactWc7);
+
+  // ../ucp-example/dist/elements/react/ReactSlots.style.js
+  var ReactSlots_style_default = ``;
+
+  // ../ucp-example/dist/elements/react/ReactSlots.js
+  var import_react27 = __toESM(require_react());
+  var import_react_dom8 = __toESM(require_react_dom());
+  var import_react11 = __toESM(require_react());
+  var ReactSlots_default = () => {
+    const style2 = {
+      border: "2px solid red"
+    };
+    return /* @__PURE__ */ import_react11.default.createElement("div", null, /* @__PURE__ */ import_react11.default.createElement("slot", null), /* @__PURE__ */ import_react11.default.createElement("div", {
+      style: style2
+    }, /* @__PURE__ */ import_react11.default.createElement("slot", {
+      name: "box"
+    })), /* @__PURE__ */ import_react11.default.createElement("slot", {
+      name: "after"
+    }));
+  };
+  var ReactWc8 = class extends HTMLElement {
+    render() {
+      const rootEl = document.createElement("div");
+      const args = {};
+      (0, import_react_dom8.createRoot)(rootEl).render(/* @__PURE__ */ import_react27.default.createElement(ReactSlots_default, {
+        ...args
+      }));
+      this.shadowRoot.innerHTML = "";
+      this.shadowRoot.appendChild(rootEl);
+      const styleElement = document.createElement("style");
+      styleElement.innerHTML = ReactSlots_style_default;
+      this.shadowRoot.appendChild(styleElement);
+    }
+    static get observedAttributes() {
+      return [];
+    }
+    attributeChangedCallback() {
+      this.render();
+    }
+    constructor() {
+      super();
+      this.attachShadow({ mode: "open" });
+      this.render();
+    }
+  };
+  customElements.define("ex-react-slots", ReactWc8);
+
+  // ../ucp-example/dist/elements/react/ReactState.style.js
+  var ReactState_style_default = ``;
+
+  // ../ucp-example/dist/elements/react/ReactState.js
+  var import_react28 = __toESM(require_react());
+  var import_react_dom9 = __toESM(require_react_dom());
+  var import_react12 = __toESM(require_react());
+  var ReactState_default = () => {
+    const [count, setCount] = (0, import_react12.useState)(0);
+    return /* @__PURE__ */ import_react12.default.createElement("div", null, /* @__PURE__ */ import_react12.default.createElement("button", {
+      onClick: () => setCount(count + 1)
+    }, count));
+  };
+  var ReactWc9 = class extends HTMLElement {
+    render() {
+      const rootEl = document.createElement("div");
+      const args = {};
+      (0, import_react_dom9.createRoot)(rootEl).render(/* @__PURE__ */ import_react28.default.createElement(ReactState_default, {
+        ...args
+      }));
+      this.shadowRoot.innerHTML = "";
+      this.shadowRoot.appendChild(rootEl);
+      const styleElement = document.createElement("style");
+      styleElement.innerHTML = ReactState_style_default;
+      this.shadowRoot.appendChild(styleElement);
+    }
+    static get observedAttributes() {
+      return [];
+    }
+    attributeChangedCallback() {
+      this.render();
+    }
+    constructor() {
+      super();
+      this.attachShadow({ mode: "open" });
+      this.render();
+    }
+  };
+  customElements.define("ex-react-state", ReactWc9);
+
+  // ../ucp-example/dist/elements/svelte/SvelteDemo.js
+  function create_fragment4(ctx) {
+    let button;
+    let t;
+    let mounted;
+    let dispose;
+    return {
+      c() {
+        button = element("button");
+        t = text(ctx[0]);
+      },
+      m(target, anchor) {
+        insert(target, button, anchor);
+        append(button, t);
+        if (!mounted) {
+          dispose = listen(button, "click", ctx[2]);
+          mounted = true;
+        }
+      },
+      p(ctx2, [dirty]) {
+        if (dirty & 1)
+          set_data(t, ctx2[0]);
+      },
+      i: noop,
+      o: noop,
+      d(detaching) {
+        if (detaching)
+          detach(button);
+        mounted = false;
+        dispose();
+      }
+    };
+  }
+  function instance4($$self, $$props, $$invalidate) {
+    const dispatch = createEventDispatcher();
+    let { text: text2 } = $$props;
+    const click_handler = () => {
+      dispatch("myclick", "Svelte click");
+    };
+    $$self.$$set = ($$props2) => {
+      if ("text" in $$props2)
+        $$invalidate(0, text2 = $$props2.text);
+    };
+    return [text2, dispatch, click_handler];
+  }
+  var SvelteDemo = class extends SvelteComponent {
+    constructor(options) {
+      super();
+      init(this, options, instance4, create_fragment4, safe_not_equal, { text: 0 });
+    }
+  };
+  var SvelteDemo_default = SvelteDemo;
+  function create_fragment23(ctx) {
+    let component_1;
+    let current;
+    component_1 = new SvelteDemo_default({ props: { text: ctx[0] } });
+    component_1.$on("myclick", ctx[2]);
+    return {
+      c() {
+        create_component(component_1.$$.fragment);
+        this.c = noop;
+      },
+      m(target, anchor) {
+        mount_component(component_1, target, anchor);
+        current = true;
+      },
+      p(ctx2, [dirty]) {
+        const component_1_changes = {};
+        if (dirty & 1)
+          component_1_changes.text = ctx2[0];
+        component_1.$set(component_1_changes);
+      },
+      i(local) {
+        if (current)
+          return;
+        transition_in(component_1.$$.fragment, local);
+        current = true;
+      },
+      o(local) {
+        transition_out(component_1.$$.fragment, local);
+        current = false;
+      },
+      d(detaching) {
+        destroy_component(component_1, detaching);
+      }
+    };
+  }
+  function instance23($$self, $$props, $$invalidate) {
+    const component = get_current_component();
+    const svelteDispatch = createEventDispatcher();
+    const dispatch = (name, detail) => {
+      svelteDispatch(name, detail);
+      component.dispatchEvent && component.dispatchEvent(new CustomEvent(name, { detail, bubbles: true }));
+    };
+    let { text: text2 } = $$props;
+    const handleEvent = (ev) => dispatch("ex-" + ev.type, [ev.detail]);
+    const myclick_handler = (ev) => handleEvent(ev);
+    $$self.$$set = ($$props2) => {
+      if ("text" in $$props2)
+        $$invalidate(0, text2 = $$props2.text);
+    };
+    return [text2, handleEvent, myclick_handler];
+  }
+  var SvelteDemo2 = class extends SvelteElement {
+    constructor(options) {
+      super();
+      init(this, {
+        target: this.shadowRoot,
+        props: attribute_to_object(this.attributes),
+        customElement: true
+      }, instance23, create_fragment23, safe_not_equal, { text: 0 }, null);
+      if (options) {
+        if (options.target) {
+          insert(options.target, this, options.anchor);
+        }
+        if (options.props) {
+          this.$set(options.props);
+          flush();
+        }
+      }
+    }
+    static get observedAttributes() {
+      return ["text"];
+    }
+    get text() {
+      return this.$$.ctx[0];
+    }
+    set text(text2) {
+      this.$$set({ text: text2 });
+      flush();
+    }
+  };
+  customElements.define("ex-svelte-demo", SvelteDemo2);
+
+  // ../ucp-example/dist/elements/svelte/SvelteEmits.js
+  function create_fragment5(ctx) {
+    let button;
+    let mounted;
+    let dispose;
+    return {
+      c() {
+        button = element("button");
+        button.textContent = "Svelte Send event";
+        attr(button, "class", "event-button");
+      },
+      m(target, anchor) {
+        insert(target, button, anchor);
+        if (!mounted) {
+          dispose = listen(button, "click", ctx[1]);
+          mounted = true;
+        }
+      },
+      p: noop,
+      i: noop,
+      o: noop,
+      d(detaching) {
+        if (detaching)
+          detach(button);
+        mounted = false;
+        dispose();
+      }
+    };
+  }
+  function instance5($$self) {
+    const dispatch = createEventDispatcher();
+    const click_handler = () => {
+      dispatch("stringevent", "demo");
+      dispatch("numevent", 5);
+      dispatch("objevent", { value: "val" });
+      dispatch("voidevent");
+    };
+    return [dispatch, click_handler];
+  }
+  var SvelteEmits = class extends SvelteComponent {
+    constructor(options) {
+      super();
+      init(this, options, instance5, create_fragment5, safe_not_equal, {});
+    }
+  };
+  var SvelteEmits_default = SvelteEmits;
+  function create_fragment24(ctx) {
+    let component_1;
+    let current;
+    component_1 = new SvelteEmits_default({});
+    component_1.$on("stringevent", ctx[1]);
+    component_1.$on("numevent", ctx[2]);
+    component_1.$on("objevent", ctx[3]);
+    component_1.$on("voidevent", ctx[4]);
+    return {
+      c() {
+        create_component(component_1.$$.fragment);
+        this.c = noop;
+      },
+      m(target, anchor) {
+        mount_component(component_1, target, anchor);
+        current = true;
+      },
+      p: noop,
+      i(local) {
+        if (current)
+          return;
+        transition_in(component_1.$$.fragment, local);
+        current = true;
+      },
+      o(local) {
+        transition_out(component_1.$$.fragment, local);
+        current = false;
+      },
+      d(detaching) {
+        destroy_component(component_1, detaching);
+      }
+    };
+  }
+  function instance24($$self) {
+    const component = get_current_component();
+    const svelteDispatch = createEventDispatcher();
+    const dispatch = (name, detail) => {
+      svelteDispatch(name, detail);
+      component.dispatchEvent && component.dispatchEvent(new CustomEvent(name, { detail, bubbles: true }));
+    };
+    const handleEvent = (ev) => dispatch("ex-" + ev.type, [ev.detail]);
+    const stringevent_handler = (ev) => handleEvent(ev);
+    const numevent_handler = (ev) => handleEvent(ev);
+    const objevent_handler = (ev) => handleEvent(ev);
+    const voidevent_handler = (ev) => handleEvent(ev);
+    return [
+      handleEvent,
+      stringevent_handler,
+      numevent_handler,
+      objevent_handler,
+      voidevent_handler
+    ];
+  }
+  var SvelteEmits2 = class extends SvelteElement {
+    constructor(options) {
+      super();
+      init(this, {
+        target: this.shadowRoot,
+        props: attribute_to_object(this.attributes),
+        customElement: true
+      }, instance24, create_fragment24, safe_not_equal, {}, null);
+      if (options) {
+        if (options.target) {
+          insert(options.target, this, options.anchor);
+        }
+      }
+    }
+  };
+  customElements.define("ex-svelte-emits", SvelteEmits2);
+
+  // ../ucp-example/dist/elements/svelte/SvelteProps.js
+  function create_fragment6(ctx) {
+    let div3;
+    let div0;
+    let t0;
+    let t1;
+    let div1;
+    let t2_value = ctx[1] + 1 + "";
+    let t2;
+    let t3;
+    let div2;
+    let t4_value = ctx[2]?.value + "";
+    let t4;
+    return {
+      c() {
+        div3 = element("div");
+        div0 = element("div");
+        t0 = text(ctx[0]);
+        t1 = space();
+        div1 = element("div");
+        t2 = text(t2_value);
+        t3 = space();
+        div2 = element("div");
+        t4 = text(t4_value);
+        attr(div0, "class", "stringprop");
+        attr(div1, "class", "numprop");
+        attr(div2, "class", "complexprop");
+      },
+      m(target, anchor) {
+        insert(target, div3, anchor);
+        append(div3, div0);
+        append(div0, t0);
+        append(div3, t1);
+        append(div3, div1);
+        append(div1, t2);
+        append(div3, t3);
+        append(div3, div2);
+        append(div2, t4);
+      },
+      p(ctx2, [dirty]) {
+        if (dirty & 1)
+          set_data(t0, ctx2[0]);
+        if (dirty & 2 && t2_value !== (t2_value = ctx2[1] + 1 + ""))
+          set_data(t2, t2_value);
+        if (dirty & 4 && t4_value !== (t4_value = ctx2[2]?.value + ""))
+          set_data(t4, t4_value);
+      },
+      i: noop,
+      o: noop,
+      d(detaching) {
+        if (detaching)
+          detach(div3);
+      }
+    };
+  }
+  function instance6($$self, $$props, $$invalidate) {
+    let { stringprop } = $$props;
+    let { numprop } = $$props;
+    let { complexprop } = $$props;
+    $$self.$$set = ($$props2) => {
+      if ("stringprop" in $$props2)
+        $$invalidate(0, stringprop = $$props2.stringprop);
+      if ("numprop" in $$props2)
+        $$invalidate(1, numprop = $$props2.numprop);
+      if ("complexprop" in $$props2)
+        $$invalidate(2, complexprop = $$props2.complexprop);
+    };
+    return [stringprop, numprop, complexprop];
+  }
+  var SvelteProps = class extends SvelteComponent {
+    constructor(options) {
+      super();
+      init(this, options, instance6, create_fragment6, safe_not_equal, {
+        stringprop: 0,
+        numprop: 1,
+        complexprop: 2
+      });
+    }
+  };
+  var SvelteProps_default = SvelteProps;
+  function create_fragment25(ctx) {
+    let component_1;
+    let current;
+    component_1 = new SvelteProps_default({
+      props: {
+        stringprop: ctx[0],
+        numprop: JSON.parse(ctx[1]),
+        complexprop: JSON.parse(ctx[2])
+      }
+    });
+    return {
+      c() {
+        create_component(component_1.$$.fragment);
+        this.c = noop;
+      },
+      m(target, anchor) {
+        mount_component(component_1, target, anchor);
+        current = true;
+      },
+      p(ctx2, [dirty]) {
+        const component_1_changes = {};
+        if (dirty & 1)
+          component_1_changes.stringprop = ctx2[0];
+        if (dirty & 2)
+          component_1_changes.numprop = JSON.parse(ctx2[1]);
+        if (dirty & 4)
+          component_1_changes.complexprop = JSON.parse(ctx2[2]);
+        component_1.$set(component_1_changes);
+      },
+      i(local) {
+        if (current)
+          return;
+        transition_in(component_1.$$.fragment, local);
+        current = true;
+      },
+      o(local) {
+        transition_out(component_1.$$.fragment, local);
+        current = false;
+      },
+      d(detaching) {
+        destroy_component(component_1, detaching);
+      }
+    };
+  }
+  function instance25($$self, $$props, $$invalidate) {
+    const component = get_current_component();
+    const svelteDispatch = createEventDispatcher();
+    const dispatch = (name, detail) => {
+      svelteDispatch(name, detail);
+      component.dispatchEvent && component.dispatchEvent(new CustomEvent(name, { detail, bubbles: true }));
+    };
+    let { stringprop } = $$props;
+    let { numprop } = $$props;
+    let { complexprop } = $$props;
+    const handleEvent = (ev) => dispatch("ex-" + ev.type, [ev.detail]);
+    $$self.$$set = ($$props2) => {
+      if ("stringprop" in $$props2)
+        $$invalidate(0, stringprop = $$props2.stringprop);
+      if ("numprop" in $$props2)
+        $$invalidate(1, numprop = $$props2.numprop);
+      if ("complexprop" in $$props2)
+        $$invalidate(2, complexprop = $$props2.complexprop);
+    };
+    return [stringprop, numprop, complexprop];
+  }
+  var SvelteProps2 = class extends SvelteElement {
+    constructor(options) {
+      super();
+      init(this, {
+        target: this.shadowRoot,
+        props: attribute_to_object(this.attributes),
+        customElement: true
+      }, instance25, create_fragment25, safe_not_equal, {
+        stringprop: 0,
+        numprop: 1,
+        complexprop: 2
+      }, null);
+      if (options) {
+        if (options.target) {
+          insert(options.target, this, options.anchor);
+        }
+        if (options.props) {
+          this.$set(options.props);
+          flush();
+        }
+      }
+    }
+    static get observedAttributes() {
+      return ["stringprop", "numprop", "complexprop"];
+    }
+    get stringprop() {
+      return this.$$.ctx[0];
+    }
+    set stringprop(stringprop) {
+      this.$$set({ stringprop });
+      flush();
+    }
+    get numprop() {
+      return this.$$.ctx[1];
+    }
+    set numprop(numprop) {
+      this.$$set({ numprop });
+      flush();
+    }
+    get complexprop() {
+      return this.$$.ctx[2];
+    }
+    set complexprop(complexprop) {
+      this.$$set({ complexprop });
+      flush();
+    }
+  };
+  customElements.define("ex-svelte-props", SvelteProps2);
+
+  // ../ucp-example/dist/elements/svelte/SvelteSimple.js
+  function add_css2(target) {
+    append_styles(target, "svelte-1ep5jkz", ".dummy.svelte-1ep5jkz{font-family:Avenir, Helvetica, Arial, sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-align:center;color:#2c3e50}");
+  }
+  function create_fragment7(ctx) {
+    let div;
+    return {
+      c() {
+        div = element("div");
+        div.textContent = "Svelte";
+        attr(div, "class", "dummy svelte-1ep5jkz");
+      },
+      m(target, anchor) {
+        insert(target, div, anchor);
+      },
+      p: noop,
+      i: noop,
+      o: noop,
+      d(detaching) {
+        if (detaching)
+          detach(div);
+      }
+    };
+  }
+  var SvelteSimple = class extends SvelteComponent {
+    constructor(options) {
+      super();
+      init(this, options, null, create_fragment7, safe_not_equal, {}, add_css2);
+    }
+  };
+  var SvelteSimple_default = SvelteSimple;
+  function create_fragment26(ctx) {
+    let component_1;
+    let current;
+    component_1 = new SvelteSimple_default({});
+    return {
+      c() {
+        create_component(component_1.$$.fragment);
+        this.c = noop;
+      },
+      m(target, anchor) {
+        mount_component(component_1, target, anchor);
+        current = true;
+      },
+      p: noop,
+      i(local) {
+        if (current)
+          return;
+        transition_in(component_1.$$.fragment, local);
+        current = true;
+      },
+      o(local) {
+        transition_out(component_1.$$.fragment, local);
+        current = false;
+      },
+      d(detaching) {
+        destroy_component(component_1, detaching);
+      }
+    };
+  }
+  function instance7($$self) {
+    const component = get_current_component();
+    const svelteDispatch = createEventDispatcher();
+    const dispatch = (name, detail) => {
+      svelteDispatch(name, detail);
+      component.dispatchEvent && component.dispatchEvent(new CustomEvent(name, { detail, bubbles: true }));
+    };
+    const handleEvent = (ev) => dispatch("ex-" + ev.type, [ev.detail]);
+    return [];
+  }
+  var SvelteSimple2 = class extends SvelteElement {
+    constructor(options) {
+      super();
+      init(this, {
+        target: this.shadowRoot,
+        props: attribute_to_object(this.attributes),
+        customElement: true
+      }, instance7, create_fragment26, safe_not_equal, {}, null);
+      if (options) {
+        if (options.target) {
+          insert(options.target, this, options.anchor);
+        }
+      }
+    }
+  };
+  customElements.define("ex-svelte-simple", SvelteSimple2);
+
+  // ../ucp-example/dist/elements/svelte/SvelteSlots.js
+  function add_css3(target) {
+    append_styles(target, "svelte-g5cmra", ".slot.svelte-g5cmra{border:2px solid red}");
+  }
+  var get_after_slot_changes = (dirty) => ({});
+  var get_after_slot_context = (ctx) => ({});
+  var get_box_slot_changes = (dirty) => ({});
+  var get_box_slot_context = (ctx) => ({});
+  function create_fragment8(ctx) {
+    let div1;
+    let t0;
+    let div0;
+    let t1;
+    let current;
+    const default_slot_template = ctx[1].default;
+    const default_slot = create_slot(default_slot_template, ctx, ctx[0], null);
+    const box_slot_template = ctx[1].box;
+    const box_slot = create_slot(box_slot_template, ctx, ctx[0], get_box_slot_context);
+    const after_slot_template = ctx[1].after;
+    const after_slot = create_slot(after_slot_template, ctx, ctx[0], get_after_slot_context);
+    return {
+      c() {
+        div1 = element("div");
+        if (default_slot)
+          default_slot.c();
+        t0 = space();
+        div0 = element("div");
+        if (box_slot)
+          box_slot.c();
+        t1 = space();
+        if (after_slot)
+          after_slot.c();
+        attr(div0, "class", "slot svelte-g5cmra");
+      },
+      m(target, anchor) {
+        insert(target, div1, anchor);
+        if (default_slot) {
+          default_slot.m(div1, null);
+        }
+        append(div1, t0);
+        append(div1, div0);
+        if (box_slot) {
+          box_slot.m(div0, null);
+        }
+        append(div1, t1);
+        if (after_slot) {
+          after_slot.m(div1, null);
+        }
+        current = true;
+      },
+      p(ctx2, [dirty]) {
+        if (default_slot) {
+          if (default_slot.p && (!current || dirty & 1)) {
+            update_slot_base(default_slot, default_slot_template, ctx2, ctx2[0], !current ? get_all_dirty_from_scope(ctx2[0]) : get_slot_changes(default_slot_template, ctx2[0], dirty, null), null);
+          }
+        }
+        if (box_slot) {
+          if (box_slot.p && (!current || dirty & 1)) {
+            update_slot_base(box_slot, box_slot_template, ctx2, ctx2[0], !current ? get_all_dirty_from_scope(ctx2[0]) : get_slot_changes(box_slot_template, ctx2[0], dirty, get_box_slot_changes), get_box_slot_context);
+          }
+        }
+        if (after_slot) {
+          if (after_slot.p && (!current || dirty & 1)) {
+            update_slot_base(after_slot, after_slot_template, ctx2, ctx2[0], !current ? get_all_dirty_from_scope(ctx2[0]) : get_slot_changes(after_slot_template, ctx2[0], dirty, get_after_slot_changes), get_after_slot_context);
+          }
+        }
+      },
+      i(local) {
+        if (current)
+          return;
+        transition_in(default_slot, local);
+        transition_in(box_slot, local);
+        transition_in(after_slot, local);
+        current = true;
+      },
+      o(local) {
+        transition_out(default_slot, local);
+        transition_out(box_slot, local);
+        transition_out(after_slot, local);
+        current = false;
+      },
+      d(detaching) {
+        if (detaching)
+          detach(div1);
+        if (default_slot)
+          default_slot.d(detaching);
+        if (box_slot)
+          box_slot.d(detaching);
+        if (after_slot)
+          after_slot.d(detaching);
+      }
+    };
+  }
+  function instance8($$self, $$props, $$invalidate) {
+    let { $$slots: slots = {}, $$scope } = $$props;
+    $$self.$$set = ($$props2) => {
+      if ("$$scope" in $$props2)
+        $$invalidate(0, $$scope = $$props2.$$scope);
+    };
+    return [$$scope, slots];
+  }
+  var SvelteSlots = class extends SvelteComponent {
+    constructor(options) {
+      super();
+      init(this, options, instance8, create_fragment8, safe_not_equal, {}, add_css3);
+    }
+  };
+  var SvelteSlots_default = SvelteSlots;
+  function create_default_slot(ctx) {
+    let slot;
+    return {
+      c() {
+        slot = element("slot");
+      },
+      m(target, anchor) {
+        insert(target, slot, anchor);
+      },
+      p: noop,
+      d(detaching) {
+        if (detaching)
+          detach(slot);
+      }
+    };
+  }
+  function create_box_slot(ctx) {
+    let slot;
+    return {
+      c() {
+        slot = element("slot");
+        attr(slot, "name", "box");
+        attr(slot, "slot", "box");
+      },
+      m(target, anchor) {
+        insert(target, slot, anchor);
+      },
+      p: noop,
+      d(detaching) {
+        if (detaching)
+          detach(slot);
+      }
+    };
+  }
+  function create_after_slot(ctx) {
+    let slot;
+    return {
+      c() {
+        slot = element("slot");
+        attr(slot, "name", "after");
+        attr(slot, "slot", "after");
+      },
+      m(target, anchor) {
+        insert(target, slot, anchor);
+      },
+      p: noop,
+      d(detaching) {
+        if (detaching)
+          detach(slot);
+      }
+    };
+  }
+  function create_fragment27(ctx) {
+    let component_1;
+    let current;
+    component_1 = new SvelteSlots_default({
+      props: {
+        $$slots: {
+          after: [create_after_slot],
+          box: [create_box_slot],
+          default: [create_default_slot]
+        },
+        $$scope: { ctx }
+      }
+    });
+    return {
+      c() {
+        create_component(component_1.$$.fragment);
+        this.c = noop;
+      },
+      m(target, anchor) {
+        mount_component(component_1, target, anchor);
+        current = true;
+      },
+      p(ctx2, [dirty]) {
+        const component_1_changes = {};
+        if (dirty & 16) {
+          component_1_changes.$$scope = { dirty, ctx: ctx2 };
+        }
+        component_1.$set(component_1_changes);
+      },
+      i(local) {
+        if (current)
+          return;
+        transition_in(component_1.$$.fragment, local);
+        current = true;
+      },
+      o(local) {
+        transition_out(component_1.$$.fragment, local);
+        current = false;
+      },
+      d(detaching) {
+        destroy_component(component_1, detaching);
+      }
+    };
+  }
+  function instance26($$self) {
+    const component = get_current_component();
+    const svelteDispatch = createEventDispatcher();
+    const dispatch = (name, detail) => {
+      svelteDispatch(name, detail);
+      component.dispatchEvent && component.dispatchEvent(new CustomEvent(name, { detail, bubbles: true }));
+    };
+    const handleEvent = (ev) => dispatch("ex-" + ev.type, [ev.detail]);
+    return [];
+  }
+  var SvelteSlots2 = class extends SvelteElement {
+    constructor(options) {
+      super();
+      init(this, {
+        target: this.shadowRoot,
+        props: attribute_to_object(this.attributes),
+        customElement: true
+      }, instance26, create_fragment27, safe_not_equal, {}, null);
+      if (options) {
+        if (options.target) {
+          insert(options.target, this, options.anchor);
+        }
+      }
+    }
+  };
+  customElements.define("ex-svelte-slots", SvelteSlots2);
+
+  // ../ucp-example/dist/elements/svelte/SvelteState.js
+  function create_fragment9(ctx) {
+    let button;
+    let t;
+    let mounted;
+    let dispose;
+    return {
+      c() {
+        button = element("button");
+        t = text(ctx[0]);
+      },
+      m(target, anchor) {
+        insert(target, button, anchor);
+        append(button, t);
+        if (!mounted) {
+          dispose = listen(button, "click", ctx[1]);
+          mounted = true;
+        }
+      },
+      p(ctx2, [dirty]) {
+        if (dirty & 1)
+          set_data(t, ctx2[0]);
+      },
+      i: noop,
+      o: noop,
+      d(detaching) {
+        if (detaching)
+          detach(button);
+        mounted = false;
+        dispose();
+      }
+    };
+  }
+  function instance9($$self, $$props, $$invalidate) {
+    "use strict";
+    let count = 0;
+    const click_handler = () => $$invalidate(0, count++, count);
+    return [count, click_handler];
+  }
+  var SvelteState = class extends SvelteComponent {
+    constructor(options) {
+      super();
+      init(this, options, instance9, create_fragment9, safe_not_equal, {});
+    }
+  };
+  var SvelteState_default = SvelteState;
+  function create_fragment28(ctx) {
+    let component_1;
+    let current;
+    component_1 = new SvelteState_default({});
+    return {
+      c() {
+        create_component(component_1.$$.fragment);
+        this.c = noop;
+      },
+      m(target, anchor) {
+        mount_component(component_1, target, anchor);
+        current = true;
+      },
+      p: noop,
+      i(local) {
+        if (current)
+          return;
+        transition_in(component_1.$$.fragment, local);
+        current = true;
+      },
+      o(local) {
+        transition_out(component_1.$$.fragment, local);
+        current = false;
+      },
+      d(detaching) {
+        destroy_component(component_1, detaching);
+      }
+    };
+  }
+  function instance27($$self) {
+    const component = get_current_component();
+    const svelteDispatch = createEventDispatcher();
+    const dispatch = (name, detail) => {
+      svelteDispatch(name, detail);
+      component.dispatchEvent && component.dispatchEvent(new CustomEvent(name, { detail, bubbles: true }));
+    };
+    const handleEvent = (ev) => dispatch("ex-" + ev.type, [ev.detail]);
+    return [];
+  }
+  var SvelteState2 = class extends SvelteElement {
+    constructor(options) {
+      super();
+      init(this, {
+        target: this.shadowRoot,
+        props: attribute_to_object(this.attributes),
+        customElement: true
+      }, instance27, create_fragment28, safe_not_equal, {}, null);
+      if (options) {
+        if (options.target) {
+          insert(options.target, this, options.anchor);
+        }
+      }
+    }
+  };
+  customElements.define("ex-svelte-state", SvelteState2);
+
+  // ../ucp-example/dist/elements/svelte/SvelteTheme.js
+  function create_fragment10(ctx) {
+    let div;
+    let current;
+    const default_slot_template = ctx[2].default;
+    const default_slot = create_slot(default_slot_template, ctx, ctx[1], null);
+    return {
+      c() {
+        div = element("div");
+        if (default_slot)
+          default_slot.c();
+        set_style(div, "--bg-color", ctx[0]);
+      },
+      m(target, anchor) {
+        insert(target, div, anchor);
+        if (default_slot) {
+          default_slot.m(div, null);
+        }
+        current = true;
+      },
+      p(ctx2, [dirty]) {
+        if (default_slot) {
+          if (default_slot.p && (!current || dirty & 2)) {
+            update_slot_base(default_slot, default_slot_template, ctx2, ctx2[1], !current ? get_all_dirty_from_scope(ctx2[1]) : get_slot_changes(default_slot_template, ctx2[1], dirty, null), null);
+          }
+        }
+        if (!current || dirty & 1) {
+          set_style(div, "--bg-color", ctx2[0]);
+        }
+      },
+      i(local) {
+        if (current)
+          return;
+        transition_in(default_slot, local);
+        current = true;
+      },
+      o(local) {
+        transition_out(default_slot, local);
+        current = false;
+      },
+      d(detaching) {
+        if (detaching)
+          detach(div);
+        if (default_slot)
+          default_slot.d(detaching);
+      }
+    };
+  }
+  function instance10($$self, $$props, $$invalidate) {
+    let { $$slots: slots = {}, $$scope } = $$props;
+    let { color } = $$props;
+    $$self.$$set = ($$props2) => {
+      if ("color" in $$props2)
+        $$invalidate(0, color = $$props2.color);
+      if ("$$scope" in $$props2)
+        $$invalidate(1, $$scope = $$props2.$$scope);
+    };
+    return [color, $$scope, slots];
+  }
+  var SvelteTheme = class extends SvelteComponent {
+    constructor(options) {
+      super();
+      init(this, options, instance10, create_fragment10, safe_not_equal, { color: 0 });
+    }
+  };
+  var SvelteTheme_default = SvelteTheme;
+  function create_default_slot2(ctx) {
+    let slot;
+    return {
+      c() {
+        slot = element("slot");
+      },
+      m(target, anchor) {
+        insert(target, slot, anchor);
+      },
+      p: noop,
+      d(detaching) {
+        if (detaching)
+          detach(slot);
+      }
+    };
+  }
+  function create_fragment29(ctx) {
+    let component_1;
+    let current;
+    component_1 = new SvelteTheme_default({
+      props: {
+        color: ctx[0],
+        $$slots: { default: [create_default_slot2] },
+        $$scope: { ctx }
+      }
+    });
+    return {
+      c() {
+        create_component(component_1.$$.fragment);
+        this.c = noop;
+      },
+      m(target, anchor) {
+        mount_component(component_1, target, anchor);
+        current = true;
+      },
+      p(ctx2, [dirty]) {
+        const component_1_changes = {};
+        if (dirty & 1)
+          component_1_changes.color = ctx2[0];
+        if (dirty & 32) {
+          component_1_changes.$$scope = { dirty, ctx: ctx2 };
+        }
+        component_1.$set(component_1_changes);
+      },
+      i(local) {
+        if (current)
+          return;
+        transition_in(component_1.$$.fragment, local);
+        current = true;
+      },
+      o(local) {
+        transition_out(component_1.$$.fragment, local);
+        current = false;
+      },
+      d(detaching) {
+        destroy_component(component_1, detaching);
+      }
+    };
+  }
+  function instance28($$self, $$props, $$invalidate) {
+    const component = get_current_component();
+    const svelteDispatch = createEventDispatcher();
+    const dispatch = (name, detail) => {
+      svelteDispatch(name, detail);
+      component.dispatchEvent && component.dispatchEvent(new CustomEvent(name, { detail, bubbles: true }));
+    };
+    let { color } = $$props;
+    const handleEvent = (ev) => dispatch("ex-" + ev.type, [ev.detail]);
+    $$self.$$set = ($$props2) => {
+      if ("color" in $$props2)
+        $$invalidate(0, color = $$props2.color);
+    };
+    return [color];
+  }
+  var SvelteTheme2 = class extends SvelteElement {
+    constructor(options) {
+      super();
+      init(this, {
+        target: this.shadowRoot,
+        props: attribute_to_object(this.attributes),
+        customElement: true
+      }, instance28, create_fragment29, safe_not_equal, { color: 0 }, null);
+      if (options) {
+        if (options.target) {
+          insert(options.target, this, options.anchor);
+        }
+        if (options.props) {
+          this.$set(options.props);
+          flush();
+        }
+      }
+    }
+    static get observedAttributes() {
+      return ["color"];
+    }
+    get color() {
+      return this.$$.ctx[0];
+    }
+    set color(color) {
+      this.$$set({ color });
+      flush();
+    }
+  };
+  customElements.define("ex-svelte-theme", SvelteTheme2);
+
+  // ../ucp-example/dist/elements/vue/VueDemo.style.js
+  var VueDemo_style_default = ``;
+
   // ../ucp-example/dist/elements/vue/VueDemo.js
   var VueDemo_default = /* @__PURE__ */ defineComponent({
     props: {
@@ -14645,33 +15685,31 @@ Component that was made reactive: `, type);
       return __returned__;
     }
   });
-  function render2(_ctx, _cache, $props, $setup, $data, $options) {
+  function render4(_ctx, _cache, $props, $setup, $data, $options) {
     return openBlock(), createElementBlock("button", {
       onClick: _cache[0] || (_cache[0] = () => $setup.emit("myclick", "Vue click"))
     }, toDisplayString($props.text), 1);
   }
-  var defineCe = (script4, style) => {
-    var Element = defineCustomElement(script4);
-    class StyledElement extends Element {
-      constructor(args) {
-        super(args);
-        if (style) {
-          const styleTag = document.createElement("style");
-          styleTag.innerText = style;
-          this.shadowRoot.appendChild(styleTag);
-        }
-      }
-    }
-    customElements.define("ex-vue-demo", StyledElement);
-  };
-  var renderFix = (_ctx, _cache, $props, $setup, $data, $options) => {
-    const emitPrefixer = (key, detail) => $setup.emit("ex-" + key, detail);
-    return render2(_ctx, _cache, $props, { ...$setup, emit: emitPrefixer }, $data, $options);
-  };
-  VueDemo_default.render = renderFix;
+  VueDemo_default.render = render4;
   VueDemo_default.__file = "../ucp-example/src/components/vue/VueDemo.vue";
-  var styles = [];
-  defineCe(VueDemo_default, styles.join("\n"));
+  var VueDemo_default2 = VueDemo_default;
+  var Element3 = defineCustomElement(VueDemo_default2);
+  var StyledElement3 = class extends Element3 {
+    constructor(args) {
+      super(args);
+      const styleElement = document.createElement("style");
+      styleElement.innerHTML = VueDemo_style_default;
+      this.shadowRoot.appendChild(styleElement);
+      this.addEventListener("myclick", (ev) => {
+        ev.stopPropagation();
+        this.dispatchEvent(new CustomEvent("ex-myclick", { detail: ev.detail }));
+      });
+    }
+  };
+  customElements.define("ex-vue-demo", StyledElement3);
+
+  // ../ucp-example/dist/elements/vue/VueEmits.style.js
+  var VueEmits_style_default = ``;
 
   // ../ucp-example/dist/elements/vue/VueEmits.js
   var VueEmits_default = /* @__PURE__ */ defineComponent({
@@ -14683,7 +15721,7 @@ Component that was made reactive: `, type);
       return __returned__;
     }
   });
-  function render3(_ctx, _cache, $props, $setup, $data, $options) {
+  function render5(_ctx, _cache, $props, $setup, $data, $options) {
     return openBlock(), createElementBlock("button", {
       class: "event-button",
       onClick: _cache[0] || (_cache[0] = () => {
@@ -14692,30 +15730,40 @@ Component that was made reactive: `, type);
         $setup.emit("objevent", { value: "val" });
         $setup.emit("voidevent");
       })
-    }, " Send event ");
+    }, " Vue Send event ");
   }
-  var defineCe2 = (script4, style) => {
-    var Element = defineCustomElement(script4);
-    class StyledElement extends Element {
-      constructor(args) {
-        super(args);
-        if (style) {
-          const styleTag = document.createElement("style");
-          styleTag.innerText = style;
-          this.shadowRoot.appendChild(styleTag);
-        }
-      }
-    }
-    customElements.define("ex-vue-emits", StyledElement);
-  };
-  var renderFix2 = (_ctx, _cache, $props, $setup, $data, $options) => {
-    const emitPrefixer = (key, detail) => $setup.emit("ex-" + key, detail);
-    return render3(_ctx, _cache, $props, { ...$setup, emit: emitPrefixer }, $data, $options);
-  };
-  VueEmits_default.render = renderFix2;
+  VueEmits_default.render = render5;
   VueEmits_default.__file = "../ucp-example/src/components/vue/VueEmits.vue";
-  var styles2 = [];
-  defineCe2(VueEmits_default, styles2.join("\n"));
+  var VueEmits_default2 = VueEmits_default;
+  var Element4 = defineCustomElement(VueEmits_default2);
+  var StyledElement4 = class extends Element4 {
+    constructor(args) {
+      super(args);
+      const styleElement = document.createElement("style");
+      styleElement.innerHTML = VueEmits_style_default;
+      this.shadowRoot.appendChild(styleElement);
+      this.addEventListener("stringevent", (ev) => {
+        ev.stopPropagation();
+        this.dispatchEvent(new CustomEvent("ex-stringevent", { detail: ev.detail }));
+      });
+      this.addEventListener("numevent", (ev) => {
+        ev.stopPropagation();
+        this.dispatchEvent(new CustomEvent("ex-numevent", { detail: ev.detail }));
+      });
+      this.addEventListener("objevent", (ev) => {
+        ev.stopPropagation();
+        this.dispatchEvent(new CustomEvent("ex-objevent", { detail: ev.detail }));
+      });
+      this.addEventListener("voidevent", (ev) => {
+        ev.stopPropagation();
+        this.dispatchEvent(new CustomEvent("ex-voidevent", { detail: ev.detail }));
+      });
+    }
+  };
+  customElements.define("ex-vue-emits", StyledElement4);
+
+  // ../ucp-example/dist/elements/vue/VueNested.style.js
+  var VueNested_style_default = ``;
 
   // ../ucp-example/dist/elements/vue/VueNested.js
   var VueNested_default = /* @__PURE__ */ defineComponent({
@@ -14727,34 +15775,28 @@ Component that was made reactive: `, type);
       return __returned__;
     }
   });
-  function render4(_ctx, _cache, $props, $setup, $data, $options) {
+  function render6(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_ex_vue_emits = resolveComponent("ex-vue-emits");
     return openBlock(), createBlock(_component_ex_vue_emits, {
       onExStringevent: _cache[0] || (_cache[0] = (ev) => $setup.log(ev.detail))
     });
   }
-  var defineCe3 = (script4, style) => {
-    var Element = defineCustomElement(script4);
-    class StyledElement extends Element {
-      constructor(args) {
-        super(args);
-        if (style) {
-          const styleTag = document.createElement("style");
-          styleTag.innerText = style;
-          this.shadowRoot.appendChild(styleTag);
-        }
-      }
-    }
-    customElements.define("ex-vue-nested", StyledElement);
-  };
-  var renderFix3 = (_ctx, _cache, $props, $setup, $data, $options) => {
-    const emitPrefixer = (key, detail) => $setup.emit("ex-" + key, detail);
-    return render4(_ctx, _cache, $props, { ...$setup, emit: emitPrefixer }, $data, $options);
-  };
-  VueNested_default.render = renderFix3;
+  VueNested_default.render = render6;
   VueNested_default.__file = "../ucp-example/src/components/vue/VueNested.vue";
-  var styles3 = [];
-  defineCe3(VueNested_default, styles3.join("\n"));
+  var VueNested_default2 = VueNested_default;
+  var Element5 = defineCustomElement(VueNested_default2);
+  var StyledElement5 = class extends Element5 {
+    constructor(args) {
+      super(args);
+      const styleElement = document.createElement("style");
+      styleElement.innerHTML = VueNested_style_default;
+      this.shadowRoot.appendChild(styleElement);
+    }
+  };
+  customElements.define("ex-vue-nested", StyledElement5);
+
+  // ../ucp-example/dist/elements/vue/VueProps.style.js
+  var VueProps_style_default = ``;
 
   // ../ucp-example/dist/elements/vue/VueProps.js
   var VueProps_default = /* @__PURE__ */ defineComponent({
@@ -14778,75 +15820,74 @@ Component that was made reactive: `, type);
   var _hoisted_1 = { class: "stringprop" };
   var _hoisted_2 = { class: "numprop" };
   var _hoisted_3 = { class: "complexprop" };
-  function render5(_ctx, _cache, $props, $setup, $data, $options) {
+  function render7(_ctx, _cache, $props, $setup, $data, $options) {
     return openBlock(), createElementBlock("div", null, [
       createBaseVNode("div", _hoisted_1, toDisplayString($props.stringprop), 1),
       createBaseVNode("div", _hoisted_2, toDisplayString($props.numprop + 1), 1),
       createBaseVNode("div", _hoisted_3, toDisplayString($props.complexprop?.value), 1)
     ]);
   }
-  var defineCe4 = (script4, style) => {
-    var Element = defineCustomElement(script4);
-    class StyledElement extends Element {
-      constructor(args) {
-        super(args);
-        if (style) {
-          const styleTag = document.createElement("style");
-          styleTag.innerText = style;
-          this.shadowRoot.appendChild(styleTag);
-        }
-      }
-    }
-    customElements.define("ex-vue-props", StyledElement);
-  };
-  var renderFix4 = (_ctx, _cache, $props, $setup, $data, $options) => {
-    const emitPrefixer = (key, detail) => $setup.emit("ex-" + key, detail);
-    return render5(_ctx, _cache, $props, { ...$setup, emit: emitPrefixer }, $data, $options);
-  };
-  VueProps_default.render = renderFix4;
+  VueProps_default.render = render7;
   VueProps_default.__file = "../ucp-example/src/components/vue/VueProps.vue";
-  var styles4 = [];
-  defineCe4(VueProps_default, styles4.join("\n"));
+  var VueProps_default2 = VueProps_default;
+  var Element6 = defineCustomElement(VueProps_default2);
+  var StyledElement6 = class extends Element6 {
+    constructor(args) {
+      super(args);
+      const styleElement = document.createElement("style");
+      styleElement.innerHTML = VueProps_style_default;
+      this.shadowRoot.appendChild(styleElement);
+    }
+  };
+  customElements.define("ex-vue-props", StyledElement6);
 
-  // ../ucp-example/dist/elements/vue/VueSimple.js
-  var _hoisted_12 = { class: "dummy" };
-  function render6(_ctx, _cache) {
-    return openBlock(), createElementBlock("div", _hoisted_12, "Vue");
-  }
-  var VueSimple_default = `.dummy {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  // ../ucp-example/dist/elements/vue/VueSimple.style.js
+  var VueSimple_style_default = `/* sfc-style:/Users/ahp168/Code/Privat/ucp/modules/ucp-example/src/components/vue/VueSimple.vue?type=style&index=0 */
+.dummy {
+  font-family:
+    Avenir,
+    Helvetica,
+    Arial,
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}`;
-  var defineCe5 = (script22, style) => {
-    var Element = defineCustomElement(script22);
-    class StyledElement extends Element {
-      constructor(args) {
-        super(args);
-        if (style) {
-          const styleTag = document.createElement("style");
-          styleTag.innerText = style;
-          this.shadowRoot.appendChild(styleTag);
-        }
-      }
-    }
-    customElements.define("ex-vue-simple", StyledElement);
-  };
+}
+/*# =VueSimple.css.map */
+`;
+
+  // ../ucp-example/dist/elements/vue/VueSimple.js
+  var _hoisted_12 = { class: "dummy" };
+  function render8(_ctx, _cache) {
+    return openBlock(), createElementBlock("div", _hoisted_12, "Vue");
+  }
   var script = {};
-  var renderFix5 = (_ctx, _cache, $props, $setup, $data, $options) => {
-    const emitPrefixer = (key, detail) => $setup.emit("ex-" + key, detail);
-    return render6(_ctx, _cache, $props, { ...$setup, emit: emitPrefixer }, $data, $options);
-  };
-  script.render = renderFix5;
+  script.render = render8;
   script.__file = "../ucp-example/src/components/vue/VueSimple.vue";
-  var styles5 = [VueSimple_default];
-  defineCe5(script, styles5.join("\n"));
+  var VueSimple_default = script;
+  var Element7 = defineCustomElement(VueSimple_default);
+  var StyledElement7 = class extends Element7 {
+    constructor(args) {
+      super(args);
+      const styleElement = document.createElement("style");
+      styleElement.innerHTML = VueSimple_style_default;
+      this.shadowRoot.appendChild(styleElement);
+    }
+  };
+  customElements.define("ex-vue-simple", StyledElement7);
+
+  // ../ucp-example/dist/elements/vue/VueSlots.style.js
+  var VueSlots_style_default = `/* sfc-style:/Users/ahp168/Code/Privat/ucp/modules/ucp-example/src/components/vue/VueSlots.vue?type=style&index=0 */
+.slot {
+  border: 2px solid red;
+}
+/*# =VueSlots.css.map */
+`;
 
   // ../ucp-example/dist/elements/vue/VueSlots.js
   var _hoisted_13 = { class: "slot" };
-  function render7(_ctx, _cache) {
+  function render9(_ctx, _cache) {
     return openBlock(), createElementBlock("div", null, [
       renderSlot(_ctx.$slots, "default"),
       createBaseVNode("div", _hoisted_13, [
@@ -14855,34 +15896,23 @@ Component that was made reactive: `, type);
       renderSlot(_ctx.$slots, "after")
     ]);
   }
-  var VueSlots_default = `
-.slot {
-  border: 2px solid red;
-}
-`;
-  var defineCe6 = (script22, style) => {
-    var Element = defineCustomElement(script22);
-    class StyledElement extends Element {
-      constructor(args) {
-        super(args);
-        if (style) {
-          const styleTag = document.createElement("style");
-          styleTag.innerText = style;
-          this.shadowRoot.appendChild(styleTag);
-        }
-      }
-    }
-    customElements.define("ex-vue-slots", StyledElement);
-  };
   var script2 = {};
-  var renderFix6 = (_ctx, _cache, $props, $setup, $data, $options) => {
-    const emitPrefixer = (key, detail) => $setup.emit("ex-" + key, detail);
-    return render7(_ctx, _cache, $props, { ...$setup, emit: emitPrefixer }, $data, $options);
-  };
-  script2.render = renderFix6;
+  script2.render = render9;
   script2.__file = "../ucp-example/src/components/vue/VueSlots.vue";
-  var styles6 = [VueSlots_default];
-  defineCe6(script2, styles6.join("\n"));
+  var VueSlots_default = script2;
+  var Element8 = defineCustomElement(VueSlots_default);
+  var StyledElement8 = class extends Element8 {
+    constructor(args) {
+      super(args);
+      const styleElement = document.createElement("style");
+      styleElement.innerHTML = VueSlots_style_default;
+      this.shadowRoot.appendChild(styleElement);
+    }
+  };
+  customElements.define("ex-vue-slots", StyledElement8);
+
+  // ../ucp-example/dist/elements/vue/VueState.style.js
+  var VueState_style_default = ``;
 
   // ../ucp-example/dist/elements/vue/VueState.js
   var VueState_default = /* @__PURE__ */ defineComponent({
@@ -14897,76 +15927,65 @@ Component that was made reactive: `, type);
       return __returned__;
     }
   });
-  function render8(_ctx, _cache, $props, $setup, $data, $options) {
+  function render10(_ctx, _cache, $props, $setup, $data, $options) {
     return openBlock(), createElementBlock("button", { onClick: $setup.increment }, toDisplayString($setup.count), 1);
   }
-  var defineCe7 = (script4, style) => {
-    var Element = defineCustomElement(script4);
-    class StyledElement extends Element {
-      constructor(args) {
-        super(args);
-        if (style) {
-          const styleTag = document.createElement("style");
-          styleTag.innerText = style;
-          this.shadowRoot.appendChild(styleTag);
-        }
-      }
-    }
-    customElements.define("ex-vue-state", StyledElement);
-  };
-  var renderFix7 = (_ctx, _cache, $props, $setup, $data, $options) => {
-    const emitPrefixer = (key, detail) => $setup.emit("ex-" + key, detail);
-    return render8(_ctx, _cache, $props, { ...$setup, emit: emitPrefixer }, $data, $options);
-  };
-  VueState_default.render = renderFix7;
+  VueState_default.render = render10;
   VueState_default.__file = "../ucp-example/src/components/vue/VueState.vue";
-  var styles7 = [];
-  defineCe7(VueState_default, styles7.join("\n"));
+  var VueState_default2 = VueState_default;
+  var Element9 = defineCustomElement(VueState_default2);
+  var StyledElement9 = class extends Element9 {
+    constructor(args) {
+      super(args);
+      const styleElement = document.createElement("style");
+      styleElement.innerHTML = VueState_style_default;
+      this.shadowRoot.appendChild(styleElement);
+    }
+  };
+  customElements.define("ex-vue-state", StyledElement9);
 
-  // ../ucp-example/dist/elements/vue/VueThemed.js
-  var _hoisted_14 = { class: "themed" };
-  function render9(_ctx, _cache) {
-    return openBlock(), createElementBlock("button", _hoisted_14, "Themed");
-  }
-  var VueThemed_default = `
+  // ../ucp-example/dist/elements/vue/VueThemed.style.js
+  var VueThemed_style_default = `/* sfc-style:/Users/ahp168/Code/Privat/ucp/modules/ucp-example/src/components/vue/VueThemed.vue?type=style&index=0 */
 .themed[data-v-f877025e] {
   background-color: var(--bg-color);
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 4px;
   padding: 1rem;
   color: whitesmoke;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family:
+    Avenir,
+    Helvetica,
+    Arial,
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 1rem;
   font-weight: 500;
   margin: 10px;
 }
+/*# =VueThemed.css.map */
 `;
-  var defineCe8 = (script22, style) => {
-    var Element = defineCustomElement(script22);
-    class StyledElement extends Element {
-      constructor(args) {
-        super(args);
-        if (style) {
-          const styleTag = document.createElement("style");
-          styleTag.innerText = style;
-          this.shadowRoot.appendChild(styleTag);
-        }
-      }
-    }
-    customElements.define("ex-vue-themed", StyledElement);
-  };
+
+  // ../ucp-example/dist/elements/vue/VueThemed.js
+  var _hoisted_14 = { class: "themed" };
+  function render11(_ctx, _cache) {
+    return openBlock(), createElementBlock("button", _hoisted_14, "Themed");
+  }
   var script3 = {};
-  var renderFix8 = (_ctx, _cache, $props, $setup, $data, $options) => {
-    const emitPrefixer = (key, detail) => $setup.emit("ex-" + key, detail);
-    return render9(_ctx, _cache, $props, { ...$setup, emit: emitPrefixer }, $data, $options);
-  };
-  script3.render = renderFix8;
+  script3.render = render11;
   script3.__file = "../ucp-example/src/components/vue/VueThemed.vue";
   script3.__scopeId = "data-v-f877025e";
-  var styles8 = [VueThemed_default];
-  defineCe8(script3, styles8.join("\n"));
+  var VueThemed_default = script3;
+  var Element10 = defineCustomElement(VueThemed_default);
+  var StyledElement10 = class extends Element10 {
+    constructor(args) {
+      super(args);
+      const styleElement = document.createElement("style");
+      styleElement.innerHTML = VueThemed_style_default;
+      this.shadowRoot.appendChild(styleElement);
+    }
+  };
+  customElements.define("ex-vue-themed", StyledElement10);
 })();
 /**
  * @license React
