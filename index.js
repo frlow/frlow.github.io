@@ -14310,8 +14310,8 @@ Component that was made reactive: `, type);
       styleElement.innerHTML = VueAppComponent_style_default;
       this.shadowRoot.appendChild(styleElement);
       this.addEventListener("click", (ev) => {
-        ev.stopPropagation();
-        this.dispatchEvent(new CustomEvent("ex-click", { detail: ev.detail }));
+        if (ev[Symbol.toStringTag] === "CustomEvent")
+          this.dispatchEvent(new CustomEvent("ex-click", { detail: ev.detail }));
       });
     }
   };
@@ -14321,16 +14321,48 @@ Component that was made reactive: `, type);
   var ReactDemo_style_default = ``;
 
   // ../ucp-example/dist/elements/react/ReactDemo.js
-  var import_react23 = __toESM(require_react());
+  var import_react42 = __toESM(require_react());
   var import_react_dom4 = __toESM(require_react_dom());
+  var import_react32 = __toESM(require_react());
   var import_react7 = __toESM(require_react());
+  var import_react23 = __toESM(require_react());
+  var wrapWc = (name) => (args) => {
+    const Component = name;
+    const events = Object.entries(args).reduce((acc, [key, value]) => {
+      if (key.match(/^on[A-Z]/))
+        acc[key] = value;
+      return acc;
+    }, {});
+    const ref2 = (0, import_react23.useRef)();
+    (0, import_react23.useEffect)(() => {
+      const callback = (ev) => events[ev.type](ev.detail);
+      Object.keys(events).forEach((key) => ref2.current.addEventListener(key, callback));
+      return () => {
+        Object.keys(events).forEach((key) => ref2.current.removeEventListener(key, callback));
+      };
+    });
+    const props = Object.entries(args).reduce((acc, [key, value]) => {
+      if (!key.match(/^on[A-Z]/))
+        acc[key] = JSON.stringify(value);
+      return acc;
+    }, {});
+    return /* @__PURE__ */ import_react7.default.createElement(Component, {
+      ref: ref2,
+      ...props
+    });
+  };
   var ReactDemo_default = ({
     text: text2,
     onMyclick
   }) => {
-    return /* @__PURE__ */ import_react7.default.createElement("button", {
+    const VueProps = wrapWc("ex-vue-props");
+    return /* @__PURE__ */ import_react32.default.createElement("div", null, /* @__PURE__ */ import_react32.default.createElement("button", {
       onClick: () => onMyclick("React click")
-    }, text2);
+    }, text2), /* @__PURE__ */ import_react32.default.createElement(VueProps, {
+      stringprop: "str",
+      numprop: 9,
+      complexprop: { value: "val" }
+    }));
   };
   var ReactWc4 = class extends HTMLElement {
     render() {
@@ -14346,7 +14378,7 @@ Component that was made reactive: `, type);
         })(),
         onMyclick: (args2) => this.dispatchEvent(new CustomEvent("ex-myclick", { bubbles: true, detail: [args2] }))
       };
-      (0, import_react_dom4.createRoot)(rootEl).render(/* @__PURE__ */ import_react23.default.createElement(ReactDemo_default, {
+      (0, import_react_dom4.createRoot)(rootEl).render(/* @__PURE__ */ import_react42.default.createElement(ReactDemo_default, {
         ...args
       }));
       this.shadowRoot.innerHTML = "";
@@ -15701,8 +15733,8 @@ Component that was made reactive: `, type);
       styleElement.innerHTML = VueDemo_style_default;
       this.shadowRoot.appendChild(styleElement);
       this.addEventListener("myclick", (ev) => {
-        ev.stopPropagation();
-        this.dispatchEvent(new CustomEvent("ex-myclick", { detail: ev.detail }));
+        if (ev[Symbol.toStringTag] === "CustomEvent")
+          this.dispatchEvent(new CustomEvent("ex-myclick", { detail: ev.detail }));
       });
     }
   };
@@ -15743,20 +15775,20 @@ Component that was made reactive: `, type);
       styleElement.innerHTML = VueEmits_style_default;
       this.shadowRoot.appendChild(styleElement);
       this.addEventListener("stringevent", (ev) => {
-        ev.stopPropagation();
-        this.dispatchEvent(new CustomEvent("ex-stringevent", { detail: ev.detail }));
+        if (ev[Symbol.toStringTag] === "CustomEvent")
+          this.dispatchEvent(new CustomEvent("ex-stringevent", { detail: ev.detail }));
       });
       this.addEventListener("numevent", (ev) => {
-        ev.stopPropagation();
-        this.dispatchEvent(new CustomEvent("ex-numevent", { detail: ev.detail }));
+        if (ev[Symbol.toStringTag] === "CustomEvent")
+          this.dispatchEvent(new CustomEvent("ex-numevent", { detail: ev.detail }));
       });
       this.addEventListener("objevent", (ev) => {
-        ev.stopPropagation();
-        this.dispatchEvent(new CustomEvent("ex-objevent", { detail: ev.detail }));
+        if (ev[Symbol.toStringTag] === "CustomEvent")
+          this.dispatchEvent(new CustomEvent("ex-objevent", { detail: ev.detail }));
       });
       this.addEventListener("voidevent", (ev) => {
-        ev.stopPropagation();
-        this.dispatchEvent(new CustomEvent("ex-voidevent", { detail: ev.detail }));
+        if (ev[Symbol.toStringTag] === "CustomEvent")
+          this.dispatchEvent(new CustomEvent("ex-voidevent", { detail: ev.detail }));
       });
     }
   };
