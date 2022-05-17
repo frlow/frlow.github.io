@@ -15001,8 +15001,8 @@ Component that was made reactive: `, type);
     component_1 = new SvelteProps_default({
       props: {
         stringprop: ctx[0],
-        numprop: JSON.parse(ctx[1]),
-        complexprop: JSON.parse(ctx[2])
+        numprop: ctx[3](),
+        complexprop: ctx[4]()
       }
     });
     return {
@@ -15019,9 +15019,9 @@ Component that was made reactive: `, type);
         if (dirty & 1)
           component_1_changes.stringprop = ctx2[0];
         if (dirty & 2)
-          component_1_changes.numprop = JSON.parse(ctx2[1]);
+          component_1_changes.numprop = ctx2[3]();
         if (dirty & 4)
-          component_1_changes.complexprop = JSON.parse(ctx2[2]);
+          component_1_changes.complexprop = ctx2[4]();
         component_1.$set(component_1_changes);
       },
       i(local) {
@@ -15050,6 +15050,20 @@ Component that was made reactive: `, type);
     let { numprop } = $$props;
     let { complexprop } = $$props;
     const handleEvent = (ev) => dispatch("ex-" + ev.type, [ev.detail]);
+    const func = () => {
+      try {
+        return JSON.parse(numprop);
+      } catch {
+        return numprop;
+      }
+    };
+    const func_1 = () => {
+      try {
+        return JSON.parse(complexprop);
+      } catch {
+        return complexprop;
+      }
+    };
     $$self.$$set = ($$props2) => {
       if ("stringprop" in $$props2)
         $$invalidate(0, stringprop = $$props2.stringprop);
@@ -15058,7 +15072,7 @@ Component that was made reactive: `, type);
       if ("complexprop" in $$props2)
         $$invalidate(2, complexprop = $$props2.complexprop);
     };
-    return [stringprop, numprop, complexprop];
+    return [stringprop, numprop, complexprop, func, func_1];
   }
   var SvelteProps2 = class extends SvelteElement {
     constructor(options) {
