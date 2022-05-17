@@ -15890,7 +15890,7 @@ Component that was made reactive: `, type);
     props: {
       stringprop: { type: String, required: true },
       numprop: { type: Number, required: true },
-      complexprop: { type: Object, required: true },
+      complexprop: { type: null, required: true },
       optionalprop: { type: String, required: false }
     },
     setup(__props, { expose }) {
