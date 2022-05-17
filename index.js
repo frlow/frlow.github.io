@@ -14465,7 +14465,8 @@ Component that was made reactive: `, type);
   var ReactProps_default = ({
     stringprop,
     numprop,
-    complexprop
+    complexprop,
+    optionalprop
   }) => {
     return /* @__PURE__ */ import_react9.default.createElement("div", null, /* @__PURE__ */ import_react9.default.createElement("div", {
       className: "stringprop"
@@ -14473,7 +14474,9 @@ Component that was made reactive: `, type);
       className: "numprop"
     }, numprop + 1), /* @__PURE__ */ import_react9.default.createElement("div", {
       className: "complexprop"
-    }, complexprop?.value));
+    }, complexprop?.value), /* @__PURE__ */ import_react9.default.createElement("div", {
+      className: "optionalprop"
+    }, optionalprop || "default"));
   };
   var ReactWc6 = class extends HTMLElement {
     render() {
@@ -14502,6 +14505,14 @@ Component that was made reactive: `, type);
           } catch {
             return value;
           }
+        })(),
+        optionalprop: (() => {
+          const value = this.attributes.getNamedItem("optionalprop")?.value;
+          try {
+            return JSON.parse(value);
+          } catch {
+            return value;
+          }
         })()
       };
       (0, import_react_dom6.createRoot)(rootEl).render(/* @__PURE__ */ import_react25.default.createElement(ReactProps_default, {
@@ -14514,7 +14525,7 @@ Component that was made reactive: `, type);
       this.shadowRoot.appendChild(styleElement);
     }
     static get observedAttributes() {
-      return ["stringprop", "numprop", "complexprop"];
+      return ["stringprop", "numprop", "complexprop", "optionalprop"];
     }
     attributeChangedCallback() {
       this.render();
@@ -14917,7 +14928,7 @@ Component that was made reactive: `, type);
 
   // ../ucp-example/dist/elements/svelte/SvelteProps.js
   function create_fragment6(ctx) {
-    let div3;
+    let div4;
     let div0;
     let t0;
     let t1;
@@ -14928,9 +14939,12 @@ Component that was made reactive: `, type);
     let div2;
     let t4_value = ctx[2]?.value + "";
     let t4;
+    let t5;
+    let div3;
+    let t6;
     return {
       c() {
-        div3 = element("div");
+        div4 = element("div");
         div0 = element("div");
         t0 = text(ctx[0]);
         t1 = space();
@@ -14939,20 +14953,27 @@ Component that was made reactive: `, type);
         t3 = space();
         div2 = element("div");
         t4 = text(t4_value);
+        t5 = space();
+        div3 = element("div");
+        t6 = text(ctx[3]);
         attr(div0, "class", "stringprop");
         attr(div1, "class", "numprop");
         attr(div2, "class", "complexprop");
+        attr(div3, "class", "optionalprop");
       },
       m(target, anchor) {
-        insert(target, div3, anchor);
-        append(div3, div0);
+        insert(target, div4, anchor);
+        append(div4, div0);
         append(div0, t0);
-        append(div3, t1);
-        append(div3, div1);
+        append(div4, t1);
+        append(div4, div1);
         append(div1, t2);
-        append(div3, t3);
-        append(div3, div2);
+        append(div4, t3);
+        append(div4, div2);
         append(div2, t4);
+        append(div4, t5);
+        append(div4, div3);
+        append(div3, t6);
       },
       p(ctx2, [dirty]) {
         if (dirty & 1)
@@ -14961,12 +14982,14 @@ Component that was made reactive: `, type);
           set_data(t2, t2_value);
         if (dirty & 4 && t4_value !== (t4_value = ctx2[2]?.value + ""))
           set_data(t4, t4_value);
+        if (dirty & 8)
+          set_data(t6, ctx2[3]);
       },
       i: noop,
       o: noop,
       d(detaching) {
         if (detaching)
-          detach(div3);
+          detach(div4);
       }
     };
   }
@@ -14974,6 +14997,7 @@ Component that was made reactive: `, type);
     let { stringprop } = $$props;
     let { numprop } = $$props;
     let { complexprop } = $$props;
+    let { optionalprop = "default" } = $$props;
     $$self.$$set = ($$props2) => {
       if ("stringprop" in $$props2)
         $$invalidate(0, stringprop = $$props2.stringprop);
@@ -14981,8 +15005,10 @@ Component that was made reactive: `, type);
         $$invalidate(1, numprop = $$props2.numprop);
       if ("complexprop" in $$props2)
         $$invalidate(2, complexprop = $$props2.complexprop);
+      if ("optionalprop" in $$props2)
+        $$invalidate(3, optionalprop = $$props2.optionalprop);
     };
-    return [stringprop, numprop, complexprop];
+    return [stringprop, numprop, complexprop, optionalprop];
   }
   var SvelteProps = class extends SvelteComponent {
     constructor(options) {
@@ -14990,7 +15016,8 @@ Component that was made reactive: `, type);
       init(this, options, instance6, create_fragment6, safe_not_equal, {
         stringprop: 0,
         numprop: 1,
-        complexprop: 2
+        complexprop: 2,
+        optionalprop: 3
       });
     }
   };
@@ -15001,8 +15028,9 @@ Component that was made reactive: `, type);
     component_1 = new SvelteProps_default({
       props: {
         stringprop: ctx[0],
-        numprop: ctx[3](),
-        complexprop: ctx[4]()
+        numprop: ctx[4](),
+        complexprop: ctx[5](),
+        optionalprop: ctx[3]
       }
     });
     return {
@@ -15019,9 +15047,11 @@ Component that was made reactive: `, type);
         if (dirty & 1)
           component_1_changes.stringprop = ctx2[0];
         if (dirty & 2)
-          component_1_changes.numprop = ctx2[3]();
+          component_1_changes.numprop = ctx2[4]();
         if (dirty & 4)
-          component_1_changes.complexprop = ctx2[4]();
+          component_1_changes.complexprop = ctx2[5]();
+        if (dirty & 8)
+          component_1_changes.optionalprop = ctx2[3];
         component_1.$set(component_1_changes);
       },
       i(local) {
@@ -15049,6 +15079,7 @@ Component that was made reactive: `, type);
     let { stringprop } = $$props;
     let { numprop } = $$props;
     let { complexprop } = $$props;
+    let { optionalprop } = $$props;
     const handleEvent = (ev) => dispatch("ex-" + ev.type, [ev.detail]);
     const func = () => {
       try {
@@ -15071,8 +15102,10 @@ Component that was made reactive: `, type);
         $$invalidate(1, numprop = $$props2.numprop);
       if ("complexprop" in $$props2)
         $$invalidate(2, complexprop = $$props2.complexprop);
+      if ("optionalprop" in $$props2)
+        $$invalidate(3, optionalprop = $$props2.optionalprop);
     };
-    return [stringprop, numprop, complexprop, func, func_1];
+    return [stringprop, numprop, complexprop, optionalprop, func, func_1];
   }
   var SvelteProps2 = class extends SvelteElement {
     constructor(options) {
@@ -15084,7 +15117,8 @@ Component that was made reactive: `, type);
       }, instance25, create_fragment25, safe_not_equal, {
         stringprop: 0,
         numprop: 1,
-        complexprop: 2
+        complexprop: 2,
+        optionalprop: 3
       }, null);
       if (options) {
         if (options.target) {
@@ -15097,7 +15131,7 @@ Component that was made reactive: `, type);
       }
     }
     static get observedAttributes() {
-      return ["stringprop", "numprop", "complexprop"];
+      return ["stringprop", "numprop", "complexprop", "optionalprop"];
     }
     get stringprop() {
       return this.$$.ctx[0];
@@ -15118,6 +15152,13 @@ Component that was made reactive: `, type);
     }
     set complexprop(complexprop) {
       this.$$set({ complexprop });
+      flush();
+    }
+    get optionalprop() {
+      return this.$$.ctx[3];
+    }
+    set optionalprop(optionalprop) {
+      this.$$set({ optionalprop });
       flush();
     }
   };
@@ -15849,14 +15890,16 @@ Component that was made reactive: `, type);
     props: {
       stringprop: { type: String, required: true },
       numprop: { type: Number, required: true },
-      complexprop: { type: Object, required: true }
+      complexprop: { type: Object, required: true },
+      optionalprop: { type: String, required: false }
     },
     setup(__props, { expose }) {
       expose();
       const {
         stringprop,
         numprop,
-        complexprop
+        complexprop,
+        optionalprop
       } = __props;
       const __returned__ = {};
       Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
@@ -15866,11 +15909,13 @@ Component that was made reactive: `, type);
   var _hoisted_1 = { class: "stringprop" };
   var _hoisted_2 = { class: "numprop" };
   var _hoisted_3 = { class: "complexprop" };
+  var _hoisted_4 = { class: "optionalprop" };
   function render7(_ctx, _cache, $props, $setup, $data, $options) {
     return openBlock(), createElementBlock("div", null, [
       createBaseVNode("div", _hoisted_1, toDisplayString($props.stringprop), 1),
       createBaseVNode("div", _hoisted_2, toDisplayString($props.numprop + 1), 1),
-      createBaseVNode("div", _hoisted_3, toDisplayString($props.complexprop?.value), 1)
+      createBaseVNode("div", _hoisted_3, toDisplayString($props.complexprop?.value), 1),
+      createBaseVNode("div", _hoisted_4, toDisplayString($props.optionalprop || "default"), 1)
     ]);
   }
   VueProps_default.render = render7;
