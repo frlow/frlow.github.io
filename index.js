@@ -7674,22 +7674,57 @@
     }
   });
 
-  // ../ucp-example/dist/elements/chunks/chunk-AMTYERUC.js
-  var import_react = __toESM(require_react());
-  var ReactAppComponentStyled_default = ({ onClick, text: text2 }) => {
-    return /* @__PURE__ */ import_react.default.createElement("button", {
-      className: "dummy",
-      onClick: () => onClick()
-    }, text2);
-  };
-
-  // ../ucp-example/dist/elements/chunks/chunk-RX5X5YW4.js
-  var import_react2 = __toESM(require_react());
-  var ReactAppComponent_default = ({ onClick, text: text2 }) => {
-    return /* @__PURE__ */ import_react2.default.createElement(ReactAppComponentStyled_default, {
-      text: text2,
-      onClick
-    });
+  // ../ucp-example/dist/elements/chunks/chunk-OIVYFLIB.js
+  var nativeEvents_default = (element2) => {
+    const events = [
+      "click",
+      "contextmenu",
+      "dblclick",
+      "mousedown",
+      "mouseenter",
+      "mouseleave",
+      "mousemove",
+      "mouseover",
+      "mouseout",
+      "mouseup",
+      "keydown",
+      "keypress",
+      "keyup",
+      "blur",
+      "change",
+      "focus",
+      "focusin",
+      "focusout",
+      "input",
+      "invalid",
+      "reset",
+      "search",
+      "select",
+      "submit",
+      "drag",
+      "dragend",
+      "dragenter",
+      "dragleave",
+      "dragover",
+      "dragstart",
+      "drop",
+      "copy",
+      "cut",
+      "paste",
+      "mousewheel",
+      "wheel",
+      "touchcancel",
+      "touchend",
+      "touchmove",
+      "touchstart"
+    ];
+    const handler = (event) => {
+      event.stopPropagation();
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      return false;
+    };
+    events.forEach((event) => element2.shadowRoot.addEventListener(event, handler));
   };
 
   // ../ucp-example/dist/elements/app/react/ReactApp.style.js
@@ -7701,25 +7736,37 @@
 `;
 
   // ../ucp-example/dist/elements/app/react/ReactApp.js
-  var import_react22 = __toESM(require_react());
+  var import_react4 = __toESM(require_react());
   var import_react_dom = __toESM(require_react_dom());
   var import_react3 = __toESM(require_react());
+  var import_react2 = __toESM(require_react());
+  var import_react = __toESM(require_react());
+  var ReactAppComponentStyled = ({ onClick, text: text2 }) => {
+    return /* @__PURE__ */ import_react.default.createElement("button", {
+      className: "dummy",
+      onClick: () => onClick()
+    }, text2);
+  };
+  var ReactAppComponent = ({ onClick, text: text2 }) => {
+    return /* @__PURE__ */ import_react2.default.createElement(ReactAppComponentStyled, {
+      text: text2,
+      onClick
+    });
+  };
   var ReactApp_default = () => {
     const [count, setCount] = (0, import_react3.useState)(0);
-    return /* @__PURE__ */ import_react3.default.createElement(ReactAppComponent_default, {
+    return /* @__PURE__ */ import_react3.default.createElement(ReactAppComponent, {
       onClick: () => setCount(count + 1),
       text: `Clicked: ${count}`
     });
   };
   var ReactWc = class extends HTMLElement {
     render() {
-      const rootEl = document.createElement("div");
       const args = {};
-      (0, import_react_dom.createRoot)(rootEl).render(/* @__PURE__ */ import_react22.default.createElement(ReactApp_default, {
+      this.shadowRoot.innerHTML = "";
+      this.root.render(/* @__PURE__ */ import_react4.default.createElement(ReactApp_default, {
         ...args
       }));
-      this.shadowRoot.innerHTML = "";
-      this.shadowRoot.appendChild(rootEl);
       const styleElement = document.createElement("style");
       styleElement.innerHTML = ReactApp_style_default;
       this.shadowRoot.appendChild(styleElement);
@@ -7733,108 +7780,14 @@
     constructor() {
       super();
       this.attachShadow({ mode: "open" });
+      this.root = (0, import_react_dom.createRoot)(this.shadowRoot);
       this.render();
+      nativeEvents_default(this);
     }
   };
   customElements.define("ex-react-app", ReactWc);
 
-  // ../ucp-example/dist/elements/app/react/ReactAppComponent.style.js
-  var ReactAppComponent_style_default = `/* ../ucp-example/src/components/app/react/ReactAppComponentStyled.scss */
-.dummy {
-  background-color: #377bb2;
-}
-/*# =ReactAppComponent.css.map */
-`;
-
-  // ../ucp-example/dist/elements/app/react/ReactAppComponent.js
-  var import_react4 = __toESM(require_react());
-  var import_react_dom2 = __toESM(require_react_dom());
-  var ReactWc2 = class extends HTMLElement {
-    render() {
-      const rootEl = document.createElement("div");
-      const args = {
-        text: (() => {
-          const value = this.attributes.getNamedItem("text")?.value;
-          try {
-            return JSON.parse(value);
-          } catch {
-            return value;
-          }
-        })(),
-        onClick: (args2) => this.dispatchEvent(new CustomEvent("ex-click", { bubbles: true, detail: [args2] }))
-      };
-      (0, import_react_dom2.createRoot)(rootEl).render(/* @__PURE__ */ import_react4.default.createElement(ReactAppComponent_default, {
-        ...args
-      }));
-      this.shadowRoot.innerHTML = "";
-      this.shadowRoot.appendChild(rootEl);
-      const styleElement = document.createElement("style");
-      styleElement.innerHTML = ReactAppComponent_style_default;
-      this.shadowRoot.appendChild(styleElement);
-    }
-    static get observedAttributes() {
-      return ["text"];
-    }
-    attributeChangedCallback() {
-      this.render();
-    }
-    constructor() {
-      super();
-      this.attachShadow({ mode: "open" });
-      this.render();
-    }
-  };
-  customElements.define("ex-react-app-component", ReactWc2);
-
-  // ../ucp-example/dist/elements/app/react/ReactAppComponentStyled.style.js
-  var ReactAppComponentStyled_style_default = `/* ../ucp-example/src/components/app/react/ReactAppComponentStyled.scss */
-.dummy {
-  background-color: #377bb2;
-}
-/*# =ReactAppComponentStyled.css.map */
-`;
-
-  // ../ucp-example/dist/elements/app/react/ReactAppComponentStyled.js
-  var import_react5 = __toESM(require_react());
-  var import_react_dom3 = __toESM(require_react_dom());
-  var ReactWc3 = class extends HTMLElement {
-    render() {
-      const rootEl = document.createElement("div");
-      const args = {
-        text: (() => {
-          const value = this.attributes.getNamedItem("text")?.value;
-          try {
-            return JSON.parse(value);
-          } catch {
-            return value;
-          }
-        })(),
-        onClick: (args2) => this.dispatchEvent(new CustomEvent("ex-click", { bubbles: true, detail: [args2] }))
-      };
-      (0, import_react_dom3.createRoot)(rootEl).render(/* @__PURE__ */ import_react5.default.createElement(ReactAppComponentStyled_default, {
-        ...args
-      }));
-      this.shadowRoot.innerHTML = "";
-      this.shadowRoot.appendChild(rootEl);
-      const styleElement = document.createElement("style");
-      styleElement.innerHTML = ReactAppComponentStyled_style_default;
-      this.shadowRoot.appendChild(styleElement);
-    }
-    static get observedAttributes() {
-      return ["text"];
-    }
-    attributeChangedCallback() {
-      this.render();
-    }
-    constructor() {
-      super();
-      this.attachShadow({ mode: "open" });
-      this.render();
-    }
-  };
-  customElements.define("ex-react-app-component-styled", ReactWc3);
-
-  // ../ucp-example/dist/elements/chunks/chunk-MGNSNS55.js
+  // ../ucp-example/dist/elements/chunks/chunk-QGUGWXBZ.js
   function noop() {
   }
   function assign(tar, src) {
@@ -7996,6 +7949,9 @@
       throw new Error("Function called outside component initialization");
     return current_component;
   }
+  function onMount(fn) {
+    get_current_component().$$.on_mount.push(fn);
+  }
   function createEventDispatcher() {
     const component = get_current_component();
     return (type, detail, { cancelable = false } = {}) => {
@@ -8095,10 +8051,10 @@
   function create_component(block) {
     block && block.c();
   }
-  function mount_component(component, target, anchor, customElement) {
+  function mount_component(component, target, anchor, customElement2) {
     const { fragment, on_mount, on_destroy, after_update } = component.$$;
     fragment && fragment.m(target, anchor);
-    if (!customElement) {
+    if (!customElement2) {
       add_render_callback(() => {
         const new_on_destroy = on_mount.map(run).filter(is_function);
         if (on_destroy) {
@@ -8247,7 +8203,7 @@
     }
   };
 
-  // ../ucp-example/dist/elements/chunks/chunk-ZKZN5XW3.js
+  // ../ucp-example/dist/elements/chunks/chunk-HQCIU5X7.js
   function add_css(target) {
     append_styles(target, "svelte-1i5xse5", ".dummy.svelte-1i5xse5{background-color:#b84141}");
   }
@@ -8387,11 +8343,12 @@
   function instance22($$self) {
     const component = get_current_component();
     const svelteDispatch = createEventDispatcher();
+    onMount(() => nativeEvents_default(component));
     const dispatch = (name, detail) => {
       svelteDispatch(name, detail);
       component.dispatchEvent && component.dispatchEvent(new CustomEvent(name, { detail, bubbles: true }));
     };
-    const handleEvent = (ev) => dispatch("ex-" + ev.type, [ev.detail]);
+    const handleEvent = (ev) => dispatch(ev.type, [ev.detail]);
     return [];
   }
   var SvelteApp2 = class extends SvelteElement {
@@ -8450,12 +8407,13 @@
   function instance3($$self, $$props, $$invalidate) {
     const component = get_current_component();
     const svelteDispatch = createEventDispatcher();
+    onMount(() => nativeEvents_default(component));
     const dispatch = (name, detail) => {
       svelteDispatch(name, detail);
       component.dispatchEvent && component.dispatchEvent(new CustomEvent(name, { detail, bubbles: true }));
     };
     let { text: text2 } = $$props;
-    const handleEvent = (ev) => dispatch("ex-" + ev.type, [ev.detail]);
+    const handleEvent = (ev) => dispatch(ev.type, [ev.detail]);
     const myclick_handler = (ev) => handleEvent(ev);
     $$self.$$set = ($$props2) => {
       if ("text" in $$props2)
@@ -10242,7 +10200,7 @@
           if (cleanup) {
             cleanup();
           }
-          return callWithAsyncErrorHandling(source, instance11, 3, [onCleanup]);
+          return callWithAsyncErrorHandling(source, instance11, 3, [onCleanup2]);
         };
       }
     } else {
@@ -10253,20 +10211,20 @@
       getter = () => traverse(baseGetter());
     }
     let cleanup;
-    let onCleanup = (fn) => {
+    let onCleanup2 = (fn) => {
       cleanup = effect2.onStop = () => {
         callWithErrorHandling(fn, instance11, 4);
       };
     };
     if (isInSSRComponentSetup) {
-      onCleanup = NOOP;
+      onCleanup2 = NOOP;
       if (!cb) {
         getter();
       } else if (immediate) {
         callWithAsyncErrorHandling(cb, instance11, 3, [
           getter(),
           isMultiSource ? [] : void 0,
-          onCleanup
+          onCleanup2
         ]);
       }
       return NOOP;
@@ -10285,7 +10243,7 @@
           callWithAsyncErrorHandling(cb, instance11, 3, [
             newValue,
             oldValue === INITIAL_WATCHER_VALUE ? void 0 : oldValue,
-            onCleanup
+            onCleanup2
           ]);
           oldValue = newValue;
         }
@@ -10427,14 +10385,14 @@
       const state = useTransitionState();
       let prevTransitionKey;
       return () => {
-        const children2 = slots.default && getTransitionRawChildren(slots.default(), true);
-        if (!children2 || !children2.length) {
+        const children3 = slots.default && getTransitionRawChildren(slots.default(), true);
+        if (!children3 || !children3.length) {
           return;
         }
-        let child = children2[0];
-        if (children2.length > 1) {
+        let child = children3[0];
+        if (children3.length > 1) {
           let hasFound = false;
-          for (const c of children2) {
+          for (const c of children3) {
             if (c.type !== Comment) {
               if (false) {
                 warn("<transition> can only be used on a single element or component. Use <transition-group> for lists.");
@@ -10637,11 +10595,11 @@
       vnode.transition = hooks;
     }
   }
-  function getTransitionRawChildren(children2, keepComment = false, parentKey) {
+  function getTransitionRawChildren(children3, keepComment = false, parentKey) {
     let ret = [];
     let keyedFragmentCount = 0;
-    for (let i = 0; i < children2.length; i++) {
-      let child = children2[i];
+    for (let i = 0; i < children3.length; i++) {
+      let child = children3[i];
       const key = parentKey == null ? child.key : String(parentKey) + String(child.key != null ? child.key : i);
       if (child.type === Fragment) {
         if (child.patchFlag & 128)
@@ -10873,11 +10831,11 @@
     if (created) {
       callHook(created, instance11, "c");
     }
-    function registerLifecycleHook(register, hook) {
+    function registerLifecycleHook(register2, hook) {
       if (isArray(hook)) {
-        hook.forEach((_hook) => register(_hook.bind(publicThis)));
+        hook.forEach((_hook) => register2(_hook.bind(publicThis)));
       } else if (hook) {
-        register(hook.bind(publicThis));
+        register2(hook.bind(publicThis));
       }
     }
     registerLifecycleHook(onBeforeMount, beforeMount);
@@ -11361,54 +11319,54 @@
       }
     }
   };
-  var normalizeVNodeSlots = (instance11, children2) => {
+  var normalizeVNodeSlots = (instance11, children3) => {
     if (false) {
       warn(`Non-function value encountered for default slot. Prefer function slots for better performance.`);
     }
-    const normalized = normalizeSlotValue(children2);
+    const normalized = normalizeSlotValue(children3);
     instance11.slots.default = () => normalized;
   };
-  var initSlots = (instance11, children2) => {
+  var initSlots = (instance11, children3) => {
     if (instance11.vnode.shapeFlag & 32) {
-      const type = children2._;
+      const type = children3._;
       if (type) {
-        instance11.slots = toRaw(children2);
-        def(children2, "_", type);
+        instance11.slots = toRaw(children3);
+        def(children3, "_", type);
       } else {
-        normalizeObjectSlots(children2, instance11.slots = {});
+        normalizeObjectSlots(children3, instance11.slots = {});
       }
     } else {
       instance11.slots = {};
-      if (children2) {
-        normalizeVNodeSlots(instance11, children2);
+      if (children3) {
+        normalizeVNodeSlots(instance11, children3);
       }
     }
     def(instance11.slots, InternalObjectKey, 1);
   };
-  var updateSlots = (instance11, children2, optimized) => {
+  var updateSlots = (instance11, children3, optimized) => {
     const { vnode, slots } = instance11;
     let needDeletionCheck = true;
     let deletionComparisonTarget = EMPTY_OBJ;
     if (vnode.shapeFlag & 32) {
-      const type = children2._;
+      const type = children3._;
       if (type) {
         if (false) {
-          extend(slots, children2);
+          extend(slots, children3);
         } else if (optimized && type === 1) {
           needDeletionCheck = false;
         } else {
-          extend(slots, children2);
+          extend(slots, children3);
           if (!optimized && type === 1) {
             delete slots._;
           }
         }
       } else {
-        needDeletionCheck = !children2.$stable;
-        normalizeObjectSlots(children2, slots);
+        needDeletionCheck = !children3.$stable;
+        normalizeObjectSlots(children3, slots);
       }
-      deletionComparisonTarget = children2;
-    } else if (children2) {
-      normalizeVNodeSlots(instance11, children2);
+      deletionComparisonTarget = children3;
+    } else if (children3) {
+      normalizeVNodeSlots(instance11, children3);
       deletionComparisonTarget = { default: 1 };
     }
     if (needDeletionCheck) {
@@ -11879,9 +11837,9 @@ For more details, see https://link.vuejs.org/feature-flags.`);
         }
       }
     };
-    const mountChildren = (children2, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized, start = 0) => {
-      for (let i = start; i < children2.length; i++) {
-        const child = children2[i] = optimized ? cloneIfMounted(children2[i]) : normalizeVNode(children2[i]);
+    const mountChildren = (children3, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized, start = 0) => {
+      for (let i = start; i < children3.length; i++) {
+        const child = children3[i] = optimized ? cloneIfMounted(children3[i]) : normalizeVNode(children3[i]);
         patch(null, child, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized);
       }
     };
@@ -12394,7 +12352,7 @@ For more details, see https://link.vuejs.org/feature-flags.`);
       }
     };
     const move = (vnode, container, anchor, moveType, parentSuspense = null) => {
-      const { el, type, transition, children: children2, shapeFlag } = vnode;
+      const { el, type, transition, children: children3, shapeFlag } = vnode;
       if (shapeFlag & 6) {
         move(vnode.component.subTree, container, anchor, moveType);
         return;
@@ -12409,8 +12367,8 @@ For more details, see https://link.vuejs.org/feature-flags.`);
       }
       if (type === Fragment) {
         hostInsert(el, container, anchor);
-        for (let i = 0; i < children2.length; i++) {
-          move(children2[i], container, anchor, moveType);
+        for (let i = 0; i < children3.length; i++) {
+          move(children3[i], container, anchor, moveType);
         }
         hostInsert(vnode.anchor, container, anchor);
         return;
@@ -12445,7 +12403,7 @@ For more details, see https://link.vuejs.org/feature-flags.`);
       }
     };
     const unmount = (vnode, parentComponent, parentSuspense, doRemove = false, optimized = false) => {
-      const { type, props, ref: ref2, children: children2, dynamicChildren, shapeFlag, patchFlag, dirs } = vnode;
+      const { type, props, ref: ref2, children: children3, dynamicChildren, shapeFlag, patchFlag, dirs } = vnode;
       if (ref2 != null) {
         setRef(ref2, null, parentSuspense, vnode, true);
       }
@@ -12474,7 +12432,7 @@ For more details, see https://link.vuejs.org/feature-flags.`);
         } else if (dynamicChildren && (type !== Fragment || patchFlag > 0 && patchFlag & 64)) {
           unmountChildren(dynamicChildren, parentComponent, parentSuspense, false, true);
         } else if (type === Fragment && patchFlag & (128 | 256) || !optimized && shapeFlag & 16) {
-          unmountChildren(children2, parentComponent, parentSuspense);
+          unmountChildren(children3, parentComponent, parentSuspense);
         }
         if (doRemove) {
           remove2(vnode);
@@ -12563,9 +12521,9 @@ For more details, see https://link.vuejs.org/feature-flags.`);
         devtoolsComponentRemoved(instance11);
       }
     };
-    const unmountChildren = (children2, parentComponent, parentSuspense, doRemove = false, optimized = false, start = 0) => {
-      for (let i = start; i < children2.length; i++) {
-        unmount(children2[i], parentComponent, parentSuspense, doRemove, optimized);
+    const unmountChildren = (children3, parentComponent, parentSuspense, doRemove = false, optimized = false, start = 0) => {
+      for (let i = start; i < children3.length; i++) {
+        unmount(children3[i], parentComponent, parentSuspense, doRemove, optimized);
       }
     };
     const getNextHostNode = (vnode) => {
@@ -12733,11 +12691,11 @@ If this is a native custom element, make sure to exclude it from component resol
     }
     return vnode;
   }
-  function createElementBlock(type, props, children2, patchFlag, dynamicProps, shapeFlag) {
-    return setupBlock(createBaseVNode(type, props, children2, patchFlag, dynamicProps, shapeFlag, true));
+  function createElementBlock(type, props, children3, patchFlag, dynamicProps, shapeFlag) {
+    return setupBlock(createBaseVNode(type, props, children3, patchFlag, dynamicProps, shapeFlag, true));
   }
-  function createBlock(type, props, children2, patchFlag, dynamicProps) {
-    return setupBlock(createVNode(type, props, children2, patchFlag, dynamicProps, true));
+  function createBlock(type, props, children3, patchFlag, dynamicProps) {
+    return setupBlock(createVNode(type, props, children3, patchFlag, dynamicProps, true));
   }
   function isVNode(value) {
     return value ? value.__v_isVNode === true : false;
@@ -12753,7 +12711,7 @@ If this is a native custom element, make sure to exclude it from component resol
   var normalizeRef = ({ ref: ref2, ref_key, ref_for }) => {
     return ref2 != null ? isString(ref2) || isRef(ref2) || isFunction(ref2) ? { i: currentRenderingInstance, r: ref2, k: ref_key, f: !!ref_for } : ref2 : null;
   };
-  function createBaseVNode(type, props = null, children2 = null, patchFlag = 0, dynamicProps = null, shapeFlag = type === Fragment ? 0 : 1, isBlockNode = false, needFullChildrenNormalization = false) {
+  function createBaseVNode(type, props = null, children3 = null, patchFlag = 0, dynamicProps = null, shapeFlag = type === Fragment ? 0 : 1, isBlockNode = false, needFullChildrenNormalization = false) {
     const vnode = {
       __v_isVNode: true,
       __v_skip: true,
@@ -12763,7 +12721,7 @@ If this is a native custom element, make sure to exclude it from component resol
       ref: props && normalizeRef(props),
       scopeId: currentScopeId,
       slotScopeIds: null,
-      children: children2,
+      children: children3,
       component: null,
       suspense: null,
       ssContent: null,
@@ -12782,12 +12740,12 @@ If this is a native custom element, make sure to exclude it from component resol
       appContext: null
     };
     if (needFullChildrenNormalization) {
-      normalizeChildren(vnode, children2);
+      normalizeChildren(vnode, children3);
       if (shapeFlag & 128) {
         type.normalize(vnode);
       }
-    } else if (children2) {
-      vnode.shapeFlag |= isString(children2) ? 8 : 16;
+    } else if (children3) {
+      vnode.shapeFlag |= isString(children3) ? 8 : 16;
     }
     if (false) {
       warn(`VNode created with invalid key (NaN). VNode type:`, vnode.type);
@@ -12798,7 +12756,7 @@ If this is a native custom element, make sure to exclude it from component resol
     return vnode;
   }
   var createVNode = false ? createVNodeWithArgsTransform : _createVNode;
-  function _createVNode(type, props = null, children2 = null, patchFlag = 0, dynamicProps = null, isBlockNode = false) {
+  function _createVNode(type, props = null, children3 = null, patchFlag = 0, dynamicProps = null, isBlockNode = false) {
     if (!type || type === NULL_DYNAMIC_COMPONENT) {
       if (false) {
         warn(`Invalid vnode type when creating vnode: ${type}.`);
@@ -12807,8 +12765,8 @@ If this is a native custom element, make sure to exclude it from component resol
     }
     if (isVNode(type)) {
       const cloned = cloneVNode(type, props, true);
-      if (children2) {
-        normalizeChildren(cloned, children2);
+      if (children3) {
+        normalizeChildren(cloned, children3);
       }
       return cloned;
     }
@@ -12834,7 +12792,7 @@ If this is a native custom element, make sure to exclude it from component resol
       warn(`Vue received a Component which was made a reactive object. This can lead to unnecessary performance overhead, and should be avoided by marking the component with \`markRaw\` or using \`shallowRef\` instead of \`ref\`.`, `
 Component that was made reactive: `, type);
     }
-    return createBaseVNode(type, props, children2, patchFlag, dynamicProps, shapeFlag, isBlockNode, true);
+    return createBaseVNode(type, props, children3, patchFlag, dynamicProps, shapeFlag, isBlockNode, true);
   }
   function guardReactiveProps(props) {
     if (!props)
@@ -12842,7 +12800,7 @@ Component that was made reactive: `, type);
     return isProxy(props) || InternalObjectKey in props ? extend({}, props) : props;
   }
   function cloneVNode(vnode, extraProps, mergeRef = false) {
-    const { props, ref: ref2, patchFlag, children: children2 } = vnode;
+    const { props, ref: ref2, patchFlag, children: children3 } = vnode;
     const mergedProps = extraProps ? mergeProps(props || {}, extraProps) : props;
     const cloned = {
       __v_isVNode: true,
@@ -12853,7 +12811,7 @@ Component that was made reactive: `, type);
       ref: extraProps && extraProps.ref ? mergeRef && ref2 ? isArray(ref2) ? ref2.concat(normalizeRef(extraProps)) : [ref2, normalizeRef(extraProps)] : normalizeRef(extraProps) : ref2,
       scopeId: vnode.scopeId,
       slotScopeIds: vnode.slotScopeIds,
-      children: false ? children2.map(deepCloneVNode) : children2,
+      children: false ? children3.map(deepCloneVNode) : children3,
       target: vnode.target,
       targetAnchor: vnode.targetAnchor,
       staticCount: vnode.staticCount,
@@ -12890,16 +12848,16 @@ Component that was made reactive: `, type);
   function cloneIfMounted(child) {
     return child.el === null || child.memo ? child : cloneVNode(child);
   }
-  function normalizeChildren(vnode, children2) {
+  function normalizeChildren(vnode, children3) {
     let type = 0;
     const { shapeFlag } = vnode;
-    if (children2 == null) {
-      children2 = null;
-    } else if (isArray(children2)) {
+    if (children3 == null) {
+      children3 = null;
+    } else if (isArray(children3)) {
       type = 16;
-    } else if (typeof children2 === "object") {
+    } else if (typeof children3 === "object") {
       if (shapeFlag & (1 | 64)) {
-        const slot = children2.default;
+        const slot = children3.default;
         if (slot) {
           slot._c && (slot._d = false);
           normalizeChildren(vnode, slot());
@@ -12908,31 +12866,31 @@ Component that was made reactive: `, type);
         return;
       } else {
         type = 32;
-        const slotFlag = children2._;
-        if (!slotFlag && !(InternalObjectKey in children2)) {
-          children2._ctx = currentRenderingInstance;
+        const slotFlag = children3._;
+        if (!slotFlag && !(InternalObjectKey in children3)) {
+          children3._ctx = currentRenderingInstance;
         } else if (slotFlag === 3 && currentRenderingInstance) {
           if (currentRenderingInstance.slots._ === 1) {
-            children2._ = 1;
+            children3._ = 1;
           } else {
-            children2._ = 2;
+            children3._ = 2;
             vnode.patchFlag |= 1024;
           }
         }
       }
-    } else if (isFunction(children2)) {
-      children2 = { default: children2, _ctx: currentRenderingInstance };
+    } else if (isFunction(children3)) {
+      children3 = { default: children3, _ctx: currentRenderingInstance };
       type = 32;
     } else {
-      children2 = String(children2);
+      children3 = String(children3);
       if (shapeFlag & 64) {
         type = 16;
-        children2 = [createTextVNode(children2)];
+        children3 = [createTextVNode(children3)];
       } else {
         type = 8;
       }
     }
-    vnode.children = children2;
+    vnode.children = children3;
     vnode.shapeFlag |= type;
   }
   function mergeProps(...args) {
@@ -13221,10 +13179,10 @@ Component that was made reactive: `, type);
   var isInSSRComponentSetup = false;
   function setupComponent(instance11, isSSR = false) {
     isInSSRComponentSetup = isSSR;
-    const { props, children: children2 } = instance11.vnode;
+    const { props, children: children3 } = instance11.vnode;
     const isStateful = isStatefulComponent(instance11);
     initProps(instance11, props, isStateful, isSSR);
-    initSlots(instance11, children2);
+    initSlots(instance11, children3);
     const setupResult = isStateful ? setupStatefulComponent(instance11, isSSR) : void 0;
     isInSSRComponentSetup = false;
     return setupResult;
@@ -13316,8 +13274,8 @@ Component that was made reactive: `, type);
     const Component = instance11.type;
     if (!instance11.render) {
       if (!isSSR && compile && !Component.render) {
-        const template = Component.template;
-        if (template) {
+        const template2 = Component.template;
+        if (template2) {
           if (false) {
             startMeasure(instance11, `compile`);
           }
@@ -13327,7 +13285,7 @@ Component that was made reactive: `, type);
             isCustomElement,
             delimiters
           }, compilerOptions), componentCompilerOptions);
-          Component.render = compile(template, finalCompilerOptions);
+          Component.render = compile(template2, finalCompilerOptions);
           if (false) {
             endMeasure(instance11, `compile`);
           }
@@ -13451,7 +13409,7 @@ Component that was made reactive: `, type);
   var computed2 = (getterOrOptions, debugOptions) => {
     return computed(getterOrOptions, debugOptions, isInSSRComponentSetup);
   };
-  function h(type, propsOrChildren, children2) {
+  function h(type, propsOrChildren, children3) {
     const l = arguments.length;
     if (l === 2) {
       if (isObject(propsOrChildren) && !isArray(propsOrChildren)) {
@@ -13464,11 +13422,11 @@ Component that was made reactive: `, type);
       }
     } else {
       if (l > 3) {
-        children2 = Array.prototype.slice.call(arguments, 2);
-      } else if (l === 3 && isVNode(children2)) {
-        children2 = [children2];
+        children3 = Array.prototype.slice.call(arguments, 2);
+      } else if (l === 3 && isVNode(children3)) {
+        children3 = [children3];
       }
-      return createVNode(type, propsOrChildren, children2);
+      return createVNode(type, propsOrChildren, children3);
     }
   }
   var ssrContextKey = Symbol(false ? `ssrContext` : ``);
@@ -13524,15 +13482,15 @@ Component that was made reactive: `, type);
         }
       } else {
         templateContainer.innerHTML = isSVG ? `<svg>${content}</svg>` : content;
-        const template = templateContainer.content;
+        const template2 = templateContainer.content;
         if (isSVG) {
-          const wrapper = template.firstChild;
+          const wrapper = template2.firstChild;
           while (wrapper.firstChild) {
-            template.appendChild(wrapper.firstChild);
+            template2.appendChild(wrapper.firstChild);
           }
-          template.removeChild(wrapper);
+          template2.removeChild(wrapper);
         }
-        parent.insertBefore(template, anchor);
+        parent.insertBefore(template2, anchor);
       }
       return [
         before ? before.nextSibling : parent.firstChild,
@@ -14289,6 +14247,7 @@ Component that was made reactive: `, type);
       const styleElement = document.createElement("style");
       styleElement.innerHTML = VueApp_style_default;
       this.shadowRoot.appendChild(styleElement);
+      nativeEvents_default(this);
     }
   };
   customElements.define("ex-vue-app", StyledElement);
@@ -14309,10 +14268,8 @@ Component that was made reactive: `, type);
       const styleElement = document.createElement("style");
       styleElement.innerHTML = VueAppComponent_style_default;
       this.shadowRoot.appendChild(styleElement);
-      this.addEventListener("click", (ev) => {
-        if (ev[Symbol.toStringTag] === "CustomEvent")
-          this.dispatchEvent(new CustomEvent("ex-click", { detail: ev.detail }));
-      });
+      nativeEvents_default(this);
+      this.shadowRoot.addEventListener("click", (ev) => this.dispatchEvent(new CustomEvent("click", { detail: ev.detail })));
     }
   };
   customElements.define("ex-vue-app-component", StyledElement2);
@@ -14322,10 +14279,10 @@ Component that was made reactive: `, type);
 
   // ../ucp-example/dist/elements/react/ReactDemo.js
   var import_react42 = __toESM(require_react());
-  var import_react_dom4 = __toESM(require_react_dom());
+  var import_react_dom2 = __toESM(require_react_dom());
   var import_react32 = __toESM(require_react());
-  var import_react7 = __toESM(require_react());
-  var import_react23 = __toESM(require_react());
+  var import_react6 = __toESM(require_react());
+  var import_react22 = __toESM(require_react());
   var wrapWc = (name) => (args) => {
     const Component = name;
     const events = Object.entries(args).reduce((acc, [key, value]) => {
@@ -14333,8 +14290,8 @@ Component that was made reactive: `, type);
         acc[key] = value;
       return acc;
     }, {});
-    const ref2 = (0, import_react23.useRef)();
-    (0, import_react23.useEffect)(() => {
+    const ref2 = (0, import_react22.useRef)();
+    (0, import_react22.useEffect)(() => {
       const callback = (ev) => events[ev.type](ev.detail);
       Object.keys(events).forEach((key) => ref2.current.addEventListener(key, callback));
       return () => {
@@ -14346,7 +14303,7 @@ Component that was made reactive: `, type);
         acc[key] = JSON.stringify(value);
       return acc;
     }, {});
-    return /* @__PURE__ */ import_react7.default.createElement(Component, {
+    return /* @__PURE__ */ import_react6.default.createElement(Component, {
       ref: ref2,
       ...props
     });
@@ -14364,9 +14321,8 @@ Component that was made reactive: `, type);
       complexprop: { value: "val" }
     }));
   };
-  var ReactWc4 = class extends HTMLElement {
+  var ReactWc2 = class extends HTMLElement {
     render() {
-      const rootEl = document.createElement("div");
       const args = {
         text: (() => {
           const value = this.attributes.getNamedItem("text")?.value;
@@ -14376,13 +14332,12 @@ Component that was made reactive: `, type);
             return value;
           }
         })(),
-        onMyclick: (args2) => this.dispatchEvent(new CustomEvent("ex-myclick", { bubbles: true, detail: [args2] }))
+        onMyclick: (args2) => this.dispatchEvent(new CustomEvent("myclick", { bubbles: true, detail: [args2] }))
       };
-      (0, import_react_dom4.createRoot)(rootEl).render(/* @__PURE__ */ import_react42.default.createElement(ReactDemo_default, {
+      this.shadowRoot.innerHTML = "";
+      this.root.render(/* @__PURE__ */ import_react42.default.createElement(ReactDemo_default, {
         ...args
       }));
-      this.shadowRoot.innerHTML = "";
-      this.shadowRoot.appendChild(rootEl);
       const styleElement = document.createElement("style");
       styleElement.innerHTML = ReactDemo_style_default;
       this.shadowRoot.appendChild(styleElement);
@@ -14396,47 +14351,47 @@ Component that was made reactive: `, type);
     constructor() {
       super();
       this.attachShadow({ mode: "open" });
+      this.root = (0, import_react_dom2.createRoot)(this.shadowRoot);
       this.render();
+      nativeEvents_default(this);
     }
   };
-  customElements.define("ex-react-demo", ReactWc4);
+  customElements.define("ex-react-demo", ReactWc2);
 
   // ../ucp-example/dist/elements/react/ReactEmits.style.js
   var ReactEmits_style_default = ``;
 
   // ../ucp-example/dist/elements/react/ReactEmits.js
-  var import_react24 = __toESM(require_react());
-  var import_react_dom5 = __toESM(require_react_dom());
-  var import_react8 = __toESM(require_react());
+  var import_react23 = __toESM(require_react());
+  var import_react_dom3 = __toESM(require_react_dom());
+  var import_react7 = __toESM(require_react());
   var ReactEmits_default = ({
     onStringevent,
-    onVoidevent,
+    onClick,
     onObjevent,
     onNumevent
   }) => {
-    return /* @__PURE__ */ import_react8.default.createElement("button", {
+    return /* @__PURE__ */ import_react7.default.createElement("button", {
       onClick: () => {
         onStringevent("demo");
         onNumevent(5);
         onObjevent({ value: "val" });
-        onVoidevent();
+        onClick();
       }
     }, "React Send event");
   };
-  var ReactWc5 = class extends HTMLElement {
+  var ReactWc3 = class extends HTMLElement {
     render() {
-      const rootEl = document.createElement("div");
       const args = {
-        onStringevent: (args2) => this.dispatchEvent(new CustomEvent("ex-stringevent", { bubbles: true, detail: [args2] })),
-        onNumevent: (args2) => this.dispatchEvent(new CustomEvent("ex-numevent", { bubbles: true, detail: [args2] })),
-        onObjevent: (args2) => this.dispatchEvent(new CustomEvent("ex-objevent", { bubbles: true, detail: [args2] })),
-        onVoidevent: (args2) => this.dispatchEvent(new CustomEvent("ex-voidevent", { bubbles: true, detail: [args2] }))
+        onStringevent: (args2) => this.dispatchEvent(new CustomEvent("stringevent", { bubbles: true, detail: [args2] })),
+        onNumevent: (args2) => this.dispatchEvent(new CustomEvent("numevent", { bubbles: true, detail: [args2] })),
+        onObjevent: (args2) => this.dispatchEvent(new CustomEvent("objevent", { bubbles: true, detail: [args2] })),
+        onClick: (args2) => this.dispatchEvent(new CustomEvent("click", { bubbles: true, detail: [args2] }))
       };
-      (0, import_react_dom5.createRoot)(rootEl).render(/* @__PURE__ */ import_react24.default.createElement(ReactEmits_default, {
+      this.shadowRoot.innerHTML = "";
+      this.root.render(/* @__PURE__ */ import_react23.default.createElement(ReactEmits_default, {
         ...args
       }));
-      this.shadowRoot.innerHTML = "";
-      this.shadowRoot.appendChild(rootEl);
       const styleElement = document.createElement("style");
       styleElement.innerHTML = ReactEmits_style_default;
       this.shadowRoot.appendChild(styleElement);
@@ -14450,37 +14405,38 @@ Component that was made reactive: `, type);
     constructor() {
       super();
       this.attachShadow({ mode: "open" });
+      this.root = (0, import_react_dom3.createRoot)(this.shadowRoot);
       this.render();
+      nativeEvents_default(this);
     }
   };
-  customElements.define("ex-react-emits", ReactWc5);
+  customElements.define("ex-react-emits", ReactWc3);
 
   // ../ucp-example/dist/elements/react/ReactProps.style.js
   var ReactProps_style_default = ``;
 
   // ../ucp-example/dist/elements/react/ReactProps.js
-  var import_react25 = __toESM(require_react());
-  var import_react_dom6 = __toESM(require_react_dom());
-  var import_react9 = __toESM(require_react());
+  var import_react24 = __toESM(require_react());
+  var import_react_dom4 = __toESM(require_react_dom());
+  var import_react8 = __toESM(require_react());
   var ReactProps_default = ({
     stringprop,
     numprop,
     complexprop,
     optionalprop
   }) => {
-    return /* @__PURE__ */ import_react9.default.createElement("div", null, /* @__PURE__ */ import_react9.default.createElement("div", {
+    return /* @__PURE__ */ import_react8.default.createElement("div", null, /* @__PURE__ */ import_react8.default.createElement("div", {
       className: "stringprop"
-    }, stringprop), /* @__PURE__ */ import_react9.default.createElement("div", {
+    }, stringprop), /* @__PURE__ */ import_react8.default.createElement("div", {
       className: "numprop"
-    }, numprop + 1), /* @__PURE__ */ import_react9.default.createElement("div", {
+    }, numprop + 1), /* @__PURE__ */ import_react8.default.createElement("div", {
       className: "complexprop"
-    }, complexprop?.value), /* @__PURE__ */ import_react9.default.createElement("div", {
+    }, complexprop?.value), /* @__PURE__ */ import_react8.default.createElement("div", {
       className: "optionalprop"
     }, optionalprop || "default"));
   };
-  var ReactWc6 = class extends HTMLElement {
+  var ReactWc4 = class extends HTMLElement {
     render() {
-      const rootEl = document.createElement("div");
       const args = {
         stringprop: (() => {
           const value = this.attributes.getNamedItem("stringprop")?.value;
@@ -14515,11 +14471,10 @@ Component that was made reactive: `, type);
           }
         })()
       };
-      (0, import_react_dom6.createRoot)(rootEl).render(/* @__PURE__ */ import_react25.default.createElement(ReactProps_default, {
+      this.shadowRoot.innerHTML = "";
+      this.root.render(/* @__PURE__ */ import_react24.default.createElement(ReactProps_default, {
         ...args
       }));
-      this.shadowRoot.innerHTML = "";
-      this.shadowRoot.appendChild(rootEl);
       const styleElement = document.createElement("style");
       styleElement.innerHTML = ReactProps_style_default;
       this.shadowRoot.appendChild(styleElement);
@@ -14533,10 +14488,12 @@ Component that was made reactive: `, type);
     constructor() {
       super();
       this.attachShadow({ mode: "open" });
+      this.root = (0, import_react_dom4.createRoot)(this.shadowRoot);
       this.render();
+      nativeEvents_default(this);
     }
   };
-  customElements.define("ex-react-props", ReactWc6);
+  customElements.define("ex-react-props", ReactWc4);
 
   // ../ucp-example/dist/elements/react/ReactSimple.style.js
   var ReactSimple_style_default = `/* ../ucp-example/src/components/dummy.scss */
@@ -14555,23 +14512,21 @@ Component that was made reactive: `, type);
 `;
 
   // ../ucp-example/dist/elements/react/ReactSimple.js
-  var import_react26 = __toESM(require_react());
-  var import_react_dom7 = __toESM(require_react_dom());
-  var import_react10 = __toESM(require_react());
+  var import_react25 = __toESM(require_react());
+  var import_react_dom5 = __toESM(require_react_dom());
+  var import_react9 = __toESM(require_react());
   var ReactSimple_default = () => {
-    return /* @__PURE__ */ import_react10.default.createElement("div", {
+    return /* @__PURE__ */ import_react9.default.createElement("div", {
       className: "dummy"
-    }, "React");
+    }, "react");
   };
-  var ReactWc7 = class extends HTMLElement {
+  var ReactWc5 = class extends HTMLElement {
     render() {
-      const rootEl = document.createElement("div");
       const args = {};
-      (0, import_react_dom7.createRoot)(rootEl).render(/* @__PURE__ */ import_react26.default.createElement(ReactSimple_default, {
+      this.shadowRoot.innerHTML = "";
+      this.root.render(/* @__PURE__ */ import_react25.default.createElement(ReactSimple_default, {
         ...args
       }));
-      this.shadowRoot.innerHTML = "";
-      this.shadowRoot.appendChild(rootEl);
       const styleElement = document.createElement("style");
       styleElement.innerHTML = ReactSimple_style_default;
       this.shadowRoot.appendChild(styleElement);
@@ -14585,39 +14540,39 @@ Component that was made reactive: `, type);
     constructor() {
       super();
       this.attachShadow({ mode: "open" });
+      this.root = (0, import_react_dom5.createRoot)(this.shadowRoot);
       this.render();
+      nativeEvents_default(this);
     }
   };
-  customElements.define("ex-react-simple", ReactWc7);
+  customElements.define("ex-react-simple", ReactWc5);
 
   // ../ucp-example/dist/elements/react/ReactSlots.style.js
   var ReactSlots_style_default = ``;
 
   // ../ucp-example/dist/elements/react/ReactSlots.js
-  var import_react27 = __toESM(require_react());
-  var import_react_dom8 = __toESM(require_react_dom());
-  var import_react11 = __toESM(require_react());
+  var import_react26 = __toESM(require_react());
+  var import_react_dom6 = __toESM(require_react_dom());
+  var import_react10 = __toESM(require_react());
   var ReactSlots_default = () => {
     const style2 = {
       border: "2px solid red"
     };
-    return /* @__PURE__ */ import_react11.default.createElement("div", null, /* @__PURE__ */ import_react11.default.createElement("slot", null), /* @__PURE__ */ import_react11.default.createElement("div", {
+    return /* @__PURE__ */ import_react10.default.createElement("div", null, /* @__PURE__ */ import_react10.default.createElement("slot", null), /* @__PURE__ */ import_react10.default.createElement("div", {
       style: style2
-    }, /* @__PURE__ */ import_react11.default.createElement("slot", {
+    }, /* @__PURE__ */ import_react10.default.createElement("slot", {
       name: "box"
-    })), /* @__PURE__ */ import_react11.default.createElement("slot", {
+    })), /* @__PURE__ */ import_react10.default.createElement("slot", {
       name: "after"
     }));
   };
-  var ReactWc8 = class extends HTMLElement {
+  var ReactWc6 = class extends HTMLElement {
     render() {
-      const rootEl = document.createElement("div");
       const args = {};
-      (0, import_react_dom8.createRoot)(rootEl).render(/* @__PURE__ */ import_react27.default.createElement(ReactSlots_default, {
+      this.shadowRoot.innerHTML = "";
+      this.root.render(/* @__PURE__ */ import_react26.default.createElement(ReactSlots_default, {
         ...args
       }));
-      this.shadowRoot.innerHTML = "";
-      this.shadowRoot.appendChild(rootEl);
       const styleElement = document.createElement("style");
       styleElement.innerHTML = ReactSlots_style_default;
       this.shadowRoot.appendChild(styleElement);
@@ -14631,33 +14586,33 @@ Component that was made reactive: `, type);
     constructor() {
       super();
       this.attachShadow({ mode: "open" });
+      this.root = (0, import_react_dom6.createRoot)(this.shadowRoot);
       this.render();
+      nativeEvents_default(this);
     }
   };
-  customElements.define("ex-react-slots", ReactWc8);
+  customElements.define("ex-react-slots", ReactWc6);
 
   // ../ucp-example/dist/elements/react/ReactState.style.js
   var ReactState_style_default = ``;
 
   // ../ucp-example/dist/elements/react/ReactState.js
-  var import_react28 = __toESM(require_react());
-  var import_react_dom9 = __toESM(require_react_dom());
-  var import_react12 = __toESM(require_react());
+  var import_react27 = __toESM(require_react());
+  var import_react_dom7 = __toESM(require_react_dom());
+  var import_react11 = __toESM(require_react());
   var ReactState_default = () => {
-    const [count, setCount] = (0, import_react12.useState)(0);
-    return /* @__PURE__ */ import_react12.default.createElement("div", null, /* @__PURE__ */ import_react12.default.createElement("button", {
+    const [count, setCount] = (0, import_react11.useState)(0);
+    return /* @__PURE__ */ import_react11.default.createElement("div", null, /* @__PURE__ */ import_react11.default.createElement("button", {
       onClick: () => setCount(count + 1)
     }, count));
   };
-  var ReactWc9 = class extends HTMLElement {
+  var ReactWc7 = class extends HTMLElement {
     render() {
-      const rootEl = document.createElement("div");
       const args = {};
-      (0, import_react_dom9.createRoot)(rootEl).render(/* @__PURE__ */ import_react28.default.createElement(ReactState_default, {
+      this.shadowRoot.innerHTML = "";
+      this.root.render(/* @__PURE__ */ import_react27.default.createElement(ReactState_default, {
         ...args
       }));
-      this.shadowRoot.innerHTML = "";
-      this.shadowRoot.appendChild(rootEl);
       const styleElement = document.createElement("style");
       styleElement.innerHTML = ReactState_style_default;
       this.shadowRoot.appendChild(styleElement);
@@ -14671,10 +14626,1223 @@ Component that was made reactive: `, type);
     constructor() {
       super();
       this.attachShadow({ mode: "open" });
+      this.root = (0, import_react_dom7.createRoot)(this.shadowRoot);
       this.render();
+      nativeEvents_default(this);
     }
   };
-  customElements.define("ex-react-state", ReactWc9);
+  customElements.define("ex-react-state", ReactWc7);
+
+  // ../ucp-example/dist/elements/chunks/chunk-OE5YS2M6.js
+  var sharedConfig = {};
+  var equalFn = (a, b) => a === b;
+  var $PROXY = Symbol("solid-proxy");
+  var $TRACK = Symbol("solid-track");
+  var $DEVCOMP = Symbol("solid-dev-component");
+  var signalOptions = {
+    equals: equalFn
+  };
+  var ERROR = null;
+  var runEffects = runQueue;
+  var NOTPENDING = {};
+  var STALE = 1;
+  var PENDING = 2;
+  var UNOWNED = {
+    owned: null,
+    cleanups: null,
+    context: null,
+    owner: null
+  };
+  var [transPending, setTransPending] = /* @__PURE__ */ createSignal(false);
+  var Owner = null;
+  var Transition2 = null;
+  var Scheduler = null;
+  var ExternalSourceFactory = null;
+  var Listener = null;
+  var Pending = null;
+  var Updates = null;
+  var Effects = null;
+  var ExecCount = 0;
+  function createRoot(fn, detachedOwner) {
+    const listener = Listener, owner = Owner, root = fn.length === 0 && true ? UNOWNED : {
+      owned: null,
+      cleanups: null,
+      context: null,
+      owner: detachedOwner || owner
+    };
+    Owner = root;
+    Listener = null;
+    try {
+      return runUpdates(() => fn(() => cleanNode(root)), true);
+    } finally {
+      Listener = listener;
+      Owner = owner;
+    }
+  }
+  function createSignal(value, options) {
+    options = options ? Object.assign({}, signalOptions, options) : signalOptions;
+    const s = {
+      value,
+      observers: null,
+      observerSlots: null,
+      pending: NOTPENDING,
+      comparator: options.equals || void 0
+    };
+    const setter = (value2) => {
+      if (typeof value2 === "function") {
+        if (Transition2 && Transition2.running && Transition2.sources.has(s))
+          value2 = value2(s.pending !== NOTPENDING ? s.pending : s.tValue);
+        else
+          value2 = value2(s.pending !== NOTPENDING ? s.pending : s.value);
+      }
+      return writeSignal(s, value2);
+    };
+    return [readSignal.bind(s), setter];
+  }
+  function createComputed(fn, value, options) {
+    const c = createComputation(fn, value, true, STALE);
+    if (Scheduler && Transition2 && Transition2.running)
+      Updates.push(c);
+    else
+      updateComputation(c);
+  }
+  function createRenderEffect(fn, value, options) {
+    const c = createComputation(fn, value, false, STALE);
+    if (Scheduler && Transition2 && Transition2.running)
+      Updates.push(c);
+    else
+      updateComputation(c);
+  }
+  function createMemo(fn, value, options) {
+    options = options ? Object.assign({}, signalOptions, options) : signalOptions;
+    const c = createComputation(fn, value, true, 0);
+    c.pending = NOTPENDING;
+    c.observers = null;
+    c.observerSlots = null;
+    c.comparator = options.equals || void 0;
+    if (Scheduler && Transition2 && Transition2.running) {
+      c.tState = STALE;
+      Updates.push(c);
+    } else
+      updateComputation(c);
+    return readSignal.bind(c);
+  }
+  function batch(fn) {
+    if (Pending)
+      return fn();
+    let result;
+    const q = Pending = [];
+    try {
+      result = fn();
+    } finally {
+      Pending = null;
+    }
+    runUpdates(() => {
+      for (let i = 0; i < q.length; i += 1) {
+        const data = q[i];
+        if (data.pending !== NOTPENDING) {
+          const pending = data.pending;
+          data.pending = NOTPENDING;
+          writeSignal(data, pending);
+        }
+      }
+    }, false);
+    return result;
+  }
+  function untrack(fn) {
+    let result, listener = Listener;
+    Listener = null;
+    result = fn();
+    Listener = listener;
+    return result;
+  }
+  function onCleanup(fn) {
+    if (Owner === null)
+      ;
+    else if (Owner.cleanups === null)
+      Owner.cleanups = [fn];
+    else
+      Owner.cleanups.push(fn);
+    return fn;
+  }
+  function startTransition(fn) {
+    if (Transition2 && Transition2.running) {
+      fn();
+      return Transition2.done;
+    }
+    const l = Listener;
+    const o = Owner;
+    return Promise.resolve().then(() => {
+      Listener = l;
+      Owner = o;
+      let t;
+      if (Scheduler || SuspenseContext) {
+        t = Transition2 || (Transition2 = {
+          sources: /* @__PURE__ */ new Set(),
+          effects: [],
+          promises: /* @__PURE__ */ new Set(),
+          disposed: /* @__PURE__ */ new Set(),
+          queue: /* @__PURE__ */ new Set(),
+          running: true
+        });
+        t.done || (t.done = new Promise((res) => t.resolve = res));
+        t.running = true;
+      }
+      batch(fn);
+      Listener = Owner = null;
+      return t ? t.done : void 0;
+    });
+  }
+  function createContext(defaultValue) {
+    const id = Symbol("context");
+    return {
+      id,
+      Provider: createProvider(id),
+      defaultValue
+    };
+  }
+  function children2(fn) {
+    const children22 = createMemo(fn);
+    return createMemo(() => resolveChildren(children22()));
+  }
+  var SuspenseContext;
+  function readSignal() {
+    const runningTransition = Transition2 && Transition2.running;
+    if (this.sources && (!runningTransition && this.state || runningTransition && this.tState)) {
+      const updates = Updates;
+      Updates = null;
+      !runningTransition && this.state === STALE || runningTransition && this.tState === STALE ? updateComputation(this) : lookUpstream(this);
+      Updates = updates;
+    }
+    if (Listener) {
+      const sSlot = this.observers ? this.observers.length : 0;
+      if (!Listener.sources) {
+        Listener.sources = [this];
+        Listener.sourceSlots = [sSlot];
+      } else {
+        Listener.sources.push(this);
+        Listener.sourceSlots.push(sSlot);
+      }
+      if (!this.observers) {
+        this.observers = [Listener];
+        this.observerSlots = [Listener.sources.length - 1];
+      } else {
+        this.observers.push(Listener);
+        this.observerSlots.push(Listener.sources.length - 1);
+      }
+    }
+    if (runningTransition && Transition2.sources.has(this))
+      return this.tValue;
+    return this.value;
+  }
+  function writeSignal(node, value, isComp) {
+    if (Pending) {
+      if (node.pending === NOTPENDING)
+        Pending.push(node);
+      node.pending = value;
+      return value;
+    }
+    if (node.comparator) {
+      if (Transition2 && Transition2.running && Transition2.sources.has(node)) {
+        if (node.comparator(node.tValue, value))
+          return value;
+      } else if (node.comparator(node.value, value))
+        return value;
+    }
+    let TransitionRunning = false;
+    if (Transition2) {
+      TransitionRunning = Transition2.running;
+      if (TransitionRunning || !isComp && Transition2.sources.has(node)) {
+        Transition2.sources.add(node);
+        node.tValue = value;
+      }
+      if (!TransitionRunning)
+        node.value = value;
+    } else
+      node.value = value;
+    if (node.observers && node.observers.length) {
+      runUpdates(() => {
+        for (let i = 0; i < node.observers.length; i += 1) {
+          const o = node.observers[i];
+          if (TransitionRunning && Transition2.disposed.has(o))
+            continue;
+          if (TransitionRunning && !o.tState || !TransitionRunning && !o.state) {
+            if (o.pure)
+              Updates.push(o);
+            else
+              Effects.push(o);
+            if (o.observers)
+              markDownstream(o);
+          }
+          if (TransitionRunning)
+            o.tState = STALE;
+          else
+            o.state = STALE;
+        }
+        if (Updates.length > 1e6) {
+          Updates = [];
+          if (false)
+            ;
+          throw new Error();
+        }
+      }, false);
+    }
+    return value;
+  }
+  function updateComputation(node) {
+    if (!node.fn)
+      return;
+    cleanNode(node);
+    const owner = Owner, listener = Listener, time = ExecCount;
+    Listener = Owner = node;
+    runComputation(node, Transition2 && Transition2.running && Transition2.sources.has(node) ? node.tValue : node.value, time);
+    if (Transition2 && !Transition2.running && Transition2.sources.has(node)) {
+      queueMicrotask(() => {
+        runUpdates(() => {
+          Transition2 && (Transition2.running = true);
+          runComputation(node, node.tValue, time);
+        }, false);
+      });
+    }
+    Listener = listener;
+    Owner = owner;
+  }
+  function runComputation(node, value, time) {
+    let nextValue;
+    try {
+      nextValue = node.fn(value);
+    } catch (err) {
+      handleError2(err);
+    }
+    if (!node.updatedAt || node.updatedAt <= time) {
+      if (node.observers && node.observers.length) {
+        writeSignal(node, nextValue, true);
+      } else if (Transition2 && Transition2.running && node.pure) {
+        Transition2.sources.add(node);
+        node.tValue = nextValue;
+      } else
+        node.value = nextValue;
+      node.updatedAt = time;
+    }
+  }
+  function createComputation(fn, init2, pure, state = STALE, options) {
+    const c = {
+      fn,
+      state,
+      updatedAt: null,
+      owned: null,
+      sources: null,
+      sourceSlots: null,
+      cleanups: null,
+      value: init2,
+      owner: Owner,
+      context: null,
+      pure
+    };
+    if (Transition2 && Transition2.running) {
+      c.state = 0;
+      c.tState = state;
+    }
+    if (Owner === null)
+      ;
+    else if (Owner !== UNOWNED) {
+      if (Transition2 && Transition2.running && Owner.pure) {
+        if (!Owner.tOwned)
+          Owner.tOwned = [c];
+        else
+          Owner.tOwned.push(c);
+      } else {
+        if (!Owner.owned)
+          Owner.owned = [c];
+        else
+          Owner.owned.push(c);
+      }
+    }
+    if (ExternalSourceFactory) {
+      const [track2, trigger2] = createSignal(void 0, {
+        equals: false
+      });
+      const ordinary = ExternalSourceFactory(c.fn, trigger2);
+      onCleanup(() => ordinary.dispose());
+      const triggerInTransition = () => startTransition(trigger2).then(() => inTransition.dispose());
+      const inTransition = ExternalSourceFactory(c.fn, triggerInTransition);
+      c.fn = (x) => {
+        track2();
+        return Transition2 && Transition2.running ? inTransition.track(x) : ordinary.track(x);
+      };
+    }
+    return c;
+  }
+  function runTop(node) {
+    const runningTransition = Transition2 && Transition2.running;
+    if (!runningTransition && node.state === 0 || runningTransition && node.tState === 0)
+      return;
+    if (!runningTransition && node.state === PENDING || runningTransition && node.tState === PENDING)
+      return lookUpstream(node);
+    if (node.suspense && untrack(node.suspense.inFallback))
+      return node.suspense.effects.push(node);
+    const ancestors = [node];
+    while ((node = node.owner) && (!node.updatedAt || node.updatedAt < ExecCount)) {
+      if (runningTransition && Transition2.disposed.has(node))
+        return;
+      if (!runningTransition && node.state || runningTransition && node.tState)
+        ancestors.push(node);
+    }
+    for (let i = ancestors.length - 1; i >= 0; i--) {
+      node = ancestors[i];
+      if (runningTransition) {
+        let top = node, prev = ancestors[i + 1];
+        while ((top = top.owner) && top !== prev) {
+          if (Transition2.disposed.has(top))
+            return;
+        }
+      }
+      if (!runningTransition && node.state === STALE || runningTransition && node.tState === STALE) {
+        updateComputation(node);
+      } else if (!runningTransition && node.state === PENDING || runningTransition && node.tState === PENDING) {
+        const updates = Updates;
+        Updates = null;
+        lookUpstream(node, ancestors[0]);
+        Updates = updates;
+      }
+    }
+  }
+  function runUpdates(fn, init2) {
+    if (Updates)
+      return fn();
+    let wait = false;
+    if (!init2)
+      Updates = [];
+    if (Effects)
+      wait = true;
+    else
+      Effects = [];
+    ExecCount++;
+    try {
+      const res = fn();
+      completeUpdates(wait);
+      return res;
+    } catch (err) {
+      handleError2(err);
+    } finally {
+      Updates = null;
+      if (!wait)
+        Effects = null;
+    }
+  }
+  function completeUpdates(wait) {
+    if (Updates) {
+      if (Scheduler && Transition2 && Transition2.running)
+        scheduleQueue(Updates);
+      else
+        runQueue(Updates);
+      Updates = null;
+    }
+    if (wait)
+      return;
+    let res;
+    if (Transition2 && Transition2.running) {
+      if (Transition2.promises.size || Transition2.queue.size) {
+        Transition2.running = false;
+        Transition2.effects.push.apply(Transition2.effects, Effects);
+        Effects = null;
+        setTransPending(true);
+        return;
+      }
+      const sources = Transition2.sources;
+      res = Transition2.resolve;
+      Effects.forEach((e) => {
+        "tState" in e && (e.state = e.tState);
+        delete e.tState;
+      });
+      Transition2 = null;
+      batch(() => {
+        sources.forEach((v) => {
+          v.value = v.tValue;
+          if (v.owned) {
+            for (let i = 0, len = v.owned.length; i < len; i++)
+              cleanNode(v.owned[i]);
+          }
+          if (v.tOwned)
+            v.owned = v.tOwned;
+          delete v.tValue;
+          delete v.tOwned;
+          v.tState = 0;
+        });
+        setTransPending(false);
+      });
+    }
+    if (Effects.length)
+      batch(() => {
+        runEffects(Effects);
+        Effects = null;
+      });
+    else {
+      Effects = null;
+    }
+    if (res)
+      res();
+  }
+  function runQueue(queue2) {
+    for (let i = 0; i < queue2.length; i++)
+      runTop(queue2[i]);
+  }
+  function scheduleQueue(queue2) {
+    for (let i = 0; i < queue2.length; i++) {
+      const item = queue2[i];
+      const tasks = Transition2.queue;
+      if (!tasks.has(item)) {
+        tasks.add(item);
+        Scheduler(() => {
+          tasks.delete(item);
+          runUpdates(() => {
+            Transition2.running = true;
+            runTop(item);
+            if (!tasks.size) {
+              Effects.push.apply(Effects, Transition2.effects);
+              Transition2.effects = [];
+            }
+          }, false);
+          Transition2 && (Transition2.running = false);
+        });
+      }
+    }
+  }
+  function lookUpstream(node, ignore) {
+    const runningTransition = Transition2 && Transition2.running;
+    if (runningTransition)
+      node.tState = 0;
+    else
+      node.state = 0;
+    for (let i = 0; i < node.sources.length; i += 1) {
+      const source = node.sources[i];
+      if (source.sources) {
+        if (!runningTransition && source.state === STALE || runningTransition && source.tState === STALE) {
+          if (source !== ignore)
+            runTop(source);
+        } else if (!runningTransition && source.state === PENDING || runningTransition && source.tState === PENDING)
+          lookUpstream(source, ignore);
+      }
+    }
+  }
+  function markDownstream(node) {
+    const runningTransition = Transition2 && Transition2.running;
+    for (let i = 0; i < node.observers.length; i += 1) {
+      const o = node.observers[i];
+      if (!runningTransition && !o.state || runningTransition && !o.tState) {
+        if (runningTransition)
+          o.tState = PENDING;
+        else
+          o.state = PENDING;
+        if (o.pure)
+          Updates.push(o);
+        else
+          Effects.push(o);
+        o.observers && markDownstream(o);
+      }
+    }
+  }
+  function cleanNode(node) {
+    let i;
+    if (node.sources) {
+      while (node.sources.length) {
+        const source = node.sources.pop(), index = node.sourceSlots.pop(), obs = source.observers;
+        if (obs && obs.length) {
+          const n = obs.pop(), s = source.observerSlots.pop();
+          if (index < obs.length) {
+            n.sourceSlots[s] = index;
+            obs[index] = n;
+            source.observerSlots[index] = s;
+          }
+        }
+      }
+    }
+    if (Transition2 && Transition2.running && node.pure) {
+      if (node.tOwned) {
+        for (i = 0; i < node.tOwned.length; i++)
+          cleanNode(node.tOwned[i]);
+        delete node.tOwned;
+      }
+      reset2(node, true);
+    } else if (node.owned) {
+      for (i = 0; i < node.owned.length; i++)
+        cleanNode(node.owned[i]);
+      node.owned = null;
+    }
+    if (node.cleanups) {
+      for (i = 0; i < node.cleanups.length; i++)
+        node.cleanups[i]();
+      node.cleanups = null;
+    }
+    if (Transition2 && Transition2.running)
+      node.tState = 0;
+    else
+      node.state = 0;
+    node.context = null;
+  }
+  function reset2(node, top) {
+    if (!top) {
+      node.tState = 0;
+      Transition2.disposed.add(node);
+    }
+    if (node.owned) {
+      for (let i = 0; i < node.owned.length; i++)
+        reset2(node.owned[i]);
+    }
+  }
+  function handleError2(err) {
+    const fns = ERROR && lookup(Owner, ERROR);
+    if (!fns)
+      throw err;
+    fns.forEach((f) => f(err));
+  }
+  function lookup(owner, key) {
+    return owner ? owner.context && owner.context[key] !== void 0 ? owner.context[key] : lookup(owner.owner, key) : void 0;
+  }
+  function resolveChildren(children22) {
+    if (typeof children22 === "function" && !children22.length)
+      return resolveChildren(children22());
+    if (Array.isArray(children22)) {
+      const results = [];
+      for (let i = 0; i < children22.length; i++) {
+        const result = resolveChildren(children22[i]);
+        Array.isArray(result) ? results.push.apply(results, result) : results.push(result);
+      }
+      return results;
+    }
+    return children22;
+  }
+  function createProvider(id) {
+    return function provider(props) {
+      let res;
+      createComputed(() => res = untrack(() => {
+        Owner.context = {
+          [id]: props.value
+        };
+        return children2(() => props.children);
+      }));
+      return res;
+    };
+  }
+  var FALLBACK = Symbol("fallback");
+  function trueFn() {
+    return true;
+  }
+  var propTraps = {
+    get(_, property, receiver) {
+      if (property === $PROXY)
+        return receiver;
+      return _.get(property);
+    },
+    has(_, property) {
+      return _.has(property);
+    },
+    set: trueFn,
+    deleteProperty: trueFn,
+    getOwnPropertyDescriptor(_, property) {
+      return {
+        configurable: true,
+        enumerable: true,
+        get() {
+          return _.get(property);
+        },
+        set: trueFn,
+        deleteProperty: trueFn
+      };
+    },
+    ownKeys(_) {
+      return _.keys();
+    }
+  };
+  function resolveSource(s) {
+    return (s = typeof s === "function" ? s() : s) == null ? {} : s;
+  }
+  function mergeProps2(...sources) {
+    return new Proxy({
+      get(property) {
+        for (let i = sources.length - 1; i >= 0; i--) {
+          const v = resolveSource(sources[i])[property];
+          if (v !== void 0)
+            return v;
+        }
+      },
+      has(property) {
+        for (let i = sources.length - 1; i >= 0; i--) {
+          if (property in resolveSource(sources[i]))
+            return true;
+        }
+        return false;
+      },
+      keys() {
+        const keys = [];
+        for (let i = 0; i < sources.length; i++)
+          keys.push(...Object.keys(resolveSource(sources[i])));
+        return [...new Set(keys)];
+      }
+    }, propTraps);
+  }
+  var SuspenseListContext = createContext();
+  function cloneProps(props) {
+    const propKeys = Object.keys(props);
+    return propKeys.reduce((memo, k) => {
+      const prop = props[k];
+      memo[k] = Object.assign({}, prop);
+      if (isObject2(prop.value) && !isFunction2(prop.value) && !Array.isArray(prop.value))
+        memo[k].value = Object.assign({}, prop.value);
+      if (Array.isArray(prop.value))
+        memo[k].value = prop.value.slice(0);
+      return memo;
+    }, {});
+  }
+  function normalizePropDefs(props) {
+    if (!props)
+      return {};
+    const propKeys = Object.keys(props);
+    return propKeys.reduce((memo, k) => {
+      const v = props[k];
+      memo[k] = !(isObject2(v) && "value" in v) ? {
+        value: v
+      } : v;
+      memo[k].attribute || (memo[k].attribute = toAttribute(k));
+      memo[k].parse = "parse" in memo[k] ? memo[k].parse : typeof memo[k].value !== "string";
+      return memo;
+    }, {});
+  }
+  function propValues(props) {
+    const propKeys = Object.keys(props);
+    return propKeys.reduce((memo, k) => {
+      memo[k] = props[k].value;
+      return memo;
+    }, {});
+  }
+  function initializeProps(element2, propDefinition) {
+    const props = cloneProps(propDefinition), propKeys = Object.keys(propDefinition);
+    propKeys.forEach((key) => {
+      const prop = props[key], attr2 = element2.getAttribute(prop.attribute), value = element2[key];
+      if (attr2)
+        prop.value = prop.parse ? parseAttributeValue(attr2) : attr2;
+      if (value != null)
+        prop.value = Array.isArray(value) ? value.slice(0) : value;
+      prop.reflect && reflect(element2, prop.attribute, prop.value);
+      Object.defineProperty(element2, key, {
+        get() {
+          return prop.value;
+        },
+        set(val) {
+          const oldValue = prop.value;
+          prop.value = val;
+          prop.reflect && reflect(this, prop.attribute, prop.value);
+          for (let i = 0, l = this.__propertyChangedCallbacks.length; i < l; i++) {
+            this.__propertyChangedCallbacks[i](key, val, oldValue);
+          }
+        },
+        enumerable: true,
+        configurable: true
+      });
+    });
+    return props;
+  }
+  function parseAttributeValue(value) {
+    if (!value)
+      return;
+    try {
+      return JSON.parse(value);
+    } catch (err) {
+      return value;
+    }
+  }
+  function reflect(node, attribute, value) {
+    if (value == null || value === false)
+      return node.removeAttribute(attribute);
+    let reflect2 = JSON.stringify(value);
+    node.__updating[attribute] = true;
+    if (reflect2 === "true")
+      reflect2 = "";
+    node.setAttribute(attribute, reflect2);
+    Promise.resolve().then(() => delete node.__updating[attribute]);
+  }
+  function toAttribute(propName) {
+    return propName.replace(/\.?([A-Z]+)/g, (x, y) => "-" + y.toLowerCase()).replace("_", "-").replace(/^-/, "");
+  }
+  function isObject2(obj) {
+    return obj != null && (typeof obj === "object" || typeof obj === "function");
+  }
+  function isFunction2(val) {
+    return Object.prototype.toString.call(val) === "[object Function]";
+  }
+  function isConstructor(f) {
+    return typeof f === "function" && f.toString().indexOf("class") === 0;
+  }
+  var currentElement;
+  function createElementType(BaseElement, propDefinition) {
+    const propKeys = Object.keys(propDefinition);
+    return class CustomElement extends BaseElement {
+      static get observedAttributes() {
+        return propKeys.map((k) => propDefinition[k].attribute);
+      }
+      constructor() {
+        super();
+        this.__initialized = false;
+        this.__released = false;
+        this.__releaseCallbacks = [];
+        this.__propertyChangedCallbacks = [];
+        this.__updating = {};
+        this.props = {};
+      }
+      connectedCallback() {
+        if (this.__initialized)
+          return;
+        this.__releaseCallbacks = [];
+        this.__propertyChangedCallbacks = [];
+        this.__updating = {};
+        this.props = initializeProps(this, propDefinition);
+        const props = propValues(this.props), ComponentType = this.Component, outerElement = currentElement;
+        try {
+          currentElement = this;
+          this.__initialized = true;
+          if (isConstructor(ComponentType))
+            new ComponentType(props, {
+              element: this
+            });
+          else
+            ComponentType(props, {
+              element: this
+            });
+        } finally {
+          currentElement = outerElement;
+        }
+      }
+      async disconnectedCallback() {
+        await Promise.resolve();
+        if (this.isConnected)
+          return;
+        this.__propertyChangedCallbacks.length = 0;
+        let callback = null;
+        while (callback = this.__releaseCallbacks.pop())
+          callback(this);
+        delete this.__initialized;
+        this.__released = true;
+      }
+      attributeChangedCallback(name, oldVal, newVal) {
+        if (!this.__initialized)
+          return;
+        if (this.__updating[name])
+          return;
+        name = this.lookupProp(name);
+        if (name in propDefinition) {
+          if (newVal == null && !this[name])
+            return;
+          this[name] = propDefinition[name].parse ? parseAttributeValue(newVal) : newVal;
+        }
+      }
+      lookupProp(attrName) {
+        if (!propDefinition)
+          return;
+        return propKeys.find((k) => attrName === k || attrName === propDefinition[k].attribute);
+      }
+      get renderRoot() {
+        return this.shadowRoot || this.attachShadow({
+          mode: "open"
+        });
+      }
+      addReleaseCallback(fn) {
+        this.__releaseCallbacks.push(fn);
+      }
+      addPropertyChangedCallback(fn) {
+        this.__propertyChangedCallbacks.push(fn);
+      }
+    };
+  }
+  var EC = Symbol("element-context");
+  function register(tag, props = {}, options = {}) {
+    const {
+      BaseElement = HTMLElement,
+      extension
+    } = options;
+    return (ComponentType) => {
+      if (!tag)
+        throw new Error("tag is required to register a Component");
+      let ElementType = customElements.get(tag);
+      if (ElementType) {
+        ElementType.prototype.Component = ComponentType;
+        return ElementType;
+      }
+      ElementType = createElementType(BaseElement, normalizePropDefs(props));
+      ElementType.prototype.Component = ComponentType;
+      ElementType.prototype.registeredTag = tag;
+      customElements.define(tag, ElementType, extension);
+      return ElementType;
+    };
+  }
+  var booleans = ["allowfullscreen", "async", "autofocus", "autoplay", "checked", "controls", "default", "disabled", "formnovalidate", "hidden", "indeterminate", "ismap", "loop", "multiple", "muted", "nomodule", "novalidate", "open", "playsinline", "readonly", "required", "reversed", "seamless", "selected"];
+  var Properties = /* @__PURE__ */ new Set(["className", "value", "readOnly", "formNoValidate", "isMap", "noModule", "playsInline", ...booleans]);
+  function reconcileArrays(parentNode, a, b) {
+    let bLength = b.length, aEnd = a.length, bEnd = bLength, aStart = 0, bStart = 0, after = a[aEnd - 1].nextSibling, map = null;
+    while (aStart < aEnd || bStart < bEnd) {
+      if (a[aStart] === b[bStart]) {
+        aStart++;
+        bStart++;
+        continue;
+      }
+      while (a[aEnd - 1] === b[bEnd - 1]) {
+        aEnd--;
+        bEnd--;
+      }
+      if (aEnd === aStart) {
+        const node = bEnd < bLength ? bStart ? b[bStart - 1].nextSibling : b[bEnd - bStart] : after;
+        while (bStart < bEnd)
+          parentNode.insertBefore(b[bStart++], node);
+      } else if (bEnd === bStart) {
+        while (aStart < aEnd) {
+          if (!map || !map.has(a[aStart]))
+            a[aStart].remove();
+          aStart++;
+        }
+      } else if (a[aStart] === b[bEnd - 1] && b[bStart] === a[aEnd - 1]) {
+        const node = a[--aEnd].nextSibling;
+        parentNode.insertBefore(b[bStart++], a[aStart++].nextSibling);
+        parentNode.insertBefore(b[--bEnd], node);
+        a[aEnd] = b[bEnd];
+      } else {
+        if (!map) {
+          map = /* @__PURE__ */ new Map();
+          let i = bStart;
+          while (i < bEnd)
+            map.set(b[i], i++);
+        }
+        const index = map.get(a[aStart]);
+        if (index != null) {
+          if (bStart < index && index < bEnd) {
+            let i = aStart, sequence = 1, t;
+            while (++i < aEnd && i < bEnd) {
+              if ((t = map.get(a[i])) == null || t !== index + sequence)
+                break;
+              sequence++;
+            }
+            if (sequence > index - bStart) {
+              const node = a[aStart];
+              while (bStart < index)
+                parentNode.insertBefore(b[bStart++], node);
+            } else
+              parentNode.replaceChild(b[bStart++], a[aStart++]);
+          } else
+            aStart++;
+        } else
+          a[aStart++].remove();
+      }
+    }
+  }
+  var $$EVENTS = "_$DX_DELEGATE";
+  function template(html, check, isSVG) {
+    const t = document.createElement("template");
+    t.innerHTML = html;
+    let node = t.content.firstChild;
+    if (isSVG)
+      node = node.firstChild;
+    return node;
+  }
+  function delegateEvents(eventNames, document2 = window.document) {
+    const e = document2[$$EVENTS] || (document2[$$EVENTS] = /* @__PURE__ */ new Set());
+    for (let i = 0, l = eventNames.length; i < l; i++) {
+      const name = eventNames[i];
+      if (!e.has(name)) {
+        e.add(name);
+        document2.addEventListener(name, eventHandler);
+      }
+    }
+  }
+  function insert2(parent, accessor, marker, initial) {
+    if (marker !== void 0 && !initial)
+      initial = [];
+    if (typeof accessor !== "function")
+      return insertExpression(parent, accessor, initial, marker);
+    createRenderEffect((current) => insertExpression(parent, accessor(), current, marker), initial);
+  }
+  function eventHandler(e) {
+    const key = `$$${e.type}`;
+    let node = e.composedPath && e.composedPath()[0] || e.target;
+    if (e.target !== node) {
+      Object.defineProperty(e, "target", {
+        configurable: true,
+        value: node
+      });
+    }
+    Object.defineProperty(e, "currentTarget", {
+      configurable: true,
+      get() {
+        return node || document;
+      }
+    });
+    if (sharedConfig.registry && !sharedConfig.done) {
+      sharedConfig.done = true;
+      document.querySelectorAll("[id^=pl-]").forEach((elem) => elem.remove());
+    }
+    while (node !== null) {
+      const handler = node[key];
+      if (handler && !node.disabled) {
+        const data = node[`${key}Data`];
+        data !== void 0 ? handler(data, e) : handler(e);
+        if (e.cancelBubble)
+          return;
+      }
+      node = node.host && node.host !== node && node.host instanceof Node ? node.host : node.parentNode;
+    }
+  }
+  function insertExpression(parent, value, current, marker, unwrapArray) {
+    if (sharedConfig.context && !current)
+      current = [...parent.childNodes];
+    while (typeof current === "function")
+      current = current();
+    if (value === current)
+      return current;
+    const t = typeof value, multi = marker !== void 0;
+    parent = multi && current[0] && current[0].parentNode || parent;
+    if (t === "string" || t === "number") {
+      if (sharedConfig.context)
+        return current;
+      if (t === "number")
+        value = value.toString();
+      if (multi) {
+        let node = current[0];
+        if (node && node.nodeType === 3) {
+          node.data = value;
+        } else
+          node = document.createTextNode(value);
+        current = cleanChildren(parent, current, marker, node);
+      } else {
+        if (current !== "" && typeof current === "string") {
+          current = parent.firstChild.data = value;
+        } else
+          current = parent.textContent = value;
+      }
+    } else if (value == null || t === "boolean") {
+      if (sharedConfig.context)
+        return current;
+      current = cleanChildren(parent, current, marker);
+    } else if (t === "function") {
+      createRenderEffect(() => {
+        let v = value();
+        while (typeof v === "function")
+          v = v();
+        current = insertExpression(parent, v, current, marker);
+      });
+      return () => current;
+    } else if (Array.isArray(value)) {
+      const array = [];
+      if (normalizeIncomingArray(array, value, unwrapArray)) {
+        createRenderEffect(() => current = insertExpression(parent, array, current, marker, true));
+        return () => current;
+      }
+      if (sharedConfig.context) {
+        for (let i = 0; i < array.length; i++) {
+          if (array[i].parentNode)
+            return current = array;
+        }
+      }
+      if (array.length === 0) {
+        current = cleanChildren(parent, current, marker);
+        if (multi)
+          return current;
+      } else if (Array.isArray(current)) {
+        if (current.length === 0) {
+          appendNodes(parent, array, marker);
+        } else
+          reconcileArrays(parent, current, array);
+      } else {
+        current && cleanChildren(parent);
+        appendNodes(parent, array);
+      }
+      current = array;
+    } else if (value instanceof Node) {
+      if (sharedConfig.context && value.parentNode)
+        return current = multi ? [value] : value;
+      if (Array.isArray(current)) {
+        if (multi)
+          return current = cleanChildren(parent, current, marker, value);
+        cleanChildren(parent, current, null, value);
+      } else if (current == null || current === "" || !parent.firstChild) {
+        parent.appendChild(value);
+      } else
+        parent.replaceChild(value, parent.firstChild);
+      current = value;
+    } else
+      ;
+    return current;
+  }
+  function normalizeIncomingArray(normalized, array, unwrap) {
+    let dynamic = false;
+    for (let i = 0, len = array.length; i < len; i++) {
+      let item = array[i], t;
+      if (item instanceof Node) {
+        normalized.push(item);
+      } else if (item == null || item === true || item === false)
+        ;
+      else if (Array.isArray(item)) {
+        dynamic = normalizeIncomingArray(normalized, item) || dynamic;
+      } else if ((t = typeof item) === "string") {
+        normalized.push(document.createTextNode(item));
+      } else if (t === "function") {
+        if (unwrap) {
+          while (typeof item === "function")
+            item = item();
+          dynamic = normalizeIncomingArray(normalized, Array.isArray(item) ? item : [item]) || dynamic;
+        } else {
+          normalized.push(item);
+          dynamic = true;
+        }
+      } else
+        normalized.push(document.createTextNode(item.toString()));
+    }
+    return dynamic;
+  }
+  function appendNodes(parent, array, marker) {
+    for (let i = 0, len = array.length; i < len; i++)
+      parent.insertBefore(array[i], marker);
+  }
+  function cleanChildren(parent, current, marker, replacement) {
+    if (marker === void 0)
+      return parent.textContent = "";
+    const node = replacement || document.createTextNode("");
+    if (current.length) {
+      let inserted = false;
+      for (let i = current.length - 1; i >= 0; i--) {
+        const el = current[i];
+        if (node !== el) {
+          const isParent = el.parentNode === parent;
+          if (!inserted && !i)
+            isParent ? parent.replaceChild(node, el) : parent.insertBefore(node, marker);
+          else
+            isParent && el.remove();
+        } else
+          inserted = true;
+      }
+    } else
+      parent.insertBefore(node, marker);
+    return [node];
+  }
+  function createProps(raw) {
+    const keys = Object.keys(raw);
+    const props = {};
+    for (let i = 0; i < keys.length; i++) {
+      const [get2, set2] = createSignal(raw[keys[i]]);
+      Object.defineProperty(props, keys[i], {
+        get: get2,
+        set(v) {
+          set2(() => v);
+        }
+      });
+    }
+    return props;
+  }
+  function lookupContext(el) {
+    if (el.assignedSlot && el.assignedSlot._$owner)
+      return el.assignedSlot._$owner;
+    let next = el.parentNode;
+    while (next && !next._$owner && !(next.assignedSlot && next.assignedSlot._$owner))
+      next = next.parentNode;
+    return next && next.assignedSlot ? next.assignedSlot._$owner : el._$owner;
+  }
+  function withSolid(ComponentType) {
+    return (rawProps, options) => {
+      const { element: element2 } = options;
+      return createRoot((dispose) => {
+        const props = createProps(rawProps);
+        element2.addPropertyChangedCallback((key, val) => props[key] = val);
+        element2.addReleaseCallback(() => {
+          element2.renderRoot.textContent = "";
+          dispose();
+        });
+        const comp = ComponentType(props, options);
+        return insert2(element2.renderRoot, comp);
+      }, lookupContext(element2));
+    };
+  }
+  function customElement(tag, props, ComponentType) {
+    if (arguments.length === 2) {
+      ComponentType = props;
+      props = {};
+    }
+    return register(tag, props)(withSolid(ComponentType));
+  }
+
+  // ../ucp-example/dist/elements/solid/SolidDemo.solid.style.js
+  var SolidDemo_solid_style_default = ``;
+
+  // ../ucp-example/dist/elements/solid/SolidDemo.solid.js
+  var _tmpl$ = /* @__PURE__ */ template(`<div><button></button></div>`, 4);
+  var SolidDemo_solid_default = (props) => {
+    return (() => {
+      const _el$ = _tmpl$.cloneNode(true), _el$2 = _el$.firstChild;
+      _el$2.$$click = () => props.onMyclick("React click");
+      insert2(_el$2, () => props.text);
+      return _el$;
+    })();
+  };
+  delegateEvents(["click"]);
+  customElement("ex-solid-demo", { text: void 0 }, (props, { element: element2 }) => {
+    element2.attachShadow({ mode: "open" });
+    const styleElement = document.createElement("style");
+    styleElement.innerHTML = SolidDemo_solid_style_default;
+    element2.shadowRoot.appendChild(styleElement);
+    const merged = mergeProps2({ onMyclick: (ev) => {
+      element2.dispatchEvent(new CustomEvent("myclick", { detail: [ev] }));
+    } }, props);
+    return SolidDemo_solid_default(merged);
+  });
+
+  // ../ucp-example/dist/elements/solid/SolidProps.solid.style.js
+  var SolidProps_solid_style_default = ``;
+
+  // ../ucp-example/dist/elements/solid/SolidProps.solid.js
+  var _tmpl$2 = /* @__PURE__ */ template(`<div><div class="stringprop"></div><div class="numprop"></div><div class="complexprop"></div><div class="optionalprop"></div></div>`, 10);
+  var SolidProps_solid_default = (props) => {
+    return (() => {
+      const _el$ = _tmpl$2.cloneNode(true), _el$2 = _el$.firstChild, _el$3 = _el$2.nextSibling, _el$4 = _el$3.nextSibling, _el$5 = _el$4.nextSibling;
+      insert2(_el$2, () => props.stringprop);
+      insert2(_el$3, () => props.numprop + 1);
+      insert2(_el$4, () => props.complexprop?.value);
+      insert2(_el$5, () => props.optionalprop || "default");
+      return _el$;
+    })();
+  };
+  customElement("ex-solid-props", { stringprop: void 0, numprop: void 0, complexprop: void 0, optionalprop: void 0 }, (props, { element: element2 }) => {
+    element2.attachShadow({ mode: "open" });
+    const styleElement = document.createElement("style");
+    styleElement.innerHTML = SolidProps_solid_style_default;
+    element2.shadowRoot.appendChild(styleElement);
+    const merged = mergeProps2({}, props);
+    return SolidProps_solid_default(merged);
+  });
+
+  // ../ucp-example/dist/elements/solid/SolidSimple.solid.style.js
+  var SolidSimple_solid_style_default = `/* ../ucp-example/src/components/dummy.scss */
+.dummy {
+  font-family:
+    Avenir,
+    Helvetica,
+    Arial,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+/*# =SolidSimple.solid.css.map */
+`;
+
+  // ../ucp-example/dist/elements/solid/SolidSimple.solid.js
+  var _tmpl$3 = /* @__PURE__ */ template(`<div class="dummy">solid</div>`, 2);
+  var SolidSimple_solid_default = () => {
+    return _tmpl$3.cloneNode(true);
+  };
+  customElement("ex-solid-simple", {}, (props, { element: element2 }) => {
+    element2.attachShadow({ mode: "open" });
+    const styleElement = document.createElement("style");
+    styleElement.innerHTML = SolidSimple_solid_style_default;
+    element2.shadowRoot.appendChild(styleElement);
+    const merged = mergeProps2({}, props);
+    return SolidSimple_solid_default(merged);
+  });
 
   // ../ucp-example/dist/elements/svelte/SvelteDemo.js
   function create_fragment4(ctx) {
@@ -14766,12 +15934,13 @@ Component that was made reactive: `, type);
   function instance23($$self, $$props, $$invalidate) {
     const component = get_current_component();
     const svelteDispatch = createEventDispatcher();
+    onMount(() => nativeEvents_default(component));
     const dispatch = (name, detail) => {
       svelteDispatch(name, detail);
       component.dispatchEvent && component.dispatchEvent(new CustomEvent(name, { detail, bubbles: true }));
     };
     let { text: text2 } = $$props;
-    const handleEvent = (ev) => dispatch("ex-" + ev.type, [ev.detail]);
+    const handleEvent = (ev) => dispatch(ev.type, [ev.detail]);
     const myclick_handler = (ev) => handleEvent(ev);
     $$self.$$set = ($$props2) => {
       if ("text" in $$props2)
@@ -14845,7 +16014,7 @@ Component that was made reactive: `, type);
       dispatch("stringevent", "demo");
       dispatch("numevent", 5);
       dispatch("objevent", { value: "val" });
-      dispatch("voidevent");
+      dispatch("click");
     };
     return [dispatch, click_handler];
   }
@@ -14863,7 +16032,7 @@ Component that was made reactive: `, type);
     component_1.$on("stringevent", ctx[1]);
     component_1.$on("numevent", ctx[2]);
     component_1.$on("objevent", ctx[3]);
-    component_1.$on("voidevent", ctx[4]);
+    component_1.$on("click", ctx[4]);
     return {
       c() {
         create_component(component_1.$$.fragment);
@@ -14892,21 +16061,22 @@ Component that was made reactive: `, type);
   function instance24($$self) {
     const component = get_current_component();
     const svelteDispatch = createEventDispatcher();
+    onMount(() => nativeEvents_default(component));
     const dispatch = (name, detail) => {
       svelteDispatch(name, detail);
       component.dispatchEvent && component.dispatchEvent(new CustomEvent(name, { detail, bubbles: true }));
     };
-    const handleEvent = (ev) => dispatch("ex-" + ev.type, [ev.detail]);
+    const handleEvent = (ev) => dispatch(ev.type, [ev.detail]);
     const stringevent_handler = (ev) => handleEvent(ev);
     const numevent_handler = (ev) => handleEvent(ev);
     const objevent_handler = (ev) => handleEvent(ev);
-    const voidevent_handler = (ev) => handleEvent(ev);
+    const click_handler = (ev) => handleEvent(ev);
     return [
       handleEvent,
       stringevent_handler,
       numevent_handler,
       objevent_handler,
-      voidevent_handler
+      click_handler
     ];
   }
   var SvelteEmits2 = class extends SvelteElement {
@@ -15072,6 +16242,7 @@ Component that was made reactive: `, type);
   function instance25($$self, $$props, $$invalidate) {
     const component = get_current_component();
     const svelteDispatch = createEventDispatcher();
+    onMount(() => nativeEvents_default(component));
     const dispatch = (name, detail) => {
       svelteDispatch(name, detail);
       component.dispatchEvent && component.dispatchEvent(new CustomEvent(name, { detail, bubbles: true }));
@@ -15080,7 +16251,7 @@ Component that was made reactive: `, type);
     let { numprop } = $$props;
     let { complexprop } = $$props;
     let { optionalprop } = $$props;
-    const handleEvent = (ev) => dispatch("ex-" + ev.type, [ev.detail]);
+    const handleEvent = (ev) => dispatch(ev.type, [ev.detail]);
     const func = () => {
       try {
         return JSON.parse(numprop);
@@ -15173,7 +16344,7 @@ Component that was made reactive: `, type);
     return {
       c() {
         div = element("div");
-        div.textContent = "Svelte";
+        div.textContent = "svelte";
         attr(div, "class", "dummy svelte-1ep5jkz");
       },
       m(target, anchor) {
@@ -15227,11 +16398,12 @@ Component that was made reactive: `, type);
   function instance7($$self) {
     const component = get_current_component();
     const svelteDispatch = createEventDispatcher();
+    onMount(() => nativeEvents_default(component));
     const dispatch = (name, detail) => {
       svelteDispatch(name, detail);
       component.dispatchEvent && component.dispatchEvent(new CustomEvent(name, { detail, bubbles: true }));
     };
-    const handleEvent = (ev) => dispatch("ex-" + ev.type, [ev.detail]);
+    const handleEvent = (ev) => dispatch(ev.type, [ev.detail]);
     return [];
   }
   var SvelteSimple2 = class extends SvelteElement {
@@ -15458,11 +16630,12 @@ Component that was made reactive: `, type);
   function instance26($$self) {
     const component = get_current_component();
     const svelteDispatch = createEventDispatcher();
+    onMount(() => nativeEvents_default(component));
     const dispatch = (name, detail) => {
       svelteDispatch(name, detail);
       component.dispatchEvent && component.dispatchEvent(new CustomEvent(name, { detail, bubbles: true }));
     };
-    const handleEvent = (ev) => dispatch("ex-" + ev.type, [ev.detail]);
+    const handleEvent = (ev) => dispatch(ev.type, [ev.detail]);
     return [];
   }
   var SvelteSlots2 = class extends SvelteElement {
@@ -15560,11 +16733,12 @@ Component that was made reactive: `, type);
   function instance27($$self) {
     const component = get_current_component();
     const svelteDispatch = createEventDispatcher();
+    onMount(() => nativeEvents_default(component));
     const dispatch = (name, detail) => {
       svelteDispatch(name, detail);
       component.dispatchEvent && component.dispatchEvent(new CustomEvent(name, { detail, bubbles: true }));
     };
-    const handleEvent = (ev) => dispatch("ex-" + ev.type, [ev.detail]);
+    const handleEvent = (ev) => dispatch(ev.type, [ev.detail]);
     return [];
   }
   var SvelteState2 = class extends SvelteElement {
@@ -15712,12 +16886,13 @@ Component that was made reactive: `, type);
   function instance28($$self, $$props, $$invalidate) {
     const component = get_current_component();
     const svelteDispatch = createEventDispatcher();
+    onMount(() => nativeEvents_default(component));
     const dispatch = (name, detail) => {
       svelteDispatch(name, detail);
       component.dispatchEvent && component.dispatchEvent(new CustomEvent(name, { detail, bubbles: true }));
     };
     let { color } = $$props;
-    const handleEvent = (ev) => dispatch("ex-" + ev.type, [ev.detail]);
+    const handleEvent = (ev) => dispatch(ev.type, [ev.detail]);
     $$self.$$set = ($$props2) => {
       if ("color" in $$props2)
         $$invalidate(0, color = $$props2.color);
@@ -15787,10 +16962,8 @@ Component that was made reactive: `, type);
       const styleElement = document.createElement("style");
       styleElement.innerHTML = VueDemo_style_default;
       this.shadowRoot.appendChild(styleElement);
-      this.addEventListener("myclick", (ev) => {
-        if (ev[Symbol.toStringTag] === "CustomEvent")
-          this.dispatchEvent(new CustomEvent("ex-myclick", { detail: ev.detail }));
-      });
+      nativeEvents_default(this);
+      this.shadowRoot.addEventListener("myclick", (ev) => this.dispatchEvent(new CustomEvent("myclick", { detail: ev.detail })));
     }
   };
   customElements.define("ex-vue-demo", StyledElement3);
@@ -15800,7 +16973,7 @@ Component that was made reactive: `, type);
 
   // ../ucp-example/dist/elements/vue/VueEmits.js
   var VueEmits_default = /* @__PURE__ */ defineComponent({
-    emits: ["stringevent", "numevent", "objevent", "voidevent"],
+    emits: ["stringevent", "numevent", "objevent", "click"],
     setup(__props, { expose, emit }) {
       expose();
       const __returned__ = { emit };
@@ -15815,7 +16988,7 @@ Component that was made reactive: `, type);
         $setup.emit("stringevent", "demo");
         $setup.emit("numevent", 5);
         $setup.emit("objevent", { value: "val" });
-        $setup.emit("voidevent");
+        $setup.emit("click");
       })
     }, " Vue Send event ");
   }
@@ -15829,22 +17002,11 @@ Component that was made reactive: `, type);
       const styleElement = document.createElement("style");
       styleElement.innerHTML = VueEmits_style_default;
       this.shadowRoot.appendChild(styleElement);
-      this.addEventListener("stringevent", (ev) => {
-        if (ev[Symbol.toStringTag] === "CustomEvent")
-          this.dispatchEvent(new CustomEvent("ex-stringevent", { detail: ev.detail }));
-      });
-      this.addEventListener("numevent", (ev) => {
-        if (ev[Symbol.toStringTag] === "CustomEvent")
-          this.dispatchEvent(new CustomEvent("ex-numevent", { detail: ev.detail }));
-      });
-      this.addEventListener("objevent", (ev) => {
-        if (ev[Symbol.toStringTag] === "CustomEvent")
-          this.dispatchEvent(new CustomEvent("ex-objevent", { detail: ev.detail }));
-      });
-      this.addEventListener("voidevent", (ev) => {
-        if (ev[Symbol.toStringTag] === "CustomEvent")
-          this.dispatchEvent(new CustomEvent("ex-voidevent", { detail: ev.detail }));
-      });
+      nativeEvents_default(this);
+      this.shadowRoot.addEventListener("stringevent", (ev) => this.dispatchEvent(new CustomEvent("stringevent", { detail: ev.detail })));
+      this.shadowRoot.addEventListener("numevent", (ev) => this.dispatchEvent(new CustomEvent("numevent", { detail: ev.detail })));
+      this.shadowRoot.addEventListener("objevent", (ev) => this.dispatchEvent(new CustomEvent("objevent", { detail: ev.detail })));
+      this.shadowRoot.addEventListener("click", (ev) => this.dispatchEvent(new CustomEvent("click", { detail: ev.detail })));
     }
   };
   customElements.define("ex-vue-emits", StyledElement4);
@@ -15865,7 +17027,7 @@ Component that was made reactive: `, type);
   function render6(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_ex_vue_emits = resolveComponent("ex-vue-emits");
     return openBlock(), createBlock(_component_ex_vue_emits, {
-      onExStringevent: _cache[0] || (_cache[0] = (ev) => $setup.log(ev.detail))
+      onStringevent: _cache[0] || (_cache[0] = (ev) => $setup.log(ev.detail))
     });
   }
   VueNested_default.render = render6;
@@ -15878,6 +17040,7 @@ Component that was made reactive: `, type);
       const styleElement = document.createElement("style");
       styleElement.innerHTML = VueNested_style_default;
       this.shadowRoot.appendChild(styleElement);
+      nativeEvents_default(this);
     }
   };
   customElements.define("ex-vue-nested", StyledElement5);
@@ -15928,6 +17091,7 @@ Component that was made reactive: `, type);
       const styleElement = document.createElement("style");
       styleElement.innerHTML = VueProps_style_default;
       this.shadowRoot.appendChild(styleElement);
+      nativeEvents_default(this);
     }
   };
   customElements.define("ex-vue-props", StyledElement6);
@@ -15951,7 +17115,7 @@ Component that was made reactive: `, type);
   // ../ucp-example/dist/elements/vue/VueSimple.js
   var _hoisted_12 = { class: "dummy" };
   function render8(_ctx, _cache) {
-    return openBlock(), createElementBlock("div", _hoisted_12, "Vue");
+    return openBlock(), createElementBlock("div", _hoisted_12, "vue");
   }
   var script = {};
   script.render = render8;
@@ -15964,6 +17128,7 @@ Component that was made reactive: `, type);
       const styleElement = document.createElement("style");
       styleElement.innerHTML = VueSimple_style_default;
       this.shadowRoot.appendChild(styleElement);
+      nativeEvents_default(this);
     }
   };
   customElements.define("ex-vue-simple", StyledElement7);
@@ -15998,6 +17163,7 @@ Component that was made reactive: `, type);
       const styleElement = document.createElement("style");
       styleElement.innerHTML = VueSlots_style_default;
       this.shadowRoot.appendChild(styleElement);
+      nativeEvents_default(this);
     }
   };
   customElements.define("ex-vue-slots", StyledElement8);
@@ -16031,6 +17197,7 @@ Component that was made reactive: `, type);
       const styleElement = document.createElement("style");
       styleElement.innerHTML = VueState_style_default;
       this.shadowRoot.appendChild(styleElement);
+      nativeEvents_default(this);
     }
   };
   customElements.define("ex-vue-state", StyledElement9);
@@ -16074,6 +17241,7 @@ Component that was made reactive: `, type);
       const styleElement = document.createElement("style");
       styleElement.innerHTML = VueThemed_style_default;
       this.shadowRoot.appendChild(styleElement);
+      nativeEvents_default(this);
     }
   };
   customElements.define("ex-vue-themed", StyledElement10);

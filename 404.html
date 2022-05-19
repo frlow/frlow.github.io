@@ -9,140 +9,141 @@ const vue3 = 'vue3'
 const react = 'react'
 
 class Example extends HTMLElement {
-  getAttributeString(attribute, fw) {
-    switch (fw) {
-      case vue3:
-        return ` :${attribute.name}='${this.stringifyIsh(attribute.value)}'`
-      case react:
-        return ` ${attribute.name}={${this.stringifyIsh(attribute.value)}}`
-      case wc:
-        return ` ${attribute.name}='${attribute.value}'`
-      default:
-        return ''
+    getAttributeString(attribute, fw) {
+        switch (fw) {
+            case vue3:
+                return ` :${attribute.name}='${this.stringifyIsh(attribute.value)}'`
+            case react:
+                return ` ${attribute.name}={${this.stringifyIsh(attribute.value)}}`
+            case wc:
+                return ` ${attribute.name}='${attribute.value}'`
+            default:
+                return ''
+        }
     }
-  }
 
-  getEmitString(emit, fw, prefix) {
-    switch (fw) {
-      case vue3:
-        return ` @${emit}="var=>log(var)"`
-      case react:
-        return ` on${
-          emit.substring(0, 1).toUpperCase() + emit.substring(1)
-        }={var=>log(var)}`
-      default:
-        return ''
+    getEmitString(emit, fw) {
+        switch (fw) {
+            case vue3:
+                return ` @${emit}="var=>log(var)"`
+            case react:
+                return ` on${
+                    emit.substring(0, 1).toUpperCase() + emit.substring(1)
+                }={var=>log(var)}`
+            default:
+                return ''
+        }
     }
-  }
 
-  camelize(str, fw) {
-    if (fw === wc) return str
-    return str
-      .split('-')
-      .slice(1)
-      .map((part) => part.substring(0, 1).toUpperCase() + part.substring(1))
-      .join('')
-  }
-
-  stringifyIsh(str) {
-    let value = `"${str}"`
-    try {
-      JSON.parse(str)
-      value = str
-    } catch {}
-    return value
-  }
-
-  getElementTag(element, fw, prefix) {
-    const attributes = []
-    const emits = []
-    for (const attribute of element.attributes) {
-      if (attribute.name.startsWith('@')) {
-        emits.push(attribute.name.replace(`@${prefix}-`, ''))
-      } else if (attribute.name.startsWith('x-bind:')) {
-        if (!element.attributes[attribute.name.replace('x-bind:', '')])
-          throw 'Bind not ready!'
-      } else attributes.push(attribute)
+    camelize(str, fw) {
+        if (fw === wc) return str
+        return str
+            .split('-')
+            .slice(1)
+            .map((part) => part.substring(0, 1).toUpperCase() + part.substring(1))
+            .join('')
     }
-    const attributesText = attributes
-      .map((a) => this.getAttributeString(a, fw, prefix))
-      .join('')
-    const emitsText = emits
-      .map((e) => this.getEmitString(e, fw, prefix))
-      .join('')
-    return `<${this.camelize(
-      element.localName,
-      fw
-    )}${attributesText}>${emitsText}`
-  }
 
-  getNativeTag(element) {
-    let attributes = ''
-    for (const attribute of element.attributes) {
-      attributes += ` ${attribute.name}="${attribute.value}"`
+    stringifyIsh(str) {
+        let value = `"${str}"`
+        try {
+            JSON.parse(str)
+            value = str
+        } catch {
+        }
+        return value
     }
-    return `<${element.localName}${attributes}>`
-  }
 
-  process(element, fw, prefix) {
-    if (element.localName === 'ucp-example' && element.childNodes.length === 0)
-      throw 'Not loaded yet!'
-    if (element.wholeText) return element.wholeText.trim()
-    let processed = ''
-    processed +=
-      element.localName === 'ucp-example'
-        ? ''
-        : element.localName.startsWith(`${prefix}-`)
-        ? this.getElementTag(element, fw, prefix)
-        : this.getNativeTag(element)
-    let counter = 0
-    for (const child of element.childNodes) {
-      if (
-        element.localName === 'ucp-example' &&
-        counter++ >= element.childNodes.length - 1
-      ) {
-      } else if (element.localName !== 'slot')
-        processed += this.process(child, fw, prefix)
+    getElementTag(element, fw) {
+        const attributes = []
+        const emits = []
+        for (const attribute of element.attributes) {
+            if (attribute.name.startsWith('@')) {
+                emits.push(attribute.name.replace(`@`, ''))
+            } else if (attribute.name.startsWith(':')) {
+                if (!element.attributes[attribute.name.replace(':', '')])
+                    throw 'Bind not ready!'
+            } else attributes.push(attribute)
+        }
+        const attributesText = attributes
+            .map((a) => this.getAttributeString(a, fw))
+            .join('')
+        const emitsText = emits
+            .map((e) => this.getEmitString(e, fw))
+            .join('')
+        return `<${this.camelize(
+            element.localName,
+            fw
+        )}${attributesText}>${emitsText}`
     }
-    processed +=
-      element.localName === 'ucp-example'
-        ? ''
-        : element.localName.startsWith(`${prefix}-`)
-        ? `</${this.camelize(element.localName, fw)}>`
-        : `</${element.localName}>`
-    return processed.trim()
-  }
 
-  render(framework, prefix) {
-    try {
-      const code = this.process(this, framework, prefix)
-      this.shadowRoot.innerHTML = `<ucp-example-implementation code="${window.btoa(
-        code
-      )}"><slot></slot></ucp-example-implementation>`
-    } catch (e) {
-      const context = this
-      setTimeout(() => {
-        context.render(framework, prefix)
-      }, 5)
+    getNativeTag(element) {
+        let attributes = ''
+        for (const attribute of element.attributes) {
+            attributes += ` ${attribute.name}="${attribute.value}"`
+        }
+        return `<${element.localName}${attributes}>`
     }
-  }
 
-  constructor() {
-    super()
+    process(element, fw, prefix) {
+        if (element.localName === 'ucp-example' && element.childNodes.length === 0)
+            throw 'Not loaded yet!'
+        if (element.wholeText) return element.wholeText.trim()
+        let processed = ''
+        processed +=
+            element.localName === 'ucp-example'
+                ? ''
+                : element.localName.startsWith(`${prefix}-`)
+                    ? this.getElementTag(element, fw)
+                    : this.getNativeTag(element)
+        let counter = 0
+        for (const child of element.childNodes) {
+            if (
+                element.localName === 'ucp-example' &&
+                counter++ >= element.childNodes.length - 1
+            ) {
+            } else if (element.localName !== 'slot')
+                processed += this.process(child, fw, prefix)
+        }
+        processed +=
+            element.localName === 'ucp-example'
+                ? ''
+                : element.localName.startsWith(`${prefix}-`)
+                    ? `</${this.camelize(element.localName, fw)}>`
+                    : `</${element.localName}>`
+        return processed.trim()
+    }
 
-    let framework = document.createElement('template')
-    framework.innerHTML = `<div x-init="$dispatch('update', {framework, prefix})"></div>`
-    this.addEventListener('update', (ev) => {
-      this.render(ev.detail.framework, ev.detail.prefix)
-    })
-    this.attachShadow({ mode: 'open' })
-    this._contents = new DocumentFragment()
-    this._contents.appendChild(framework.content.cloneNode(true))
-  }
+    render(framework, prefix) {
+        try {
+            const code = this.process(this, framework, prefix)
+            this.shadowRoot.innerHTML = `<ucp-example-implementation code="${window.btoa(
+                code
+            )}"><slot></slot></ucp-example-implementation>`
+        } catch (e) {
+            const context = this
+            setTimeout(() => {
+                context.render(framework, prefix)
+            }, 5)
+        }
+    }
 
-  connectedCallback() {
-    this.appendChild(this._contents)
-  }
+    constructor() {
+        super()
+
+        let framework = document.createElement('template')
+        framework.innerHTML = `<div x-init="$dispatch('update', {framework, prefix})"></div>`
+        this.addEventListener('update', (ev) => {
+            this.render(ev.detail.framework, ev.detail.prefix)
+        })
+        this.attachShadow({mode: 'open'})
+        this._contents = new DocumentFragment()
+        this._contents.appendChild(framework.content.cloneNode(true))
+    }
+
+    connectedCallback() {
+        this.appendChild(this._contents)
+    }
 }
 
 window.customElements.define('ucp-example', Example)
@@ -152,8 +153,8 @@ window.customElements.define('ucp-example', Example)
 <script>
 document.addEventListener('alpine:init', ()=>{
     Alpine.data('docs', () => ({
-        docs: [{"name":"../ucp-example/src/docs/_Index.docs.html","content":"<h1>Index</h1>","position":["_Index"]},{"name":"../ucp-example/src/docs/Components/App.docs.html","content":"<h2>React</h2>\n<ucp-example>\n    <ex-react-app></ex-react-app>\n</ucp-example>\n<h2>Svelte</h2>\n<ucp-example>\n    <ex-svelte-app></ex-svelte-app>\n</ucp-example>\n<h2>Vue</h2>\n<ucp-example>\n    <ex-vue-app></ex-vue-app>\n</ucp-example>\n\n\n","position":["Components","App"]},{"name":"../ucp-example/src/docs/Components/Demo.docs.html","content":"<h1>Demo</h1>\n<h3>Svelte</h3>\n<ucp-example>\n    <ex-svelte-demo text=\"Svelte Button\" @ex-myclick=\"console.log($event.detail)\"></ex-svelte-demo>\n</ucp-example>\n\n<h3>Vue</h3>\n<ucp-example>\n    <ex-vue-demo text=\"Vue Button\" @ex-myclick=\"console.log($event.detail)\"></ex-vue-demo>\n</ucp-example>\n\n<h3>React</h3>\n<ucp-example>\n    <ex-react-demo text=\"React Button\" @ex-myclick=\"console.log($event.detail)\"></ex-react-demo>\n</ucp-example>","position":["Components","Demo"]},{"name":"../ucp-example/src/docs/Components/Emits.docs.html","content":"<h1>Emits</h1>\n<ucp-example>\n  <ex-vue-emits\n    @ex-stringevent=\"console.log($event.detail)\"\n    @ex-numevent=\"console.log($event.detail)\"\n    @ex-objevent=\"console.log($event.detail)\"\n    @ex-voidevent=\"console.log($event.detail)\"\n  >\n  </ex-vue-emits>\n  <ex-svelte-emits\n    @ex-stringevent=\"console.log($event.detail)\"\n    @ex-numevent=\"console.log($event.detail)\"\n    @ex-objevent=\"console.log($event.detail)\"\n    @ex-voidevent=\"console.log($event.detail)\"\n  >\n  </ex-svelte-emits>\n  <ex-react-emits\n    @ex-stringevent=\"console.log($event.detail)\"\n    @ex-numevent=\"console.log($event.detail)\"\n    @ex-objevent=\"console.log($event.detail)\"\n    @ex-voidevent=\"console.log($event.detail)\"\n  >\n  </ex-react-emits>\n</ucp-example>\n","position":["Components","Emits"]},{"name":"../ucp-example/src/docs/Components/Nested.docs.html","content":"<h1>Nested</h1>\n<h3>Vue Nested</h3>\n<ucp-example>\n    <ex-vue-nested></ex-vue-nested>\n</ucp-example>\n\n<h3>React Nested</h3>\n<ucp-example>\n    <ex-react-nested></ex-react-nested>\n</ucp-example>\n\n<h3>Svelte Nested</h3>\n<ucp-example>\n    <ex-svelte-nested></ex-svelte-nested>\n</ucp-example>","position":["Components","Nested"]},{"name":"../ucp-example/src/docs/Components/Props.docs.html","content":"<h1>Props</h1>\n<ucp-example>\n    Vue:\n    <ex-vue-props stringprop=\"str\" complexprop='{\"value\":\"val\"}' numprop='7'></ex-vue-props>\n    Svelte:\n    <ex-svelte-props stringprop=\"str\" complexprop='{\"value\":\"val\"}' numprop='7'></ex-svelte-props>\n    React:\n    <ex-react-props stringprop=\"str\" complexprop='{\"value\":\"val\"}' numprop='7'></ex-react-props>\n</ucp-example>\n\n<h2>Optional props</h2>\n<ucp-example>\n    Vue:\n    <ex-vue-props stringprop=\"str\" complexprop='{\"value\":\"val\"}' numprop='7' optionalprop=\"op\"></ex-vue-props>\n    Svelte:\n    <ex-svelte-props stringprop=\"str\" complexprop='{\"value\":\"val\"}' numprop='7' optionalprop=\"op\"></ex-svelte-props>\n    React:\n    <ex-react-props stringprop=\"str\" complexprop='{\"value\":\"val\"}' numprop='7' optionalprop=\"op\"></ex-react-props>\n</ucp-example>\n","position":["Components","Props"]},{"name":"../ucp-example/src/docs/Components/Simple.docs.html","content":"<h1>Simple</h1>\n<ucp-example>\n    <ex-vue-simple></ex-vue-simple>\n    <ex-svelte-simple></ex-svelte-simple>\n    <ex-react-simple></ex-react-simple>\n</ucp-example>\n","position":["Components","Simple"]},{"name":"../ucp-example/src/docs/Components/Slots.docs.html","content":"<ucp-example>\n    <ex-svelte-slots>\n        <div>hello world</div>\n        <div slot=\"box\">inside box</div>\n    </ex-svelte-slots>\n    <ex-vue-slots>\n        <div>hello world</div>\n        <div slot=\"box\">inside box</div>\n    </ex-vue-slots>\n    <ex-react-slots>\n        <div>hello world</div>\n        <div slot=\"box\">inside box</div>\n    </ex-react-slots>\n</ucp-example>\n","position":["Components","Slots"]},{"name":"../ucp-example/src/docs/Components/State.docs.html","content":"<ucp-example>\n    <ex-react-state></ex-react-state>\n</ucp-example>\n\n<ucp-example>\n    <ex-svelte-state></ex-svelte-state>\n</ucp-example>\n\n<ucp-example>\n    <ex-vue-state></ex-vue-state>\n</ucp-example>","position":["Components","State"]},{"name":"../ucp-example/src/docs/Components/Theme.docs.html","content":"<h3>Theme</h3>\n<ucp-example>\n    <ex-svelte-theme color=\"red\">\n        <ex-vue-themed></ex-vue-themed>\n    </ex-svelte-theme>\n    <ex-svelte-theme color=\"blue\">\n        <ex-vue-themed></ex-vue-themed>\n    </ex-svelte-theme>\n    <ex-svelte-theme color=\"purple\">\n        <ex-vue-themed></ex-vue-themed>\n    </ex-svelte-theme>\n    <ex-vue-themed></ex-vue-themed>\n</ucp-example>","position":["Components","Theme"]}],
-        links: [{"name":"_Index","level":0,"title":"Index","link":"/_Index"},{"name":"Components","level":0,"title":"Components"},{"name":"Components/App","level":1,"title":"App","link":"/Components/App"},{"name":"Components/Demo","level":1,"title":"Demo","link":"/Components/Demo"},{"name":"Components/Emits","level":1,"title":"Emits","link":"/Components/Emits"},{"name":"Components/Nested","level":1,"title":"Nested","link":"/Components/Nested"},{"name":"Components/Props","level":1,"title":"Props","link":"/Components/Props"},{"name":"Components/Simple","level":1,"title":"Simple","link":"/Components/Simple"},{"name":"Components/Slots","level":1,"title":"Slots","link":"/Components/Slots"},{"name":"Components/State","level":1,"title":"State","link":"/Components/State"},{"name":"Components/Theme","level":1,"title":"Theme","link":"/Components/Theme"}],
+        docs: [{"name":"../ucp-example/src/docs/_Index.docs.html","content":"<h1>Index</h1>","position":["_Index"]},{"name":"../ucp-example/src/docs/Components/App.docs.html","content":"<h2>React</h2>\n<ucp-example>\n    <ex-react-app></ex-react-app>\n</ucp-example>\n<h2>Svelte</h2>\n<ucp-example>\n    <ex-svelte-app></ex-svelte-app>\n</ucp-example>\n<h2>Vue</h2>\n<ucp-example>\n    <ex-vue-app></ex-vue-app>\n</ucp-example>\n\n\n","position":["Components","App"]},{"name":"../ucp-example/src/docs/Components/Demo.docs.html","content":"<h1>Demo</h1>\n<h3>Svelte</h3>\n<ucp-example>\n    <ex-svelte-demo text=\"Svelte Button\" @myclick=\"console.log($event.detail)\"></ex-svelte-demo>\n</ucp-example>\n\n<h3>Vue</h3>\n<ucp-example>\n    <ex-vue-demo text=\"Vue Button\" @myclick=\"console.log($event.detail)\"></ex-vue-demo>\n</ucp-example>\n\n<h3>React</h3>\n<ucp-example>\n    <ex-react-demo text=\"React Button\" @myclick=\"console.log($event.detail)\"></ex-react-demo>\n</ucp-example>\n\n<h3>Solid</h3>\n<ucp-example>\n    <ex-solid-demo text=\"Solid Button\" @myclick=\"console.log($event)\"></ex-solid-demo>\n</ucp-example>","position":["Components","Demo"]},{"name":"../ucp-example/src/docs/Components/Emits.docs.html","content":"<h1>Emits</h1>\n<ucp-example>\n  <ex-vue-emits\n    @stringevent=\"console.log($event)\"\n    @numevent=\"console.log($event)\"\n    @objevent=\"console.log($event)\"\n    @click=\"console.log($event)\"\n  >\n  </ex-vue-emits>\n  <ex-svelte-emits\n    @stringevent=\"console.log($event)\"\n    @numevent=\"console.log($event)\"\n    @objevent=\"console.log($event)\"\n    @click=\"console.log($event)\"\n  >\n  </ex-svelte-emits>\n  <ex-react-emits\n    @stringevent=\"console.log($event)\"\n    @numevent=\"console.log($event)\"\n    @objevent=\"console.log($event)\"\n    @click=\"console.log($event)\"\n  >\n  </ex-react-emits>\n</ucp-example>\n","position":["Components","Emits"]},{"name":"../ucp-example/src/docs/Components/Nested.docs.html","content":"<h1>Nested</h1>\n<h3>Vue Nested</h3>\n<ucp-example>\n    <ex-vue-nested></ex-vue-nested>\n</ucp-example>\n\n<h3>React Nested</h3>\n<ucp-example>\n    <ex-react-nested></ex-react-nested>\n</ucp-example>\n\n<h3>Svelte Nested</h3>\n<ucp-example>\n    <ex-svelte-nested></ex-svelte-nested>\n</ucp-example>","position":["Components","Nested"]},{"name":"../ucp-example/src/docs/Components/Slots.docs.html","content":"<ucp-example>\n    <ex-svelte-slots>\n        <div>hello world</div>\n        <div slot=\"box\">inside box</div>\n    </ex-svelte-slots>\n    <ex-vue-slots>\n        <div>hello world</div>\n        <div slot=\"box\">inside box</div>\n    </ex-vue-slots>\n    <ex-react-slots>\n        <div>hello world</div>\n        <div slot=\"box\">inside box</div>\n    </ex-react-slots>\n</ucp-example>\n","position":["Components","Slots"]},{"name":"../ucp-example/src/docs/Components/State.docs.html","content":"<ucp-example>\n    <ex-react-state></ex-react-state>\n</ucp-example>\n\n<ucp-example>\n    <ex-svelte-state></ex-svelte-state>\n</ucp-example>\n\n<ucp-example>\n    <ex-vue-state></ex-vue-state>\n</ucp-example>","position":["Components","State"]},{"name":"../ucp-example/src/docs/Components/Theme.docs.html","content":"<h3>Theme</h3>\n<ucp-example>\n    <ex-svelte-theme color=\"red\">\n        <ex-vue-themed></ex-vue-themed>\n    </ex-svelte-theme>\n    <ex-svelte-theme color=\"blue\">\n        <ex-vue-themed></ex-vue-themed>\n    </ex-svelte-theme>\n    <ex-svelte-theme color=\"purple\">\n        <ex-vue-themed></ex-vue-themed>\n    </ex-svelte-theme>\n    <ex-vue-themed></ex-vue-themed>\n</ucp-example>","position":["Components","Theme"]},{"name":"../ucp-example/src/docs/Tested/Props.docs.html","content":"<h1>Props</h1>\n<h3>Vue</h3>\n<ucp-example>\n    <ex-vue-props stringprop=\"str\" complexprop='{\"value\":\"val\"}' numprop='7'></ex-vue-props>\n</ucp-example>\n<h3>Svelte</h3>\n<ucp-example>\n    <ex-svelte-props stringprop=\"str\" complexprop='{\"value\":\"val\"}' numprop='7'></ex-svelte-props>\n</ucp-example>\n<h3>React</h3>\n<ucp-example>\n    <ex-react-props stringprop=\"str\" complexprop='{\"value\":\"val\"}' numprop='7'></ex-react-props>\n</ucp-example>\n<h3>Solid</h3>\n<ucp-example>\n    <ex-solid-props stringprop=\"str\" complexprop='{\"value\":\"val\"}' numprop='7'></ex-solid-props>\n</ucp-example>\n\n\n<h2>Optional props</h2>\n<h3>Vue</h3>\n<ucp-example>\n    <ex-vue-props stringprop=\"str\" complexprop='{\"value\":\"val\"}' numprop='7' optionalprop=\"op\"></ex-vue-props>\n</ucp-example>\n<h3>Svelte</h3>\n<ucp-example>\n    <ex-svelte-props stringprop=\"str\" complexprop='{\"value\":\"val\"}' numprop='7' optionalprop=\"op\"></ex-svelte-props>\n</ucp-example>\n<h3>React</h3>\n<ucp-example>\n    <ex-react-props stringprop=\"str\" complexprop='{\"value\":\"val\"}' numprop='7' optionalprop=\"op\"></ex-react-props>\n</ucp-example>\n<h3>Solid</h3>\n<ucp-example>\n    <ex-solid-props stringprop=\"str\" complexprop='{\"value\":\"val\"}' numprop='7' optionalprop=\"op\"></ex-solid-props>\n</ucp-example>\n","position":["Tested","Props"]},{"name":"../ucp-example/src/docs/Tested/Simple.docs.html","content":"<h1>Simple</h1>\n<ucp-example>\n    <ex-vue-simple></ex-vue-simple>\n    <ex-svelte-simple></ex-svelte-simple>\n    <ex-react-simple></ex-react-simple>\n    <ex-solid-simple></ex-solid-simple>\n</ucp-example>\n","position":["Tested","Simple"]}],
+        links: [{"name":"_Index","level":0,"title":"Index","link":"/_Index"},{"name":"Components","level":0,"title":"Components"},{"name":"Components/App","level":1,"title":"App","link":"/Components/App"},{"name":"Components/Demo","level":1,"title":"Demo","link":"/Components/Demo"},{"name":"Components/Emits","level":1,"title":"Emits","link":"/Components/Emits"},{"name":"Components/Nested","level":1,"title":"Nested","link":"/Components/Nested"},{"name":"Components/Slots","level":1,"title":"Slots","link":"/Components/Slots"},{"name":"Components/State","level":1,"title":"State","link":"/Components/State"},{"name":"Components/Theme","level":1,"title":"Theme","link":"/Components/Theme"},{"name":"Tested","level":0,"title":"Tested"},{"name":"Tested/Props","level":1,"title":"Props","link":"/Tested/Props"},{"name":"Tested/Simple","level":1,"title":"Simple","link":"/Tested/Simple"}],
         prefix: "ex"
     }))
 })
